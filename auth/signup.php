@@ -1,3 +1,4 @@
+<?php include('server.php')?>
 <! DOCTYPE html>
 <html>
     <head>
@@ -10,7 +11,7 @@
             <h2>Sign Up</h2>
         </div>
 
-        <form action="#" method="POST">
+        <form action="signup.php" method="POST">
             <div class="input-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" value="<?php echo $email; ?>">
