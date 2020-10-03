@@ -3,8 +3,8 @@ body {
     width: 100%;
     height: 100%;
     margin: auto;
-    padding-top: 100px;
-    padding-bottom: 392px;
+    padding-top: 90px;
+    padding-bottom: 87px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -29,7 +29,7 @@ input {
 
 label {
     font-size: 12px;
-    color: silver;
+    color: gray;
     margin-left: 15px;
 }
 
