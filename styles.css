@@ -16,3 +16,18 @@ form {
     margin-right: auto;
     margin-left: auto;
 }
+
+input {
+    width: 350px;
+    height: 30px;
+    border: none;
+    margin-bottom: 15px; 
+}
+
+label {
+    font-size: 12px;
+}
+
+#username, #password {
+    border-bottom: 2px solid silver;
+}
