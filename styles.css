@@ -87,6 +87,31 @@ aside {
     border-radius: 50px;
 }
 
+.profile-pic {
+    height: 170px;
+    width: 170px;
+    border-radius: 100px;
+    margin-bottom: 25px;
+    margin-right: 50px;
+}
+
+.content {
+    background-color: rgb(192,192,192, 0.2);
+    height: 670px;
+}
+
+.user-bio {
+    display: flex;
+    /* border: 1px dotted black; */
+    padding-top: 80px;
+    padding-left: 150px;
+}
+
+.bio-list {
+    color: rgba(22, 180, 180);
+    margin-right: 30px;
+}
+
 article {
     height: 450px;
     width: 75%;
