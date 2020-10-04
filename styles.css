@@ -67,6 +67,31 @@ li:hover {
     color: #cc00cc;
 }
 
+main {
+    display: flex;
+}
+
+aside {
+    height: 760px;
+    width: 25%;
+    background-color: #13263a;
+}
+
+.aside-links {
+    color: gray;
+    font-size: 20px;
+    margin-left: 0px;
+    padding: 12px 30px;
+    margin-bottom: 25px;
+    width: 210px;
+    border-radius: 50px;
+}
+
+article {
+    height: 450px;
+    width: 75%;
+}
+
 .navigation-links {
     list-style: none;
     display: inline-block;
