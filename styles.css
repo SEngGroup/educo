@@ -8,7 +8,7 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-form {
+.login-form {
     width: 370px;
     background-color: white;
     padding-top: 40px;
@@ -17,6 +17,15 @@ form {
     margin-right: auto;
     margin-left: auto;
     border-radius: 5px;
+}
+
+.signup-form {
+    width: 370px;
+    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    /* border-radius: 5px; */
 }
 
 input {
@@ -40,7 +49,12 @@ li {
     margin-right: auto;
     color: #9900ff;
 }
-#username, #password {
+
+li:hover {
+    color: #cc00cc;
+}
+
+#username, #password, #fullname, #email, #confirmpassword {
     border-bottom: 2px solid silver;
 }
 
@@ -57,4 +71,26 @@ li {
     background-image: linear-gradient(to left, white, white); 
     color: #9900ff;
     border: 1px solid #cc00cc;
+}
+
+.camp-image {
+    background-image: url(img/kevin-erdvig-BdfHZ4LH11A-unsplash.jpg);
+    background-size: cover;
+    height: 630px;
+    width: 400px;
+}
+
+.overlay-color {
+    margin: auto;
+    height: 630px;
+    width: 400px;
+    background-image: linear-gradient(to bottom right, rgba(204, 0, 204, 0.2), rgba(153, 0, 255, 0.2), rgba(0, 255, 255, 0.3));
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+    width: 790px;
 }
