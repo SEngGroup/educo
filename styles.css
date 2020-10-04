@@ -25,7 +25,8 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 20px;
-    /* border-radius: 5px; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 input {
@@ -54,6 +55,10 @@ li:hover {
     color: #cc00cc;
 }
 
+.signup-list {
+    color: white;
+}
+
 #username, #password, #fullname, #email, #confirmpassword {
     border-bottom: 2px solid silver;
 }
@@ -78,13 +83,17 @@ li:hover {
     background-size: cover;
     height: 630px;
     width: 400px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .overlay-color {
     margin: auto;
     height: 630px;
     width: 400px;
-    background-image: linear-gradient(to bottom right, rgba(204, 0, 204, 0.2), rgba(153, 0, 255, 0.2), rgba(0, 255, 255, 0.3));
+    background-image: linear-gradient(to bottom right, rgba(204, 0, 204, 0.2), rgba(153, 0, 255, 0.3), rgba(0, 255, 255, 0.4));
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .container {
