@@ -11,20 +11,30 @@
             <h2>Sign Up</h2>
         </div>
 
-        <form action="signup.php" method="POST">
+        <form action="server_auth.php" method="POST">
+            <div class="input-group">
+                <label for="f-name">First Name</label>
+                <input type="text" name="fname" id="f-name" required placeholder="Enter your first name">
+            </div>
+
+            <div class="input-group">
+                <label for="l-name">Last Name</label>
+                <input type="text" name="lname" id="l-name" required placeholder="Enter your last name">
+            </div>
+
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" value="<?php echo $email; ?>">
+                <input type="email" name="email" required placeholder="Enter your email">
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input type="password" name="pwd" required placeholder="Enter your password">
             </div>
 
             <div class="input-group">
                 <label for="password_conf">Confirm Password</label>
-                <input type="password" name="password_1">
+                <input type="password" name="cpwd" required placeholder="Re-enter your password">
             </div>
 
             <p>
@@ -32,11 +42,11 @@
             </p> 
 
             <div class="input-group">
-                <button type="submit" class="btn" name="reg_user">Sign Up</button>
+                <input type="submit" name="sub" value="Submit" class="btn">
             </div>
 
             <p>
-                I have an account. <a href="login.php">Sign In</a>
+                Already have an account? <a href="login.php">Sign In</a>
             </p>    
         </form>
     </body>

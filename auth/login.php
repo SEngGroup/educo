@@ -1,4 +1,4 @@
-<?php include('server.php')?>
+<?php //include('server.php')?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,24 +11,24 @@
             <h2>Login</h2>
         </div>
 
-        <form method="POST" action="login.php">
-            <?php include('errors.php')?>
+        <form method="POST" action="server_auth.php">
+            <?php //include('errors.php')?>
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" name="email">
+                <input type="email" name="email" required placeholder="Enter your email">
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input type="password" name="pwd" required placeholder="Enter your password">
             </div>
 
             <div class="input-group">
-                <button type="submit" class="btn" name="login_user">Login</button>
+                <input type="submit" name="login" class="btn" value="Log In">
             </div>
 
-            <p>
-                <a href="signup.php">I don't have an account</a>
+            <p>Don't have an account?
+                <a href="signup.php">Sign Up</a>
             </p>
         </form>
     </body>
