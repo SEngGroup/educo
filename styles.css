@@ -5,13 +5,13 @@ body {
 
 .login-container {
     background-image: linear-gradient(to bottom left, #cc00cc, #9900ff, #00ffff);
-    height: 660px;
+    height: 685px;
     padding-top: 100px;
 }
 
 .signup-container {
     background-image: linear-gradient(to bottom left, #cc00cc, #9900ff, #00ffff);
-    height: 700px;
+    height: 725px;
     padding-top: 60px;
 }
 
