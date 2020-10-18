@@ -15,5 +15,13 @@
         </ul>
         <img src="" alt="User Profile">
     </header>
+    <main>
+        <div class="side-nav-bar">
+        </div>
+        <div class="Topics-bar">
+        </div>
+        <div class="chat-view">
+        </div>
+    </main>
 </body>
 </html>
