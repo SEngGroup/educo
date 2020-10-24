@@ -93,3 +93,13 @@ a {
 .cog {
     margin-top: 70px;
 }
+
+.topics-bar {
+    width: 300px;
+    height: 635px;
+    background-color: rgba(192, 192, 192, 0.2);
+}
+
+.main {
+    height: 710px;
+}
