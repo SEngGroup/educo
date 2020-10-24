@@ -47,3 +47,49 @@ a {
     border-bottom: 1px solid gray;
     padding-left: 5px; 
 }
+
+.container, .top-nav, .chat-area {
+    display: flex;
+}
+
+.side-links {
+    border-radius: 25px;
+    padding-top: 15px;
+    margin-bottom: 5px;
+    
+}
+
+.side-links a {
+    color: gray;
+}
+
+.side-nav-bar {
+    width: 250px;
+    background-color: #13263a;
+}
+
+.chat-side-nav {
+    list-style: none;
+    padding: 5px;
+}
+
+.side-nav {
+    width: 25px;
+    margin-right: 10px;
+    margin-bottom: 25px;
+    padding-left: 35px;
+    height: 10px;
+}
+
+#create-chat {
+    margin-top: 60px;
+    margin-bottom: 60px; 
+    border-radius: 25px;
+    padding-top: 15px;
+    background-color: rgba(22, 180, 180);
+    color: white;
+}
+
+.cog {
+    margin-top: 70px;
+}
