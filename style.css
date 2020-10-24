@@ -103,3 +103,57 @@ a {
 .main {
     height: 710px;
 }
+
+.chat-view {
+    width: 870px;
+    height: 625px;
+    padding: 5px;
+}
+
+.chat-links {
+    list-style: none;
+    display: flex;
+    width: 300px;
+    padding: 5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.chat-links li {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text-area {
+    margin-top: 10px;
+    padding: 2px;
+    border: 1px solid silver;
+    border-radius: 25px;
+    width: 650px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.receiver, .sender {
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 15px;
+}
+
+.sender {
+    position: relative;
+    left: 410px;
+    background-color: rgba(22, 180, 180, 0.9);
+    color: white;
+}
+
+.receiver {
+    background-color: rgba(192, 192, 192, 0.3);
+}
+
+.topic {
+    padding: 15px;
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    color: gray;
+}
