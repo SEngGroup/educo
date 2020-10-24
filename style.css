@@ -6,3 +6,8 @@ body {
 .container {
     height: 710px;
 }
+
+.session-profile {
+    border-radius: 50%;
+    margin-left: 35px;
+}
