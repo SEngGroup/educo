@@ -12,14 +12,16 @@
     <div class="container">
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
-                <li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true"></i>Create New</li>
+              <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
+
                 <li class="side-links"><a href=""><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
                 <li class="side-links"><a href=""><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
+                <li class="side-links"><a href="forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="" style="color: #00ffff;"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
                 <li class="side-links"><a href=""><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
                 <li class="side-links"><a href=""><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
-            </ul>   
+            </ul>
         </div>
         <div class="main" style="width: 83%;">
             <div class="top-nav" style="border-bottom: 1px solid rgba(192, 192, 192, 0.2);">
@@ -35,10 +37,10 @@
 
             <div class="chat-area" style="height: 636px;">
                 <div class="topics-bar">
-                    <h3 style="padding: 5px; padding-left: 15px;">Topics</h3>
-                    <p class="topic">pharetra</p>
-                    <p class="topic">sit amet</p>
-                    <p class="topic">rhoncus dolor purus</p>
+                    <h3 style="padding: 5px; padding-left: 15px;">Chats</h3>
+                    <p class="topic">Dr. Mugambi</p>
+                    <b><p style="color: brown;" class="topic">Max</p></b>
+                    <p class="topic">Eng. Mark</p>
                 </div>
                 <div class="chat-view">
                     <ul class="chat-links">
@@ -54,10 +56,11 @@
                     <div class="text-area">
                         <input style="padding: 15px; width: 500px; border-radius: 25px; border: none;"type="text" placeholder="Write a message">
                         <input style="width: 100px; height: 40px; font-size: 15px; border-radius: 25px; border: none; margin-left: 12px; color: white; background-color: rgba(22, 180, 180);" type="button" value="Send">
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
+    <?php include 'newpost.php'; ?>
 </body>
 </html>
