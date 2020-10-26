@@ -1,0 +1,188 @@
+body {
+    margin: auto;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.login-container {
+    background-image: linear-gradient(to bottom left, #cc00cc, #9900ff, #00ffff);
+    height: 685px;
+    padding-top: 100px;
+}
+
+.signup-container {
+    background-image: linear-gradient(to bottom left, #cc00cc, #9900ff, #00ffff);
+    height: 725px;
+    padding-top: 60px;
+}
+
+.login-form {
+    width: 370px;
+    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+}
+
+.signup-form {
+    width: 370px;
+    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+header {
+    padding: 0px 30px;
+    display: flex;
+}
+
+input {
+    width: 320px;
+    height: 30px;
+    border: none;
+    margin-bottom: 15px; 
+    margin-left: 15px;
+}
+
+label {
+    font-size: 12px;
+    color: gray;
+    margin-left: 15px;
+}
+
+li {
+    list-style: none;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #9900ff;
+}
+
+li:hover {
+    color: #cc00cc;
+}
+
+main {
+    display: flex;
+}
+
+aside {
+    height: 760px;
+    width: 25%;
+    background-color: #13263a;
+}
+
+.aside-links {
+    color: gray;
+    font-size: 20px;
+    margin-left: 0px;
+    padding: 12px 30px;
+    margin-bottom: 25px;
+    width: 210px;
+    border-radius: 50px;
+}
+
+.profile-pic {
+    height: 170px;
+    width: 170px;
+    border-radius: 100px;
+    margin-bottom: 25px;
+    margin-right: 50px;
+}
+
+.content {
+    background-color: rgb(192,192,192, 0.2);
+    height: 688px;
+}
+
+.user-bio {
+    display: flex;
+    /* border: 1px dotted black; */
+    padding-top: 80px;
+    padding-left: 150px;
+}
+
+.bio-list {
+    color: rgba(22, 180, 180);
+    margin-right: 30px;
+}
+
+article {
+    height: 450px;
+    width: 75%;
+}
+
+.navigation-links {
+    list-style: none;
+    display: inline-block;
+    color: black;
+    font-weight: 40px;
+    font-size: 25px;
+}
+
+.navigation-links:hover {
+    border-bottom: 3px solid gray;
+    color: gray;
+}
+
+.navigation {
+    display: flex;
+    padding-top: 15px;
+    width: 450px;
+    margin-left: 550px; 
+}
+
+.signup-list {
+    color: white;
+}
+
+#username, #password, #fullname, #email, #confirmpassword {
+    border-bottom: 2px solid silver;
+}
+
+#button {
+    height: 35px;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 100px;
+    background-image: linear-gradient(to left, #cc00cc, #9900ff, #00ffff);
+    color: white;
+}
+
+#button:hover {
+    background-image: linear-gradient(to left, white, white); 
+    color: #9900ff;
+    border: 1px solid #cc00cc;
+}
+
+.camp-image {
+    background-image: url(img/kevin-erdvig-BdfHZ4LH11A-unsplash.jpg);
+    background-size: cover;
+    height: 630px;
+    width: 400px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.overlay-color {
+    margin: auto;
+    height: 630px;
+    width: 400px;
+    background-image: linear-gradient(to bottom right, rgba(204, 0, 204, 0.2), rgba(153, 0, 255, 0.3), rgba(0, 255, 255, 0.4));
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+    width: 790px;
+}
+
