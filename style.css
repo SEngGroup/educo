@@ -66,6 +66,7 @@ a {
 .side-nav-bar {
     width: 250px;
     background-color: #13263a;
+    position: fixed;
 }
 
 .chat-side-nav {
@@ -78,7 +79,7 @@ a {
     margin-right: 10px;
     margin-bottom: 25px;
     padding-left: 35px;
-    height: 10px;
+    height: 14px;
 }
 
 #create-chat {
@@ -98,16 +99,19 @@ a {
     width: auto;
     height: auto;
     background-color: rgba(192, 192, 192, 0.2);
+    position: fixed;
 }
 
 .main {
     height: 710px;
+    margin-left: 250px;
 }
 
 .chat-view {
     width: 870px;
     height: 625px;
     padding: 5px;
+    /*margin-left: 190px;*/
 }
 
 .chat-links {

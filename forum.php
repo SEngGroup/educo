@@ -46,7 +46,7 @@
                     <p class="topic">How to create a db</p>
                     <p class="topic">Disk part not working</p>
                 </div>
-                <div class="chat-view">
+                <div class="chat-view" style="margin-left: 190px;">
                     <h1>Importing DataFrames - no such file or directory</h1>
 
                     <article>

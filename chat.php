@@ -42,7 +42,7 @@
                     <b><p style="color: brown;" class="topic">Max</p></b>
                     <p class="topic">Eng. Mark</p>
                 </div>
-                <div class="chat-view">
+                <div class="chat-view" style="margin-left: 120px;">
                     <ul class="chat-links">
                         <li>All messages</li>
                         <li>Archive</li>
