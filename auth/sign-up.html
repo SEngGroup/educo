@@ -23,21 +23,21 @@
                     </ul>
                 </div>
             </div>
-            <form class="signup-form">
+            <form class="signup-form" action="server_auth.php" method="POST">
                 <h3 style="text-align: center; font-size: 30px;">Sign up</h3>
                 <label for="fullname">Full Name</label><br>
-                <input type="text" id="fullname" name="fullname" placeholder="e.g. Kelvin Ziro"><br>
+                <input type="text" id="fullname" name="fullname" placeholder="e.g. John Doe"><br>
                 <label for="email">Email</label><br>
-                <input type="text" id="email" name="email" placeholder="e.g. kelvin.ziro@example.com"><br>
+                <input type="text" id="email" name="email" placeholder="e.g. name@example.com"><br>
                 <label for="username">Username</label><br>
-                <input type="text" id="username" name="username" placeholder="e.g. @Kziro"><br>
+                <input type="text" id="username" name="username" placeholder="e.g. @JDoe"><br>
                 <label for="password">Password</label><br>
-                <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+                <input type="password" id="password" name="pwd" placeholder="Enter your password"><br>
                 <label for="confirmpassword">Confirm Password</label><br>
-                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-enter your password">
+                <input type="password" id="confirmpassword" name="cpwd" placeholder="Re-enter your password">
                 <input id="button" type="button" value="SIGNUP">
                 <p style="text-align: center; color: gray;">Already have an account?</p>
-                <p style="text-align: center;"><a href="login.html" style="text-decoration: none; color: gray; font-size: 12px;">LOGIN</a></p>
+                <p style="text-align: center;"><a href="login.php" style="text-decoration: none; color: gray; font-size: 12px;">LOGIN</a></p>
             </form>
         </div>
     </div>    
