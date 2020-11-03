@@ -20,7 +20,7 @@
             <ul class="chat-side-nav">
                 <a href="#exampleModal-4" rel="modal:open" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
                 <li class="side-links"><a href=""><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
-                <li class="side-links"><a href=""><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
+                <li class="side-links"><a href="profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="forum.php" style="color: #00ffff;"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links"><a href="chat.php" ><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
                 <li class="side-links"><a href=""><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
@@ -46,7 +46,7 @@
                     <p class="topic">How to create a db</p>
                     <p class="topic">Disk part not working</p>
                 </div>
-                <div class="chat-view">
+                <div class="chat-view" style="margin-left: 190px;">
                     <h1>Importing DataFrames - no such file or directory</h1>
 
                     <article>

@@ -66,6 +66,7 @@ a {
 .side-nav-bar {
     width: 250px;
     background-color: #13263a;
+    position: fixed;
 }
 
 .chat-side-nav {
@@ -78,7 +79,7 @@ a {
     margin-right: 10px;
     margin-bottom: 25px;
     padding-left: 35px;
-    height: 10px;
+    height: 14px;
 }
 
 #create-chat {
@@ -98,16 +99,19 @@ a {
     width: auto;
     height: auto;
     background-color: rgba(192, 192, 192, 0.2);
+    position: fixed;
 }
 
 .main {
     height: 710px;
+    margin-left: 250px;
 }
 
 .chat-view {
     width: 870px;
     height: 625px;
     padding: 5px;
+    /*margin-left: 190px;*/
 }
 
 .chat-links {
@@ -158,14 +162,14 @@ a {
     color: gray;
 }
 
-
-
 .pull-right{
   float:right;
 }
+
 .pull-left{
   float:left;
 }
+
 #fbcomment{
   background:#fff;
   border: 1px solid #dddfe2;
@@ -173,6 +177,7 @@ a {
   color: #4b4f56;
   padding:50px;
 }
+
 .header_comment{
     font-size: 14px;
     overflow: hidden;
@@ -181,9 +186,11 @@ a {
     margin-bottom: 24px;
     padding: 10px 0;
 }
+
 .sort_title{
   color: #4b4f56;
 }
+
 .sort_by{
   background-color: #f5f6f7;
   color: #4b4f56;
@@ -358,4 +365,52 @@ code {
 }
 .ui-draggable, .ui-droppable {
 	background-position: top;
+}
+
+.content{
+  display: flex;
+  background-color: rgb(192,192,192, 0.2);
+  height: 688px;
+  margin-top: -40.1rem;
+
+}
+
+.content .pic-section{
+  margin-left: 20rem;
+  /*margin-top: -35rem;*/
+  margin-top: 5rem;
+}
+
+.content .pic-section img{
+  border-radius: 50%;
+  height: 180px;
+  width: 180px;
+}
+
+.content .profile-info{
+  margin-left: 5rem;
+  /*margin-top: -35rem;*/
+  margin-top: 5rem;
+}
+
+.content .profile-info input{
+  padding: 8px;
+  width: 95%;
+
+}
+
+.content .profile-info label{
+  font-size: 20px;
+}
+
+.content .pic-section #icon{
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+ 
+}
+
+.content .pic-section #icon i{
+  padding: 20px;
+  font-size: 25px;
+  cursor: pointer;
 }
