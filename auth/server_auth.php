@@ -16,16 +16,17 @@ $link = connect();
 			$sql = "INSERT INTO users(first_name, last_name, user_email, user_password, date_created) VALUES ('$fname', '$lname', '$email', '$Pwd1', CURRENT_TIMESTAMP)";
 			$query = "SELECT * FROM users WHERE user_email = '$email'";
 			$result = mysqli_query($link, $query);
+
 			if(mysqli_num_rows($result) <= 0){
-			if(insert($sql)=="success"){
-				$_SESSION['msg'] = "Registration success";
-				header("Location: login.php");
-			} else{
-				$_SESSION['msg'] = "User already exist";
-				header("Location: signup.php");
-			}
+				if(insert($sql)=="success"){
+					$_SESSION['msg'] = "Registration success";
+					header("Location: login.php");
+				} else{
+					$_SESSION['msg'] = "User already exists";
+					header("Location: signup.php");
+				}
 		} else{
-			$_SESSION['msg'] = "User already exist";
+			$_SESSION['msg'] = "User already exists";
 			header("Location: signup.php");
 		}
 
