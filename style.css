@@ -414,3 +414,100 @@ code {
   font-size: 25px;
   cursor: pointer;
 }
+
+/*Dashboard css*/
+.head-dash h2{
+  margin-left: 17rem;
+  margin-top: -38rem;
+}
+
+.dash{
+
+}
+
+.graph{
+  border: 2px solid black;
+  margin-left: 17rem;
+  width: 45%;
+  height: 30rem;
+}
+
+.graph .graph-posts{
+  border: 2px solid black;
+  margin-left: 1rem;
+  width: 10rem;
+  height: 5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.graph .graph-reply{
+  border: 2px solid black;
+  margin-left: 13rem;
+  margin-top: -5.3rem;
+  width: 10rem;
+  height: 5rem;
+  text-align: center;
+}
+
+.graph .graph-graph{
+  border: 2px solid black;
+  margin-left: 5px;
+  margin-top: 3rem;
+  width: 70%;
+  height: 20rem;
+  text-align: center;
+}
+
+.posts{
+  border: 2px solid black;
+  float: right;
+  width: 33%;
+  margin-top: -30.2rem;
+  height: 30rem;
+}
+
+.posts .posts-recent{
+  border: 2px solid black;
+  width: 50%;
+  height: 10rem;
+  margin-left: 5rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.posts .posts-calendar{
+  
+  margin-top: 2rem;
+  margin-left: 8rem;
+  text-align: center;
+  width: 40%;
+  height: 13rem;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.526);
+}
+
+.posts .posts-calendar #monthName{
+  position: relative;
+  background: green;
+  padding: 5px 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.posts .posts-calendar #dayName{
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 289;
+  color: rgb(100, 97, 97);
+}
+
+.posts .posts-calendar #dayNumber{
+  line-height: 1em;
+  font-size: 20px;
+  font-weight: 289;
+  color: rgb(21, 119, 12);
+}

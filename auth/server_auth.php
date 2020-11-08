@@ -25,12 +25,10 @@ $link = connect();
 					$_SESSION['msg'] = "User already exists";
 					header("Location: signup.php");
 				}
-		} else{
-			$_SESSION['msg'] = "User already exists";
-			header("Location: signup.php");
-		}
-
-
+			} else{
+				$_SESSION['msg'] = "User already exists";
+				header("Location: signup.php");
+			}
 		}else{
 			$_SESSION['msg'] = "Passwords do not match";
 			header("Location: signup.php");
