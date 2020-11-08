@@ -1,4 +1,13 @@
+<?php if(!isset($_SESSION)) {session_start();}
+if(isset($_SESSION['user_id'])) {} else{
+  $_SESSION['msg']="Session Expired! Please login";
+  echo '<a id="link" target="_parent" href="../auth/login.php"></a>
 
+<script type="text/javascript">
+    document.getElementById("link").click();
+</script>';}
+include "config.php";?>
+<?php include 'time.php'; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -10,10 +19,6 @@
   </head>
   <body>
     <style>
-        body {
-            overflow: hidden;
-        }
-
         .preloader {
             width: 100%;
             height: 100%;
@@ -73,10 +78,6 @@
             color: #333;
             font-size: 0.8em;
         }
-
-        body {
-            overflow: hidden;
-        }
     </style>
     <div class="preloader">
         <div class="spinner"></div>
@@ -104,7 +105,7 @@
             }
         })();
     </script>
-<?php if(!isset($_SESSION)) {session_start();} include "config.php";?>
+
 <?php
   if(isset($_GET['id'])){
     $id=$_GET['id'];
@@ -154,20 +155,20 @@
         ".$topic_description."
          </article>";
        echo "<p><b>By: <i>".$topic_by."</i></b></p>
-       <p><b>Posted on: <i>".$topic_date."</i></b></p>
+       <p><b>Posted on: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
        <p><b>Category: <i>".$topic_category."</i></b></p>";
     ?>
 
 
       <div id="com" class="box_comment col-md-11">
         <h2>Type Your answer</h2>
-        <form action="post.php" method="post">
+        <form id="form2" action="post.php" method="post">
           <div ng-app="editorApp">
             <div ng-controller="editorCtrl">
               <div id="toolbar-container"></div>
               <div id="editor">
-                <input type="hidden" name="$comment_by" value="<?php echo $_SESSION['user_id'] ?>">
-                <input type="hidden" name="comment_topic" value="<?php echo $topic_id ?>">
+                <input type="hidden" name="comment_by" id="comment_by" value="<?php echo $_SESSION['user_id'] ?>">
+                <input type="hidden" name="comment_topic" id="comment_topic" value="<?php echo $topic_id ?>">
                 <textarea  name="long_desc" id="long_desc" placeholder="Add a comment..."></textarea>
               </div>
             </div>
@@ -189,7 +190,8 @@
 
       </div>
       <script>
-      $(document).ready(function(){
+
+      /*$(document).ready(function(){
         $("form").on("submit", function(event){
           event.preventDefault();
 
@@ -203,28 +205,59 @@
           });
         });
       });
-        /*$(function () {
+
+
+      $(document).on('click', '#comment', function(){
+
+        var comment_by1  = CKEDITOR.instances['long_desc'].getData();
+    		var comment_topic1 = $('#comment_topic').val();
+    		var long_desc1 = $('#long_desc').val();
+    		var action1 = "comment";
+        event.preventDefault();
+    			$.ajax({
+    				url:"post.php",
+    				method:"POST",
+    				data:{comment_by1:comment_by,comment_topic1:comment_topic,long_desc1:long_desc,action1:action},
+    				success:function(data)
+    				{
+    					//load_cart_data();
+              $("#result").html(data);
+    					submit_comment();
+    				}
+    			});
+        });
+
+
+      */
+        $(function () {
           $('#comment').bind('click', function (event) {
-          // using this page stop being refreshing
-          event.preventDefault();
+            var long_desc  = CKEDITOR.instances['long_desc'].getData();
+        		var comment_topic = document.getElementById('comment_topic').value;
+        		var comment_by =  document.getElementById('comment_by').value;
+        		var action = "comment";
+            event.preventDefault();
 
             $.ajax({
               type: 'POST',
               url: 'post.php',
-              data: $('form').serialize(),
-              success: function () {
-                alert('form was submitted');
-              }
+              data:{comment_by:comment_by,comment_topic:comment_topic,long_desc:long_desc,action:action},
+      				success:function(data)
+      				{
+      					//load_cart_data();
+                //$("#result").html(data);
+      					submit_comment();
+      				}
             });
           });
-        });*/
+        });
+
       </script>
       <div class="row">
         <h3>Responses</h3>
         <ul id="list_comment" class="col-md-12">
         <?php
 
-          $sqlcom="select * from comments where comment_topic='".$row['topic_id']."' order by comment_date";
+          $sqlcom="select * from comments where comment_topic='".$row['topic_id']."' order by comment_date desc";
           $statementcom = $connect->prepare($sqlcom);
           if($statementcom->execute()){
             $resultcom = $statementcom->fetchAll();
@@ -263,15 +296,15 @@
     <div class="tools_comment">
     <a class="like" >Like</a>
     <span aria-hidden="true"> · </span>
-    <a class="replay" >Reply</a>
+    <a id="'.$comment_id.'" class="replay" >Reply</a>
     <span aria-hidden="true"> · </span>
     <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
     <span aria-hidden="true"> · </span>
-    <span>'.$comment_date.'</span>
+    <span><script>document.write(time_ago(new Date("'.($comment_date).'")));</script></span>
     </div>
     <ul class="child_replay">
     ';
-    $sqlrp="select * from replies where reply_to='".$rowcom['comment_id']."' order by reply_date";
+    $sqlrp="select * from replies where reply_to='".$rowcom['comment_id']."' order by reply_date desc";
     $statementrp = $connect->prepare($sqlrp);
     if($statementrp->execute()){
       $resultrp = $statementrp->fetchAll();
@@ -284,7 +317,7 @@
         $sqlby2="select * from users where user_id='".$rowrp['reply_by']."'";
         $statementby2 = $connect->prepare($sqlby2);
         if($statementby2->execute()){
-          $resultby1 = $statementby2->fetchAll();
+          $resultby2 = $statementby2->fetchAll();
           foreach($resultby2 as $rowby2)
           {
           $reply_by=$rowby2['first_name']." ".$rowby2['last_name'];
@@ -308,7 +341,7 @@
         <span aria-hidden="true"> · </span>
         <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
         <span aria-hidden="true"> · </span>
-        <span>'.$reply_date.'</span>
+        <span><script>document.write(time_ago(new Date("'.($reply_date).'")));</script></span>
         </div>
         <ul class="child_replay"></ul>
         </div>
@@ -552,13 +585,7 @@ body,html {
          '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
          '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
-           '<span><?php
-function getTime(){
-date_default_timezone_set("Africa/Nairobi");
-return date("Y-m-d H:i:s");
-}
-echo getTime();
-?></span>'+
+           '<span>Just Now</span>'+
          '</div>'+
          '<ul class="child_replay"></ul>'+
          '</div>';
@@ -566,6 +593,9 @@ echo getTime();
        document.getElementById('com').innerHTML="Your answer has been posted";
        $('.commentar').val('');
       }
+
+
+
       $(document).ready(function() {
        $('#list_comment').on('click', '.like', function (e) {
          $current = $(this);
@@ -592,18 +622,22 @@ echo getTime();
        $('#list_comment').on('click', '.replay', function (e) {
          cancel_reply();
          $current = $(this);
+         var elmId = $($current).attr("id");
+         //alert(elmId);
          el = document.createElement('li');
          el.className = "box_reply row";
          var id= uniqueId();
          //el.id=id;
          el.innerHTML =
            '<div class=\"col-md-12 reply_comment\">'+
-             '<div class=\"row\">'+
+             '<form id="form3" action="post.php" method="post"><div class=\"row\">'+
                '<div class=\"avatar_comment col-md-1\">'+
                  '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
                '</div>'+
                '<div class=\"box_comment col-md-10\">'+
                  '<textarea id="texta" name="texta" class=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>'+
+                 '<input id="reply_to" name="reply_to" value="'+elmId+'" hidden/>'+
+                 '<input id="reply_by" name="reply_by" value="<?php if(isset($_SESSION['user_id'])) {echo $_SESSION['user_id'];} else{echo "Guest";} ?>" hidden/>'+
                  '<div class=\"box_post\">'+
                  '<div class=\"pull-right\">'+
                    '<span>'+
@@ -611,11 +645,11 @@ echo getTime();
                    '<i class=\"fa fa-caret-down\"></i>'+
                    '</span>'+
                    '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
-                   '<button onclick=\"submit_reply()\" type=\"button\" value=\"1\">Reply</button>'+
+                   '<button id="reply" type=\"submit\" value=\"1\">Reply</button>'+
                  '</div>'+
                  '</div>'+
                '</div>'+
-             '</div>'+
+             '</div></form>'+
            '</div>';
          $current.closest('li').find('.child_replay').prepend(el);
          //CKEDITOR.inline( 'texta');
@@ -643,7 +677,31 @@ echo getTime();
        });
       });
 
+      $(document).on('click', '#reply', function (event) {
+        //$('#reply').bind('click', function (event) {
+          var texta  = CKEDITOR.instances['texta'].getData();
+          var reply_to = document.getElementById('reply_to').value;
+          var reply_by =  document.getElementById('reply_by').value;
+          var action = "reply";
+          event.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: 'post.php',
+            data:{texta:texta,reply_to:reply_to,reply_by:reply_by,action:action},
+            success:function(data)
+            {
+              //load_cart_data();
+              //$("#result").html(data);
+              submit_reply();
+            }
+          });
+        });
+
+
       function submit_reply(){
+
+
         //var comment_replay = $('.comment_replay').val();
         var comment_replay = CKEDITOR.instances['texta'].getData();
         el = document.createElement('li');
@@ -660,13 +718,7 @@ echo getTime();
          '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
          '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
-           '<span><?php
-function getTime(){
-date_default_timezone_set("Africa/Nairobi");
-return date("Y-m-d H:i:s");
-}
-echo getTime();
-?></span>'+
+           '<span>Just Now</span>'+
          '</div>'+
          '<ul class="child_replay"></ul>'+
          '</div>';
