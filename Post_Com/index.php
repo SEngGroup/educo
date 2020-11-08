@@ -166,6 +166,8 @@
             <div ng-controller="editorCtrl">
               <div id="toolbar-container"></div>
               <div id="editor">
+                <input type="hidden" name="$comment_by" value="<?php echo $_SESSION['user_id'] ?>">
+                <input type="hidden" name="comment_topic" value="<?php echo $topic_id ?>">
                 <textarea  name="long_desc" id="long_desc" placeholder="Add a comment..."></textarea>
               </div>
             </div>
