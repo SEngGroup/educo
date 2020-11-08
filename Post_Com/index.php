@@ -552,7 +552,13 @@ body,html {
          '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
          '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
-           '<span>1m</span>'+
+           '<span><?php
+function getTime(){
+date_default_timezone_set("Africa/Nairobi");
+return date("Y-m-d H:i:s");
+}
+echo getTime();
+?></span>'+
          '</div>'+
          '<ul class="child_replay"></ul>'+
          '</div>';
@@ -654,7 +660,13 @@ body,html {
          '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
          '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
-           '<span>1m</span>'+
+           '<span><?php
+function getTime(){
+date_default_timezone_set("Africa/Nairobi");
+return date("Y-m-d H:i:s");
+}
+echo getTime();
+?></span>'+
          '</div>'+
          '<ul class="child_replay"></ul>'+
          '</div>';
