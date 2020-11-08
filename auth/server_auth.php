@@ -52,6 +52,7 @@ $link = connect();
 					if(password_verify($Pwd, $row["user_password"])){
 						echo "Correct Login";
 						$_SESSION['email']=$row['user_email'];
+						$_SESSION['user_id']=$row['user_id'];
 						$_SESSION['username']=$row['first_name']." ".$row['last_name'];
 						header("Location: test_auth.php");
 					}else{

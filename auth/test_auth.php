@@ -48,7 +48,7 @@
                     <a href="test_auth.php?logout='1" style="color:red; margin:5px">
                         Logout
                     </a>
-                    <a href="../forum.php?logout='1" style="color:green;">
+                    <a href="../forum.php?" style="color:green;">
                         View Forums
                     </a>
                 </p>

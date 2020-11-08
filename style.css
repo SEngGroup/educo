@@ -11,7 +11,9 @@ body {
     border-radius: 50%;
     margin-left: 35px;
 }
-
+li.box_result {
+    list-style-type: none;
+}
 .chat-top-nav {
     list-style: none;
     display: flex;
@@ -108,7 +110,7 @@ a {
 }
 
 .chat-view {
-    width: 870px;
+    width: 100%;
     height: 625px;
     padding: 5px;
     /*margin-left: 190px;*/
@@ -406,7 +408,7 @@ code {
 .content .pic-section #icon{
   margin-top: 1rem;
   margin-left: 1.5rem;
- 
+
 }
 
 .content .pic-section #icon i{
