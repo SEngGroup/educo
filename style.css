@@ -414,3 +414,123 @@ code {
   font-size: 25px;
   cursor: pointer;
 }
+
+/*Dashboard css*/
+.head-dash h2{
+  margin-left: 17rem;
+  margin-top: -38rem;
+}
+
+.dash{
+
+}
+
+.graph{
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.526);
+  margin-left: 16.5rem;
+  width: 45%;
+  height: 30rem;
+}
+
+.graph .graph-posts{
+  border: 2px solid rgba(22, 180, 180);
+  margin-left: 3rem;
+  width: 12rem;
+  height: 5.5rem;
+  margin-top: 1rem;
+  text-align: center;
+  border-radius: 5px;
+  background-color: rgba(22, 180, 180);
+  color: white;
+}
+
+.graph .graph-reply{
+  border: 2px solid rgba(22, 180, 180);
+  margin-left: 22rem;
+  margin-top: -5.6rem;
+  width: 12rem;
+  height: 5.5rem;
+  text-align: center;
+  border-radius: 5px;
+  background-color: rgba(22, 180, 180);
+  color: white;
+}
+
+.graph .graph-graph{
+  border: 2px solid black;
+  margin-left: 5px;
+  margin-top: 3rem;
+  width: 70%;
+  height: 20rem;
+  text-align: center;
+}
+
+.graph #cont{
+  text-align: center;
+
+}
+
+.posts{
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.526);
+  float: right;
+  width: 33%;
+  margin-top: -30.2rem;
+  margin-right: 15px;
+  height: 30rem;
+}
+
+.posts .posts-recent{
+  border: 2px solid black;
+  width: 50%;
+  height: 10rem;
+  margin-left: 6rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.posts .posts-calendar{
+  
+  margin-top: 2rem;
+  margin-left: 8rem;
+  text-align: center;
+  width: 40%;
+  height: 13rem;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.526);
+}
+
+.posts .posts-calendar #monthName{
+  position: relative;
+  background: rgba(22, 180, 180);
+  padding: 5px 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+}
+
+.posts .posts-calendar #dayName{
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 289;
+  color: rgb(100, 97, 97);
+}
+
+.posts .posts-calendar #dayNumber{
+  line-height: 1em;
+  font-size: 20px;
+  font-weight: 289;
+  color: rgba(22, 180, 180);
+}
+
+.posts .posts-recent #noPosts{
+  font-size: 20px;
+}
+
+.graph .graph-posts #postsCount, .graph .graph-reply #replyCount{
+  font-size: 30px;
+  margin-top: -0.5rem;
+
+}
+

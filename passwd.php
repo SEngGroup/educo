@@ -15,7 +15,7 @@
             <ul class="chat-side-nav">
               <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
-                <li class="side-links"><a href=""><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
+                <li class="side-links"><a href="dashboard.php"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="profile.php" style="color: #00ffff;"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
                 <li class="side-links"><a href="forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links"><a href="chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
@@ -38,26 +38,6 @@
         </div>
     </div>
 </div>
-
-    <!--<div class="content">
-                <div class="user-bio">
-                    <div class="pic-section">
-                        <img src="img/autumn-goodman-vTL_qy03D1I-unsplash.jpeg" alt="maria Hernandez" class="profile-pic" style="height: 30px; width: 30px; border-radius: 50%;">
-                        <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 142px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px;">
-                            <i class="fa fa-pencil" aria-hidden="true" style="color: white;"></i> <a href="#" style="text-decoration: none; margin-left: 10px; color: white;">Edit Profile</a>
-                        </div>  
-                </div>
-                    <div class="info-section">
-                        <h2>Maria Hernandez</h2>
-                        <p>San Mateo</p>
-                        <div style="display: flex;">
-                            <i class="fa fa-facebook bio-list" aria-hidden="true" style="font-size: 30px;"></i>
-                            <i class="fa fa-twitter bio-list" aria-hidden="true" style="font-size: 30px;"></i>
-                            <i class="fa fa-google bio-list" aria-hidden="true" style="font-size: 30px;"></i>
-                        </div>
-                    </div>
-                </div>
-    </div>-->
 
     <div class="content">
         <div class="pic-section">
