@@ -49,8 +49,9 @@ $link = connect();
 				while ($row = mysqli_fetch_array($result)) {
 					if(password_verify($Pwd, $row["user_password"])){
 						echo "Correct Login";
+						$_SESSION['userid'] = $row['user_id'];
 						$_SESSION['email']=$row['user_email'];
-						$_SESSION['username']=$row['first_name']." ".$row['last_name'];
+						$_SESSION['username']=$row['user_name'];
 						header("Location: test_auth.php");
 					}else{
 						$_SESSION['msg'] = "invalid credentials";

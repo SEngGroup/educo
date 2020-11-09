@@ -45,12 +45,50 @@
         <section class="graph">
             <div class="graph-posts">
                 <h3>Total posts</h3>
+                    <?php
+                    session_start();
+                    //$id = $_SESSION['userid'];
+
+                        $link = mysqli_connect("localhost", "root", "", "educo");
+
+                        if(!$link){
+                            die("Could not connect: ".mysqli_error());
+                        }
+
+                        $sql = "SELECT * FROM topics WHERE topic_by = 1";
+                        $result = mysqli_query($link, $sql);
+                        $row_Count = mysqli_num_rows($result);
+
+                        if($row_Count > 0){
+                            echo $row_Count;
+                        }else{
+                            //echo 0;
+                            echo "<div id='postsCount'>0</div>";
+                        }
+                    ?>
+                
             </div>
             <div class="graph-reply">
                 <h3>Total replies</h3>
+                    <?php
+                        if(!$link){
+                            die("Could not connect: ".mysqli_error());
+                        }
+
+                        $sql = "SELECT * FROM replies WHERE reply_by = 1";
+                        $result = mysqli_query($link, $sql);
+                        $row_Count = mysqli_num_rows($result);
+
+                        if($row_Count > 0){
+                            echo $row_Count;
+                        }else{
+                            echo "<div id='replyCount'>0</div>";
+                        }
+                    ?>
+                
             </div>
             
-                <h3>Contributions</h3>
+                <h3 id="cont">Contributions</h3>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script>
                     google.charts.load('current', {
@@ -64,12 +102,35 @@ function drawBackgroundColor() {
   data.addColumn('number', 'Dogs');
 
   data.addRows([
-    [1, 10],
+    [1, 1],
     [2, 20]
        
   ]);
 
   var options = {
+  scales: {
+    xAxes: [
+      {
+        type: "time",
+        time: {
+          displayFormats: {
+            hour: "MMM DD"
+          },
+          tooltipFormat: "MMM D"
+        }
+      }
+    ],
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true
+        }
+      }
+    ]
+  }
+};
+
+  /*var options = {
     hAxis: {
       title: 'Time'
     },
@@ -77,7 +138,7 @@ function drawBackgroundColor() {
       title: 'Contributions'
     },
     backgroundColor: '#f1f8e9'
-  };
+  };*/
 
   var chart = new google.visualization.LineChart(document.getElementById('graph-graph'));
   chart.draw(data, options);
@@ -90,6 +151,34 @@ function drawBackgroundColor() {
         <section class="posts">
             <div class="posts-recent">
                 <h3>Recent Posts</h3>
+                <?php
+                        if(!$link){
+                            die("Could not connect: ".mysqli_error());
+                        }
+
+                        $sql = "SELECT topic_subject FROM topics WHERE topic_by = 1";
+                        $result = mysqli_query($link, $sql);
+
+                        function getData($result){
+                            $rows = array();
+
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    $rows[] = $row;
+                                }
+                                return $rows;
+                            }
+                        }
+                        $res = getData($result);
+
+                        if($res > 0){
+                            foreach ($res as $key => $value) {
+                                echo $vaue['topic_subject'];
+                            }
+                        }else{
+                            echo "<div id='noPosts'>No recent posts</div>";
+                        }
+                    ?>
             </div>
             <div class="posts-calendar">
                 <p id="monthName"></p>
@@ -111,7 +200,7 @@ function drawBackgroundColor() {
                 document.getElementById('dayNumber').innerHTML = dayNumber;
                 document.getElementById('year').innerHTML = year;
 
-            </script>       
+            </script>     
         </section> 
 </body>
 </html>

@@ -434,20 +434,22 @@ code {
 
 .graph .graph-posts{
   border: 2px solid black;
-  margin-left: 1rem;
-  width: 10rem;
-  height: 5rem;
+  margin-left: 3rem;
+  width: 12rem;
+  height: 5.5rem;
   margin-top: 1rem;
   text-align: center;
+  border-radius: 10px;
 }
 
 .graph .graph-reply{
   border: 2px solid black;
-  margin-left: 13rem;
-  margin-top: -5.3rem;
-  width: 10rem;
-  height: 5rem;
+  margin-left: 22rem;
+  margin-top: -5.6rem;
+  width: 12rem;
+  height: 5.5rem;
   text-align: center;
+  border-radius: 10px;
 }
 
 .graph .graph-graph{
@@ -457,6 +459,11 @@ code {
   width: 70%;
   height: 20rem;
   text-align: center;
+}
+
+.graph #cont{
+  text-align: center;
+
 }
 
 .posts{
@@ -471,7 +478,7 @@ code {
   border: 2px solid black;
   width: 50%;
   height: 10rem;
-  margin-left: 5rem;
+  margin-left: 6rem;
   text-align: center;
   margin-top: 1rem;
 }
@@ -511,3 +518,14 @@ code {
   font-weight: 289;
   color: rgb(21, 119, 12);
 }
+
+.posts .posts-recent #noPosts{
+  font-size: 20px;
+}
+
+.graph .graph-posts #postsCount, .graph .graph-reply #replyCount{
+  font-size: 30px;
+  margin-top: -0.5rem;
+
+}
+
