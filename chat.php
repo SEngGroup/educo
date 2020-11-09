@@ -12,7 +12,7 @@
     <div class="container">
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
-              <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
+              <a href="new_topic.php" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
                 <li class="side-links"><a href=""><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
                 <li class="side-links"><a href="profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
@@ -31,9 +31,13 @@
                     <li class="top-links"><a href="">Home</a></li>
                     <li class="top-links"><a href="">Chats</a></li>
                     <li class="top-links"><a href="">About Us</a></li>
+<li class="top-links"><a href=""><?php if (isset($_SESSION['username'])) {
+  echo $_SESSION['username'];
+} else {
+  echo '<a href="auth/login.php">Guest</a>';
+} ?></a></li>
                 </ul>
-                <img src="https://picsum.photos/id/237/75/30" alt="User Profile" class="session-profile">
-            </div>
+                <img width="50px" height="50px" src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="User Profile" class="session-profile">            </div>
 
             <div class="chat-area" style="height: 636px;">
                 <div class="topics-bar">

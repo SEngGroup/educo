@@ -1,5 +1,14 @@
+<?php if(!isset($_SESSION)) {session_start();}
+if(isset($_SESSION['user_id'])) {} else{
+  $_SESSION['msg']="Session Expired! Please login";
+  echo '<a id="link" target="_parent" href="../auth/login.php"></a>
+
+<script type="text/javascript">
+    document.getElementById("link").click();
+</script>';}
+include "Post_Com/config.php";?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +22,7 @@
 	<div class="container">
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
-              <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
+              <a href="new_topic.php" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
                 <li class="side-links"><a href=""><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="profile.php" style="color: #00ffff;"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
@@ -33,8 +42,13 @@
                     <li class="top-links"><a href="">Home</a></li>
                     <li class="top-links"><a href="">Chats</a></li>
                     <li class="top-links"><a href="">About Us</a></li>
+<li class="top-links"><a href=""><?php if (isset($_SESSION['username'])) {
+  echo $_SESSION['username'];
+} else {
+  echo '<a href="auth/login.php">Guest</a>';
+} ?></a></li>
                 </ul>
-                <img src="https://picsum.photos/id/237/75/30" alt="User Profile" class="session-profile">
+                <img width="50px" height="50px" src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="User Profile" class="session-profile">
         </div>
     </div>
 </div>
@@ -42,10 +56,10 @@
     <!--<div class="content">
                 <div class="user-bio">
                     <div class="pic-section">
-                        <img src="img/autumn-goodman-vTL_qy03D1I-unsplash.jpeg" alt="maria Hernandez" class="profile-pic" style="height: 30px; width: 30px; border-radius: 50%;">
+                        <img src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="maria Hernandez" class="profile-pic" style="height: 30px; width: 30px; border-radius: 50%;">
                         <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 142px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px;">
                             <i class="fa fa-pencil" aria-hidden="true" style="color: white;"></i> <a href="#" style="text-decoration: none; margin-left: 10px; color: white;">Edit Profile</a>
-                        </div>  
+                        </div>
                 </div>
                     <div class="info-section">
                         <h2>Maria Hernandez</h2>
@@ -61,7 +75,7 @@
 
     <div class="content">
     	<div class="pic-section">
-    		<img src="img/autumn-goodman-vTL_qy03D1I-unsplash.jpeg">
+    		<img src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx">
     		<!--<div id="icon">
 	    		<i class="fa fa-pencil"></i>
 	    		<i class="fa fa-trash"></i>
@@ -78,15 +92,10 @@
     	</div>
 
     	<div class="profile-info" style="width: 40%;">
-    		<h2>John Doe</h2>
-            <h3>Freeco@123</h3><br>
-            <h4>About</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    		<h2><?php echo $_SESSION['username']; ?></h2>
+            <h3><?php echo $_SESSION['email']; ?></h3><br>
+            <h4>Points</h4>
+            <p>50</p>
     		<!--<br><a href="#">Change Password</a>
     		<a href="#">Save</a>
     		<div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 120px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px;">
@@ -97,7 +106,7 @@
             <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 200px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px; margin-top: -3rem; margin-left: 15rem;">
                             <i class="fa fa-key" aria-hidden="true" style="color: white;"></i> <a href="#" style="text-decoration: none; margin-left: 10px; color: white;">Change Password</a>
             </div> -->
-            
+
     	</div>
     </div>
 

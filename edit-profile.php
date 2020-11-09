@@ -1,3 +1,12 @@
+<?php if(!isset($_SESSION)) {session_start();}
+if(isset($_SESSION['user_id'])) {} else{
+  $_SESSION['msg']="Session Expired! Please login";
+  echo '<a id="link" target="_parent" href="../auth/login.php"></a>
+
+<script type="text/javascript">
+    document.getElementById("link").click();
+</script>';}
+include "Post_Com/config.php";?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +38,17 @@
         <div class="top-nav" style="border-bottom: 1px solid rgba(192, 192, 192, 0.2);">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <input type="text" placeholder="Search" class="search-bar">
-                <ul class="chat-top-nav">
+								<ul class="chat-top-nav">
                     <li class="top-links"><a href="">Home</a></li>
                     <li class="top-links"><a href="">Chats</a></li>
                     <li class="top-links"><a href="">About Us</a></li>
+<li class="top-links"><a href=""><?php if (isset($_SESSION['username'])) {
+  echo $_SESSION['username'];
+} else {
+  echo '<a href="auth/login.php">Guest</a>';
+} ?></a></li>
                 </ul>
-                <img src="https://picsum.photos/id/237/75/30" alt="User Profile" class="session-profile">
+                <img width="50px" height="50px" src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="User Profile" class="session-profile">
         </div>
     </div>
 </div>
@@ -42,10 +56,10 @@
     <!--<div class="content">
                 <div class="user-bio">
                     <div class="pic-section">
-                        <img src="img/autumn-goodman-vTL_qy03D1I-unsplash.jpeg" alt="maria Hernandez" class="profile-pic" style="height: 30px; width: 30px; border-radius: 50%;">
+                        <img src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="maria Hernandez" class="profile-pic" style="height: 30px; width: 30px; border-radius: 50%;">
                         <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 142px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px;">
                             <i class="fa fa-pencil" aria-hidden="true" style="color: white;"></i> <a href="#" style="text-decoration: none; margin-left: 10px; color: white;">Edit Profile</a>
-                        </div>  
+                        </div>
                 </div>
                     <div class="info-section">
                         <h2>Maria Hernandez</h2>
@@ -61,7 +75,7 @@
 
     <div class="content">
     	<div class="pic-section">
-    		<img src="img/autumn-goodman-vTL_qy03D1I-unsplash.jpeg">
+    		<img src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx">
     		<div id="icon">
 	    		<i class="fa fa-pencil"></i>
 	    		<i class="fa fa-trash"></i>
@@ -71,16 +85,15 @@
     	<div class="profile-info">
     		<h2>Edit Profile</h2>
     		<label>Full Name</label><br>
-    		<input type="text" name=""><br>
+    		<input type="text" name="" value="<?php echo $_SESSION['username']; ?>"><br>
 
     		<br><label>Username</label><br>
-    		<input type="text" name=""><br>
+    		<input type="text" name="" value="<?php echo $_SESSION['email']; ?>"><br>
 
     		<br><label>Email</label><br>
-    		<input type="email" name=""><br>
+    		<input type="email" name="" value="<?php echo $_SESSION['email']; ?>"><br>
 
-    		<br><label id="about">About</label><br>
-    		<textarea></textarea><br>
+    		<br>
     		<br>
     		<!--<br><a href="#">Change Password</a>
     		<a href="#">Save</a>-->
@@ -91,8 +104,8 @@
 
             <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 120px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px; margin-top: -3rem; margin-left: 15rem;">
                             <i class="fa fa-times" aria-hidden="true" style="color: white;"></i> <a href="profile.php" style="text-decoration: none; margin-left: 10px; color: white;">Cancel</a>
-            </div> 
-            
+            </div>
+
     	</div>
     </div>
 

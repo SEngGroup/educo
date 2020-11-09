@@ -43,8 +43,7 @@ include 'Post_Com/config.php'
                       echo '<a href="auth/login.php">Guest</a>';
                     } ?></a></li>
                 </ul>
-                <img src="https://picsum.photos/id/237/75/30" alt="User Profile" class="session-profile">
-            </div>
+                <img width="50px" height="50px" src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="User Profile" class="session-profile">            </div>
 
             <div class="chat-area" style="height: 636px;">
                 <div class="topics-bar">
