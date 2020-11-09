@@ -46,48 +46,23 @@ include 'Post_Com/config.php'
                 <img src="https://picsum.photos/id/237/75/30" alt="User Profile" class="session-profile">
             </div>
 
-            <div class="chat-area" style="height: 636px;">
-                <div class="topics-bar">
-                    <h3 style="padding: 5px; padding-left: 15px;">Topics</h3>
-                    <?php
-                    $sqlby1="select * from topics order by topic_id desc";
-                    $statementby1 = $connect->prepare($sqlby1);
-                    if($statementby1->execute()){
-                      $resultby1 = $statementby1->fetchAll();
-                      foreach($resultby1 as $rowby1)
-                      {
-                      echo '<p style="width: 190px;word-wrap: break-word;
-                      text-overflow: ellipsis;" id='.$rowby1['topic_id'].' class="topic">';
-                      echo html_entity_decode($rowby1["topic_subject"]).'</p></b>';
-                      echo "
-                      <script>
-                      document.getElementById('".$rowby1['topic_id']."').onclick = function() {
-                      var el = document.getElementById('ifplayer2');
-                      el.src = 'Post_Com/index.php?id=".$rowby1['topic_id']."';
-                    }
-                      </script>";
-                    }
-                    }else {
-                      echo 'No topics';
-                    }
-                     ?>
-                </div>
-                <div class="chat-view" style="margin-left: 210px;">
-                  <iframe id="ifplayer2" width='100%' height='auto' marginwidth='0' marginheight='0' frameborder='0' allowfullscreen='yes' src='Post_Com/index.php?'></iframe>
+            <div class="chat-area">
+                <div class="chat-view" style="margin-left: 10px;">
+                  <iframe id="new_topics" width='100%' height='1000px' marginwidth='0' marginheight='0' frameborder='0' allowfullscreen='yes' src='Post_Com/new_forum.php?'></iframe>
                   <script>
                      $(document).ready(function () {
-                         $('#ifplayer2').on('load', function () {
+                         $('#new_topics').on('load', function () {
                              $('#loader1').hide();
                          });
                      });
                  </script>
   <script>
   $(document).ready(function() {
-      currentLocation1 = localStorage.prevUrl || 'Post_Com/index.php?';
+      new_topics = localStorage.prevUrl || 'Post_Com/new_forum.php?';
 
-      $('#ifplayer2').attr('src', currentLocation1);
+      $('#ifplayer2').attr('src', new_topics);
       $('#ifplayer2').load(function() {
-          localStorage.prevUrl = $(this)[0].contentWindow.location.href;
+          localStorage.new_topics = $(this)[0].contentWindow.location.href;
       });
       $("p.topic").click(function(e){
          // A LI is clicked
@@ -99,11 +74,11 @@ include 'Post_Com/config.php'
      });
   });
 
-  var iframe = document.getElementById("ifplayer2");
+  var iframe = document.getElementById("new_topics");
 
     // Adjusting the iframe height onload event
     iframe.onload = function(){
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 1000'px';
     }
 
 

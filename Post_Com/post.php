@@ -29,19 +29,19 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 		} else {
 			echo "Message Blank";
 		}
-    echo mysqli_error($con);
+
 	} if(isset($_POST['action2'])&&$_POST['action2']!= ''){
 		  $long_desc=$_POST['long_desc'];
 			$short_desc=$_POST['short_desc'];
 			$topic_category=$_POST['topic_category'];
 			$topic_by=$_POST['topic_by'];
 
-			echo $short_desc."<p></p>";
+			/*echo $short_desc."<p></p>";
 			echo $topic_category."<p></p>";
 			echo $long_desc."<p></p>";
-			echo $topic_by."<p></p>";
+			echo $topic_by."<p></p>";*/
 			if($long_desc != ''){
-				mysqli_query($con, "INSERT INTO replies(reply_content,reply_to,reply_by) VALUES('".$reply_content."','".$reply_to."','".$reply_by."') ");
+				mysqli_query($con, "INSERT INTO topics(topic_subject,topic_category,topic_by,topic_description) VALUES('".$short_desc."','".$topic_category."','".$topic_by."','".$long_desc."') ");
 				//header('location: index.php');
 		 }
 		}
@@ -49,5 +49,5 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 	 else {
 		echo "Not Set";
 	}
-
+echo mysqli_error($con);
 ?>

@@ -46,6 +46,7 @@ if(isset($_SESSION['user_id'])) {} else{
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   </style>
+
 <a class="btn btn-primary" target="_parent" href="../forum.php">Back</a>
 <h1>New Topic</h1>
 <a id="link2"  target="_parent" href="../forum.php"></a>
@@ -53,7 +54,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
 <p></p>
 		Topic :<p></p>
-		<textarea id='short_desc' name='short_desc' style='border: 1px solid black;'  ></textarea><br>
+		<textarea id='short_desc' name='short_desc' style='border: 1px solid black; width:80%;'  ></textarea><br>
     <input type="hidden" name="comment_by" id="comment_by" value="<?php echo $_SESSION['user_id'] ?>">
 <p></p>
 		Category:<p></p>
@@ -103,11 +104,10 @@ if(isset($_SESSION['user_id'])) {} else{
   </div>
     <hr>
 	<script>
-
 		$(function () {
 			$('#post_topic').bind('click', function (event) {
         var long_desc  = CKEDITOR.instances['long_desc'].getData();
-        var short_desc  = CKEDITOR.instances['short_desc'].getData();
+        var short_desc  =  document.getElementById('short_desc').value;
         var topic_category = document.getElementById('category').value;
         var topic_by =  document.getElementById('comment_by').value;
         var action2 = "post";
@@ -119,14 +119,16 @@ if(isset($_SESSION['user_id'])) {} else{
           data:{long_desc:long_desc,short_desc:short_desc,topic_category:topic_category,topic_by:topic_by,action2:action2},
           success:function(data)
           {
-            CKEDITOR.instances.short_desc.setData( '', function() { this.updateElement(); } );
+            //CKEDITOR.instances.short_desc.setData( '', function() { this.updateElement(); } );
             CKEDITOR.instances.long_desc.setData( '', function() { this.updateElement(); } );
             $('.phone-select').val(null).trigger('change');
+            document.getElementById('short_desc').value="";
             $("#result").html(data);
             $( "#dialog-message" ).dialog( "open" );
           }
         });
       } else {
+
         $( "#dialog-message2" ).dialog( "open" );
       }
 
@@ -182,7 +184,7 @@ $( "#dialog-message2" ).dialog({
 	<script type="text/javascript">
 	//config.extraPlugins = 'codesnippetgeshi';
 		// Initialize CKEditor
-		CKEDITOR.inline( 'short_desc');
+		//CKEDITOR.inline( 'short_desc');
 
 		CKEDITOR.replace('long_desc',{
       extraPlugins: 'uploadimage',
@@ -203,10 +205,7 @@ $( "#dialog-message2" ).dialog({
         	height: "200px"
 
 		});
-    function submit_comment(){
-     document.getElementById('com').innerHTML="Your answer has been posted";
-     $('.commentar').val('');
-    }
+
 
 	</script>
 </body>
