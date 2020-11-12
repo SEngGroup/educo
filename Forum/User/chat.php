@@ -10,7 +10,7 @@
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="" style="color: #00ffff;"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
                 <li class="side-links"><a href=""><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
-                <li class="side-links"><a href="auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
+                <li class="side-links"><a href="../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
         <div class="main" style="width: 83%;">
