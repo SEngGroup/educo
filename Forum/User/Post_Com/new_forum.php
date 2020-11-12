@@ -179,7 +179,7 @@ $( "#dialog-message2" ).dialog({
 }
 });
 	</script>
-  <script src="../ckeditor/ckeditor.js" ></script>
+  <script src="../../../ckeditor/ckeditor.js" ></script>
 	<!-- Script -->
 	<script type="text/javascript">
 	//config.extraPlugins = 'codesnippetgeshi';
@@ -188,13 +188,13 @@ $( "#dialog-message2" ).dialog({
 
 		CKEDITOR.replace('long_desc',{
       extraPlugins: 'uploadimage',
-			uploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+			uploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
 
 		 // Configure your file manager integration. This example uses CKFinder 3 for PHP.
-		 filebrowserBrowseUrl: '../apps/ckfinder/ckfinder.html',
-		 filebrowserImageBrowseUrl: '../apps/ckfinder/ckfinder.html?type=Images',
-		 filebrowserUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-		 filebrowserImageUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+		 filebrowserBrowseUrl: '../../../apps/ckfinder/ckfinder.html',
+		 filebrowserImageBrowseUrl: '../../../apps/ckfinder/ckfinder.html?type=Images',
+		 filebrowserUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		 filebrowserImageUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
 		 // Configure the Enhanced Image plugin to use classes instead of styles and to disable the
 		 // resizer (because image size is controlled by widget styles or the image takes maximum
 		 // 100% of the editor width).

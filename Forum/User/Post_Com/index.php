@@ -14,7 +14,7 @@ include "config.php";?>
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </head>
   <body>
@@ -546,20 +546,20 @@ body,html {
     ';
   } ?>
 
-      <script src="../ckeditor/ckeditor.js" ></script>
+      <script src="../../../ckeditor/ckeditor.js" ></script>
 
       <script>
 
       //CKEDITOR.inline( 'texta');
       CKEDITOR.replace('long_desc',{
         extraPlugins: 'uploadimage',
-  			uploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+  			uploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
 
   		 // Configure your file manager integration. This example uses CKFinder 3 for PHP.
-  		 filebrowserBrowseUrl: '../apps/ckfinder/ckfinder.html',
-  		 filebrowserImageBrowseUrl: '../apps/ckfinder/ckfinder.html?type=Images',
-  		 filebrowserUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-  		 filebrowserImageUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+  		 filebrowserBrowseUrl: '../../../apps/ckfinder/ckfinder.html',
+  		 filebrowserImageBrowseUrl: '../../../apps/ckfinder/ckfinder.html?type=Images',
+  		 filebrowserUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+  		 filebrowserImageUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
   		 // Configure the Enhanced Image plugin to use classes instead of styles and to disable the
   		 // resizer (because image size is controlled by widget styles or the image takes maximum
   		 // 100% of the editor width).
@@ -655,13 +655,13 @@ body,html {
          //CKEDITOR.inline( 'texta');
          CKEDITOR.replace('texta',{
            extraPlugins: 'uploadimage',
-     			uploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+     			uploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
 
      		 // Configure your file manager integration. This example uses CKFinder 3 for PHP.
-     		 filebrowserBrowseUrl: '../apps/ckfinder/ckfinder.html',
-     		 filebrowserImageBrowseUrl: '../apps/ckfinder/ckfinder.html?type=Images',
-     		 filebrowserUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-     		 filebrowserImageUploadUrl: '../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+     		 filebrowserBrowseUrl: '../../../apps/ckfinder/ckfinder.html',
+     		 filebrowserImageBrowseUrl: '../../../apps/ckfinder/ckfinder.html?type=Images',
+     		 filebrowserUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+     		 filebrowserImageUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
      		 // Configure the Enhanced Image plugin to use classes instead of styles and to disable the
      		 // resizer (because image size is controlled by widget styles or the image takes maximum
      		 // 100% of the editor width).
