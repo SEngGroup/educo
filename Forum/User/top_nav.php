@@ -12,5 +12,5 @@ echo $_SESSION['username'];
 echo '<a href="auth/login.php">Guest</a>';
 } ?></a></li>
             </ul>
-            <img width="50px" height="50px" src="https://lh3.googleusercontent.com/proxy/45vpO98hayw3EMAMOsPiN-BOh8G992YhI3gp84A6UDq3xqE97nBwyILLN2tXTIQhrdrgAqLwD9Dk7FHh0wi-GPSKIoj01wi1JJTBneZbeIB-Eku49qZbXc3KdSpVwvkJOavbA9hsJjiVTrzMdLP2UUnx" alt="User Profile" class="session-profile">
+            <img width="50px" height="50px" src="../../assets/img/user.png" alt="User Profile" class="session-profile">
     </div>
