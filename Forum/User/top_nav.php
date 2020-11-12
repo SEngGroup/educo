@@ -1,4 +1,4 @@
-
+<?php if(!isset($_SESSION)) {session_start();}?>
     <div class="top-nav" style="border-bottom: 1px solid rgba(192, 192, 192, 0.2);">
             <i class="fa fa-search" aria-hidden="true"></i>
             <input type="text" placeholder="Search" class="search-bar">
