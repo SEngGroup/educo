@@ -33,7 +33,7 @@ SELECT * FROM topics
 if($_POST['query'] != '')
 {
   $query .= '
-  WHERE topic_subject LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  WHERE topic_subject LIKE "%'.str_replace(' ', '%', $_POST['query']).'%" or topic_description LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
 
