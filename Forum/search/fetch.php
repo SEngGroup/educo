@@ -51,7 +51,7 @@ $result = $statement->fetchAll();
 $total_filter_data = $statement->rowCount();
 
 $output = '
-<label>Total Records - '.$total_data.'</label>
+<label>Search Results - '.$total_data.'</label>
 <table class="table table-striped table-bordered">
   <tr>
     <th>ID</th>
@@ -74,7 +74,7 @@ else
 {
   $output .= '
   <tr>
-    <td colspan="2" align="center">No Data Found</td>
+    <td colspan="2" align="center">No Topics Found! Check your keywords</td>
   </tr>
   ';
 }
