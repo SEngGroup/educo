@@ -10,13 +10,44 @@ include "config.php";?>
 <?php include 'time.php'; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/style.css">
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <title>Chats</title>
+</head>
+<body>
+  <script>
+  function title(str) {
+  return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+}
+  function GetFilename(url)
+{
+ if (url)
+ {
+    var m = url.toString().match(/.*\/(.+?)\./);
+    if (m && m.length > 1)
+    {
+       return title(m[1]);
+    }
+ }
+ return "";
+}
+  $(document).ready(function() {
+
+    document.title = GetFilename(window.location.href);
+  });
+  </script>
+
   <body>
     <style>
         .preloader {
@@ -78,6 +109,14 @@ include "config.php";?>
             color: #333;
             font-size: 0.8em;
         }
+        a {
+          color: #3CA8FF;
+          text-decoration: initial;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
     </style>
     <div class="preloader">
         <div class="spinner"></div>
@@ -88,13 +127,13 @@ include "config.php";?>
       $(".preloader").fadeOut(1000, function() {
         //$(".preloader").hide();
       });
-    }, 1500);
+    }, 10);
         (function() {
             var loaderText = document.getElementById("loading-msg");
             loaderText.innerHTML = getLoadingText();
             var refreshIntervalId = setInterval(function() {
                 loaderText.innerHTML = getLoadingText();
-            }, 1000);
+            }, 10);
 
             function getLoadingText() {
                 var strLoadingText;
@@ -157,7 +196,7 @@ include "config.php";?>
        echo "<p><b>By: <i>".$topic_by."</i></b></p>
        <p><b>Posted: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
        <p><b>Category: <i>".$topic_category."</i></b></p>
-       <p>Fag this post<i class='fa fa-thumbs-o-up'></i></p>
+       <p><a >Flag this post <i class='fa fa-flag'></i></a></p>
        ";
     ?>
 
