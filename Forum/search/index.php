@@ -6,6 +6,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
     <style>
+    li a {
+      color: #3CA8FF;
+      text-decoration: initial;
+    }
+
+    li a:hover {
+      text-decoration: underline;
+    }
+
+    .show {
+      display: block;
+    }
+
+    h2,
+    h3 {
+      margin: 0px 0;
+      line-height: 23px;
+      font-size: 18px;
+    }
+
+    div#wrap {
+      margin: 17px;
+    }
+
+    ul,
+    ol {
+      padding: 0;
+    }
     .container{
       padding-right: 0px !important;
       padding-left: 0px !important;
@@ -17,7 +45,40 @@
     margin:0;
     padding:0;
 }
+p.desc {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.desc1 {
+  position: relative;
+  
+  /* exactly three lines */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.desc1:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
     </style>
+
+<style>
+
+
+
+
+</style>
+
   </head>
   <body>
     <br />
@@ -39,6 +100,7 @@
 </html>
 <script>
   $(document).ready(function(){
+    //$('.desc1').find('*').addClass('desc');
     function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),

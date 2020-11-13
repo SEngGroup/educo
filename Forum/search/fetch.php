@@ -52,10 +52,10 @@ $total_filter_data = $statement->rowCount();
 
 $output = '
 <label>Search Results - '.$total_data.'</label>
-<table class="table table-striped table-bordered">
+<table class="table ">
   <tr>
-    <th>ID</th>
-    <th>Post Title</th>
+
+    <th>Topics</th>
   </tr>
 ';
 if($total_data > 0)
@@ -63,9 +63,15 @@ if($total_data > 0)
   foreach($result as $row)
   {
     $output .= '
+
     <tr>
-      <td>'.$row["topic_id"].'</td>
-      <td><a href="../User/Post_Com/index.php?id='.$row["topic_id"].'">'.$row["topic_subject"].'</a></td>
+
+      <td><ul>
+         <li id="'.$row["topic_id"].'">
+           <h2><a href="../User/Post_Com/index.php?id='.$row["topic_id"].'">'.$row["topic_subject"].'</a></h2>
+           <div class="desc1">'.$row["topic_description"].'</div>
+         </li>
+       </ul></td>
     </tr>
     ';
   }
