@@ -53,10 +53,6 @@ $total_filter_data = $statement->rowCount();
 $output = '
 <label>Search Results - '.$total_data.'</label>
 <table class="table ">
-  <tr>
-
-    <th>Topics</th>
-  </tr>
 ';
 if($total_data > 0)
 {
