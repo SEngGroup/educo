@@ -1,7 +1,7 @@
 <?php if(!isset($_SESSION)) {session_start();}?>
     <div class="top-nav" style="border-bottom: 1px solid rgba(192, 192, 192, 0.2);">
             <i class="fa fa-search" aria-hidden="true"></i>
-            <input type="text" placeholder="Search" class="search-bar">
+            <input id="search" type="text" placeholder="Search" class="search-bar">
             <ul class="chat-top-nav">
                 <li class="top-links"><a href="">Home</a></li>
                 <li class="top-links"><a href="">Chats</a></li>
