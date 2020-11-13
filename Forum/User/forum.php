@@ -57,10 +57,27 @@ include 'header.php';
   <script>
   $(document).ready(function() {
       currentLocation1 = localStorage.prevUrl || 'Post_Com/index.php?';
+      function getParameterByName(name, url = localStorage.prevUrl) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+
 
       $('#ifplayer2').attr('src', currentLocation1);
       $('#ifplayer2').load(function() {
           localStorage.prevUrl = $(this)[0].contentWindow.location.href;
+          var p_id = getParameterByName('id');
+          if(p_id==''){
+            $("p").removeClass("selected");
+          } else {
+            $("p").removeClass("selected");
+            $('#'+p_id).addClass("selected");
+          }
       });
       $("p.topic").click(function(e){
          // A LI is clicked
