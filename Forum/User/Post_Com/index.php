@@ -155,8 +155,10 @@ include "config.php";?>
         ".$topic_description."
          </article>";
        echo "<p><b>By: <i>".$topic_by."</i></b></p>
-       <p><b>Posted on: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
-       <p><b>Category: <i>".$topic_category."</i></b></p>";
+       <p><b>Posted: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
+       <p><b>Category: <i>".$topic_category."</i></b></p>
+       <p>Fag this post<i class='fa fa-thumbs-o-up'></i></p>
+       ";
     ?>
 
 
@@ -191,44 +193,6 @@ include "config.php";?>
       </div>
       <script>
 
-      /*$(document).ready(function(){
-        $("form").on("submit", function(event){
-          event.preventDefault();
-
-          var formValues= $(this).serialize();
-          var actionUrl = $(this).attr("action");
-
-          $.post(actionUrl, formValues, function(data){
-            // Display the returned data in browser
-            $("#result").html(data);
-            submit_comment();
-          });
-        });
-      });
-
-
-      $(document).on('click', '#comment', function(){
-
-        var comment_by1  = CKEDITOR.instances['long_desc'].getData();
-    		var comment_topic1 = $('#comment_topic').val();
-    		var long_desc1 = $('#long_desc').val();
-    		var action1 = "comment";
-        event.preventDefault();
-    			$.ajax({
-    				url:"post.php",
-    				method:"POST",
-    				data:{comment_by1:comment_by,comment_topic1:comment_topic,long_desc1:long_desc,action1:action},
-    				success:function(data)
-    				{
-    					//load_cart_data();
-              $("#result").html(data);
-    					submit_comment();
-    				}
-    			});
-        });
-
-
-      */
         $(function () {
           $('#comment').bind('click', function (event) {
             var long_desc  = CKEDITOR.instances['long_desc'].getData();
