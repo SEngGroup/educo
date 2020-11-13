@@ -14,3 +14,12 @@ echo '<a href="auth/login.php">Guest</a>';
             </ul>
             <img width="50px" height="50px" src="../../assets/img/user.png" alt="User Profile" class="session-profile">
     </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#search').keyup(function(){
+    var query = $('#search').val();
+    load_data(1, query);
+  });
+  });
+  </script>
+</script>
