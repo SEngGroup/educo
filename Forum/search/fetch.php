@@ -37,7 +37,7 @@ if($_POST['query'] != '')
   ';
 }
 
-$query .= 'ORDER BY topic_id ASC ';
+$query .= 'ORDER BY topic_id DESC ';
 
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
