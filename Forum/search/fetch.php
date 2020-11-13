@@ -90,7 +90,7 @@ $total_links = ceil($total_data/$limit);
 $previous_link = '';
 $next_link = '';
 $page_link = '';
-
+  $page_array[] = 0;
 //echo $total_links;
 
 if($total_links > 4)
