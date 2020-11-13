@@ -18,7 +18,9 @@ echo '<a href="auth/login.php">Guest</a>';
 $(document).ready(function(){
   $('#search').keyup(function(){
     var query = $('#search').val();
-    load_data(1, query);
+    var el = document.getElementById('ifplayer2');
+    el.src = '../search/index.php?string='+query;
+    //load_data(1, query);
   });
   });
   </script>
