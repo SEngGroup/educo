@@ -10,6 +10,7 @@
       padding-right: 0px !important;
       padding-left: 0px !important;
       margin:5px !important;
+      max-width: 98% !important;
 
     }
     html,body {
