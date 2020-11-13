@@ -45,6 +45,19 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 				//header('location: index.php');
 		 }
 		}
+		if(isset($_POST['action3'])&&$_POST['action3']!= ''){
+			  $long_desc=$_POST['long_desc'];
+				$short_desc=$_POST['problem_id'];
+
+				/*echo $short_desc."<p></p>";
+				echo $topic_category."<p></p>";
+				echo $long_desc."<p></p>";
+				echo $topic_by."<p></p>";*/
+				if($long_desc != ''){
+					mysqli_query($con, "INSERT INTO flags(topic_id,description) VALUES('".$short_desc."','".$long_desc."') ");
+					//header('location: index.php');
+			 }
+			}
 
 	 else {
 		echo "Not Set";
