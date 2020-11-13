@@ -9,8 +9,6 @@ if(isset($_SESSION['user_id'])) {} else{
 include "config.php";?>
 <?php include 'time.php'; ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +16,6 @@ include "config.php";?>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/style.css">
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -188,6 +185,124 @@ include "config.php";?>
 
 ?>
 
+<div id="report" title="Flag Topic">
+  <p>Please type a problem to continue.<br>
+  You can report the post after providing a reason for your action</p>
+  <form action="post.php" method="post">
+
+    <fieldset>
+      <label for="topic_description">Topic</label>
+      <input type="text" id="problem_id" name="problem_id" value="<?php echo $topic_id; ?>"  class="text ui-widget-content ui-corner-all" readonly>
+      <label for="topic_description">Reason</label>
+      <input type="text" name="problem" id="problem" placeholder="Add a description..." class="text ui-widget-content ui-corner-all">
+      <button type="submit" id="post_complain" name="post" class="ui-button ui-corner-all ui-widget">Submit</button>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+  </fieldset>
+  </form>
+</div>
+<div id="dialog-message" title="Success">
+<p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+
+  Your issue has been received.
+</p>
+</div>
+<div id="dialog-message2" title="Failed">
+<p>
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+
+  Please Fill in all the fields
+</p>
+</div>
+<?php include '../newpost.php'; ?>
+<script>
+$( function() {
+  $( "#dialog-message2" ).dialog({
+    autoOpen: false,
+    modal: true,
+    show: {
+      effect: "slide",
+      duration: 100
+    },
+    hide: {
+      effect: "explode",
+      duration: 100
+    }
+    ,
+    buttons: {
+  "Ok": function() {
+    $( this ).dialog( "close" );
+  }
+  }
+  });
+  $( "#report" ).dialog({
+    autoOpen: false,
+    modal: true,
+    show: {
+      effect: "slide",
+      duration: 100
+    },
+    hide: {
+      effect: "explode",
+      duration: 100
+    }
+    ,
+    buttons: {
+  "Cancel": function() {
+    $( this ).dialog( "close" );
+  }
+  }
+  });
+
+  $( "#flagit" ).on( "click", function() {
+    $( '#report' ).dialog( "open" );
+  });
+  $( "#dialog-message" ).dialog({
+    autoOpen: false,
+    modal: true,
+    show: {
+      effect: "slide",
+      duration: 100
+    },
+    hide: {
+      effect: "explode",
+      duration: 100
+    }
+    ,
+    buttons: {
+  "Ok": function() {
+    $( this ).dialog( "close" );
+    $( '#report' ).dialog( "close" );
+  }
+}
+});
+
+$('#post_complain').bind('click', function (event) {
+  var long_desc  = document.getElementById('problem').value;
+  var problem_id  = document.getElementById('problem_id').value;
+  var action3 = "post";
+  event.preventDefault();
+if(long_desc!=''&&problem_id!=''){
+  $.ajax({
+    type: 'POST',
+    url: 'post.php',
+    data:{long_desc:long_desc,problem_id:problem_id,action3:action3},
+    success:function(data)
+    {
+      //CKEDITOR.instances.short_desc.setData( '', function() { this.updateElement(); } );
+      $( "#dialog-message" ).dialog( "open" );
+    }
+  });
+} else {
+
+  $( "#dialog-message2" ).dialog( "open" );
+}
+
+
+});
+} );
+
+</script>
     <?php
        echo "<h1>".$topic_subject."</h1>";
        echo "<article>
@@ -196,7 +311,7 @@ include "config.php";?>
        echo "<p><b>By: <i>".$topic_by."</i></b></p>
        <p><b>Posted: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
        <p><b>Category: <i>".$topic_category."</i></b></p>
-       <p><a >Flag this post <i class='fa fa-flag'></i></a></p>
+       <p><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
        ";
     ?>
 

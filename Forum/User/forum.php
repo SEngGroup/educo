@@ -121,5 +121,9 @@ include 'header.php';
         </div>
         <?php include 'newpost.php'; ?>
     </div></div>
+
+
+    
+
 </body>
 </html>
