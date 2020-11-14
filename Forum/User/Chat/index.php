@@ -95,7 +95,7 @@ if(!isset($_SESSION)) {session_start();}?>
     			data:{to_user_id:to_user_id, chat_message:chat_message},
     			success:function(data)
     			{
-    				//$('#chat_message_'+to_user_id).val('');
+    				$('#chat_message_'+to_user_id).val('');
     				$('#chat_history_'+to_user_id).html(data);
     			}
     		})
