@@ -1,5 +1,12 @@
-<?php include '../header.php'; ?>
-<?php if(!isset($_SESSION)) {session_start();}?>
+<?php include '../header.php';include('database_connection.php');
+ ?>
+<?php if(!isset($_SESSION)) {session_start();}if(isset($_SESSION['user_id'])) {} else{
+  $_SESSION['msg']="Session Expired! Please login";
+  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
+
+<script type="text/javascript">
+    document.getElementById("link").click();
+</script>';} ?>
     <div class="container">
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
@@ -14,7 +21,7 @@
                 <li class="side-links"><a href="../../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
             </ul>
         </div>
-        <div class="main" style="width: 83%;">
+        <div class="main" style="width: 100%;">
           <div class="top-nav" style="border-bottom: 1px solid rgba(192, 192, 192, 0.2);">
                   <i class="fa fa-search" aria-hidden="true"></i>
                   <input type="text" placeholder="Search" class="search-bar">
@@ -32,32 +39,95 @@
           </div>
 
             <div class="chat-area" style="height: 636px;">
-                <div class="topics-bar">
+                <div class="topics-bar" >
                     <h3 style="padding: 5px; padding-left: 15px;">Chats</h3>
-                    <p class="topic">Dr. Mugambi</p>
-                    <b><p style="color: brown;" class="topic">Max</p></b>
-                    <p class="topic">Eng. Mark</p>
+                    <div id="user_details" style="margin-bottom:10px"></div>
+                    <p></p><p></p>
                 </div>
-                <div class="chat-view" style="margin-left: 120px;">
+                <div class="chat-view" style="margin-left: 185px;">
                     <ul class="chat-links">
                         <li>All messages</li>
                         <li>Archive</li>
                         <li>Deleted</li>
                     </ul>
                     <div class="text-box" style="padding: 10px; height: 465px;">
-                        <p class="receiver">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p class="sender">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p class="receiver">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="text-area">
-                        <input style="padding: 15px; width: 500px; border-radius: 25px; border: none;"type="text" placeholder="Write a message">
-                        <input style="width: 100px; height: 40px; font-size: 15px; border-radius: 25px; border: none; margin-left: 12px; color: white; background-color: rgba(22, 180, 180);" type="button" value="Send">
-                    </div>
+                      <iframe id="ifplayer2" width='100%' height='auto' marginwidth='0' marginheight='0' frameborder='0' allowfullscreen='yes' src='index.php?'></iframe>
+                      </div>
                 </div>
             </div>
 </div>
     </div>
     <?php include '../newpost.php'; ?>
     </div>
+    <script>
+      $(document).ready(function(){
+        //$('.desc1').find('*').addClass('desc');
+        currentLocation1 = localStorage.prevUrl1 || 'index.php?';
+        function getParameterByName(name, url = currentLocation1) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        //var search_id = getParameterByName('string');
+        var iframe = document.getElementById("ifplayer2");
+
+          // Adjusting the iframe height onload event
+          iframe.onload = function(){
+              iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+          }
+          currentLocation1 = localStorage.prevUrl1 || 'index.php?';
+          $('#ifplayer2').attr('src', localStorage.prevUrl1);
+          $('#ifplayer2').load(function() {
+              localStorage.prevUrl1 = $(this)[0].contentWindow.location.href;
+              var p_id = getParameterByName('touserid');
+              if(p_id==''){
+                $("p.top").removeClass("selected");
+              } else {
+                $("p.top").removeClass("selected");
+                $('#'+p_id).addClass("selected");
+              }
+          });
+
+      });
+      function fetch_user()
+    	{
+    		$.ajax({
+    			url:"fetch_user.php",
+    			method:"POST",
+    			success:function(data){
+    				$('#user_details').html(data);
+    			}
+    		})
+    	}
+      fetch_user();
+      setInterval(function(){
+    		//update_last_activity();
+    		fetch_user();
+        var p_id = getParameterByName('touserid');
+        if(p_id==''){
+          $("p.top").removeClass("selected");
+        } else {
+          $("p.top").removeClass("selected");
+          $('#'+p_id).addClass("selected");
+        }
+    		//update_chat_history_data();
+    		//fetch_group_chat_history();
+    	}, 5000);
+    </script>
+<style>
+.selected{
+  color: brown;
+  font-weight: bold;
+}
+div.topic:hover{
+  background-color: rgba(0, 255, 255, 0.2);
+  cursor: pointer;
+
+}
+</style>
 </body>
 </html>

@@ -1,5 +1,12 @@
 <?php
 if(!isset($_SESSION)) {session_start();}
+if(isset($_SESSION['user_id'])) {} else{
+  $_SESSION['msg']="Session Expired! Please login";
+  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
+
+<script type="text/javascript">
+    document.getElementById("link").click();
+</script>';}
 include 'Post_Com/config.php';
 include 'header.php';
 ?>
@@ -56,7 +63,7 @@ include 'header.php';
                  </script>
   <script>
   $(document).ready(function() {
-      currentLocation1 = localStorage.prevUrl || 'Post_Com/index.php?';
+
       function getParameterByName(name, url = localStorage.prevUrl) {
       name = name.replace(/[\[\]]/g, '\\$&');
       var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -67,7 +74,7 @@ include 'header.php';
       }
 
 
-
+      currentLocation1 = localStorage.prevUrl || 'Post_Com/index.php?';
       $('#ifplayer2').attr('src', currentLocation1);
       $('#ifplayer2').load(function() {
           localStorage.prevUrl = $(this)[0].contentWindow.location.href;
@@ -123,7 +130,7 @@ include 'header.php';
     </div></div>
 
 
-    
+
 
 </body>
 </html>

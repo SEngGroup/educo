@@ -2,7 +2,23 @@ body {
     margin: auto;
     font-family: 'Josefin Sans', sans-serif;
 }
-
+.w3-green, .w3-hover-green:hover {
+    color: #fff!important;
+    background-color: #4CAF50!important;
+}
+.w3-badge {
+    border-radius: 50%;
+}
+.w3-badge, .w3-tag {
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
 .container {
     height: 710px;
 }
@@ -99,9 +115,10 @@ a {
 
 .topics-bar {
     width: auto;
-    height: auto;
+    height: inherit;
     background-color: rgba(192, 192, 192, 0.2);
     position: fixed;
+    overflow: auto;
 }
 
 .main {
@@ -141,7 +158,7 @@ a {
 }
 
 .receiver, .sender {
-    width: 400px;
+    width: 370px;
     padding: 10px;
     border-radius: 10px;
     margin-left: 15px;
@@ -149,7 +166,7 @@ a {
 
 .sender {
     position: relative;
-    left: 410px;
+    left: 380px;
     background-color: rgba(22, 180, 180, 0.9);
     color: white;
 }
@@ -313,6 +330,7 @@ a {
   line-height: 1.358;
   margin:0;
 }
+
 .box_result .result_comment{
   display:block;
   overflow:hidden;
