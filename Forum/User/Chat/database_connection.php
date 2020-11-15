@@ -1,7 +1,7 @@
 <?php
 $connect = new PDO("mysql:host=localhost;dbname=educo;charset=utf8mb4", "root", "");
 date_default_timezone_set('Africa/Nairobi');
-
+$mysqli = new mysqli('localhost', 'root', '', 'educo');
 
 function fetch_user_chat_history($from_user_id, $to_user_id, $connect)
 {

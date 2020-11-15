@@ -41,15 +41,25 @@
             <div class="chat-area" style="height: 636px;">
                 <div class="topics-bar" >
                     <h3 style="padding: 5px; padding-left: 15px;">Chats</h3>
+                    <div id="user_details1" style="margin-bottom:10px"></div>
+                    <h3 style="padding: 5px; padding-left: 15px;">Contacts</h3>
                     <div id="user_details" style="margin-bottom:10px"></div>
                     <p></p><p></p>
                 </div>
                 <div class="chat-view" style="margin-left: 185px;">
                     <ul class="chat-links">
-                        <li>All messages</li>
+                        <li id="all" style="cursor:pointer">All messages</li>
                         <li>Archive</li>
                         <li>Deleted</li>
                     </ul>
+                    <script>
+                		document.getElementById("all").onclick = function() {
+                		//document.getElementById("top_'.$row['user_id'].'").style.color = "brown";
+                		var el = document.getElementById("ifplayer2");
+                		el.src = "chats.php";
+
+                		}
+                		</script>
                     <div class="text-box" style="padding: 10px; height: 465px;">
                       <iframe id="ifplayer2" width='100%' height='auto' marginwidth='0' marginheight='0' frameborder='0' allowfullscreen='yes' src='index.php?'></iframe>
                       </div>
@@ -88,17 +98,33 @@
       });
       function fetch_user()
     	{
+        var action = "user";
     		$.ajax({
     			url:"fetch_user.php",
     			method:"POST",
+          data:{action:action},
     			success:function(data){
     				$('#user_details').html(data);
     			}
     		})
     	}
+      function fetch_message()
+    	{
+        var action = "message";
+    		$.ajax({
+    			url:"fetch_user.php",
+    			method:"POST",
+          data:{action:action},
+    			success:function(data){
+    				$('#user_details1').html(data);
+    			}
+    		})
+    	}
+      fetch_message();
       fetch_user();
       setInterval(function(){
     		//update_last_activity();
+        fetch_message();
     		fetch_user();
     	}, 5000);
     </script>

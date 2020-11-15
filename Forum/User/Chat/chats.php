@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <style>
-  #gallery { float: left; width: 65%; min-height: 12em; }
+  #gallery { float: left; width: 50%; min-height: 12em; }
   .gallery.custom-state-active { background: #eee; }
   .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
   .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
@@ -15,10 +15,9 @@
   .gallery li a.ui-icon-zoomin { float: left; }
   .gallery li img { width: 100%; cursor: move; }
 
-  #trash { float: right; width: 32%; min-height: 18em; padding: 1%; }
+  #trash { float: rightx; width: 32%; min-height: 18em; padding: 1%; }
   #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
   #trash h4 .ui-icon { float: left; }
-  #trash .gallery h5 { display: none; }
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -71,9 +70,9 @@
         $item.find( "a.ui-icon-trash" ).remove();
         $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
           $item
-            .animate({ width: "48px" })
+            .animate({ width: "60px" })
             .find( "img" )
-              .animate({ height: "36px" });
+              .animate({ height: "56px" });
         });
       });
     }
@@ -137,7 +136,7 @@
 </head>
 <body>
 
-<div class="ui-widget ui-helper-clearfix">
+<div class="ui-widget ui-helper-clearfix" style="display:flex">
 
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
   <li class="ui-widget-content ui-corner-tr">
