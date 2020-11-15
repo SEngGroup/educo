@@ -10,7 +10,7 @@ if(isset($_POST['action'])&&$_POST['action']== 'user'){
 
 	$query = "
 	SELECT * FROM users
-	WHERE user_id != '".$_SESSION['user_id']."'
+	WHERE user_id != '".$_SESSION['user_id']." order by first_name ASC'
 	";
 
 	$statement = $connect->prepare($query);
