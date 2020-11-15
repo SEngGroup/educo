@@ -112,18 +112,22 @@ if(isset($_POST['action'])&&$_POST['action']== 'user'){
 				$status = 'offline';
 				$current_timestamp = strtotime(date("Y-m-d H:i:s") . '- 10 second');
 				$current_timestamp = date('Y-m-d H:i:s', $current_timestamp);
+				$q="'";
 				if($row!=$_SESSION['user_id']){
 					$output .= '
 					<li  class="ui-widget-content ui-corner-tr">
 				    <h5 id="msg_'.$row.'" class="ui-widget-header">'.get_user_name($row,$connect).' '.count_unseen_message($row, $_SESSION['user_id'], $connect).'</h5>
-				    <img src="https://jqueryui.com/resources/demos/droppable/images/high_tatras_min.jpg" alt="The peaks of High Tatras" width="96" height="72">
-				    <a href="https://jqueryui.com/resources/demos/droppable/images/high_tatras_min.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+				    <img src="../../../assets/img/chat.png" alt="The peaks of High Tatras" width="96" height="72">
+				    <a href="../../../assets/img/chat.png" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
 				    <a id="'.$row.'" href="link/to/trash/script/when/we/have/js/off" title="Delete this Message" class="ui-icon ui-icon-trash">Delete image</a>
 				  </li>
 						<script>
 						document.getElementById("msg_'.$row.'").onclick = function() {
 							window.location.href = "index.php?touserid='.$row.'&tousername='.get_user_name($row,$connect).'";
 						}
+						var recycle_icon = '.$q.'<a id="'.$row.'" href="link/to/recycle/script/when/we/have/js/off" title="Recycle this image" class="ui-icon ui-icon-refresh">Recycle image</a>'.$q.';
+						var trash_icon = '.$q.'<a id="'.$row.'" href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>'.$q.';
+
 						</script>
 					';
 		  }
