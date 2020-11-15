@@ -31,25 +31,16 @@ if(!isset($_SESSION)) {session_start();}?>
     <script>
     $(document).ready(function(){
 
-    	fetch_user();
+    	//fetch_user();
 
     	setInterval(function(){
     		//update_last_activity();
-    		fetch_user();
+    		//fetch_user();
     		update_chat_history_data();
     		//fetch_group_chat_history();
     	}, 5000);
 
-    	function fetch_user()
-    	{
-    		$.ajax({
-    			url:"fetch_user.php",
-    			method:"POST",
-    			success:function(data){
-    				$('#user_details').html(data);
-    			}
-    		})
-    	}
+
 
     	function make_chat_dialog_box(to_user_id, to_user_name)
     	{

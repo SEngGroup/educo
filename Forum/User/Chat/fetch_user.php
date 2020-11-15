@@ -29,13 +29,15 @@ foreach($result as $row)
 
 	$output .= '
 	<div id="'.$row['user_id'].'" class="topic">
-		<p  class="top" >'.get_user_name($row['user_id'],$connect).' '.count_unseen_message($row['user_id'], $_SESSION['user_id'], $connect).' '.fetch_is_type_status($row['user_id'], $connect).'</p>
+		<p  class="top" id="top_'.$row['user_id'].'">'.get_user_name($row['user_id'],$connect).' '.count_unseen_message($row['user_id'], $_SESSION['user_id'], $connect).' '.fetch_is_type_status($row['user_id'], $connect).'</p>
 
 		</div>
 		<script>
 		document.getElementById("'.$row['user_id'].'").onclick = function() {
+		//document.getElementById("top_'.$row['user_id'].'").style.color = "brown";
 		var el = document.getElementById("ifplayer2");
 		el.src = "index.php?touserid='.$row['user_id'].'&tousername='.get_user_name($row['user_id'],$connect).'";
+
 		}
 		</script>
 	';

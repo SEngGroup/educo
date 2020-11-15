@@ -83,13 +83,6 @@
           $('#ifplayer2').attr('src', localStorage.prevUrl1);
           $('#ifplayer2').load(function() {
               localStorage.prevUrl1 = $(this)[0].contentWindow.location.href;
-              var p_id = getParameterByName('touserid');
-              if(p_id==''){
-                $("p.top").removeClass("selected");
-              } else {
-                $("p.top").removeClass("selected");
-                $('#'+p_id).addClass("selected");
-              }
           });
 
       });
@@ -107,15 +100,6 @@
       setInterval(function(){
     		//update_last_activity();
     		fetch_user();
-        var p_id = getParameterByName('touserid');
-        if(p_id==''){
-          $("p.top").removeClass("selected");
-        } else {
-          $("p.top").removeClass("selected");
-          $('#'+p_id).addClass("selected");
-        }
-    		//update_chat_history_data();
-    		//fetch_group_chat_history();
     	}, 5000);
     </script>
 <style>
