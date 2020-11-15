@@ -144,14 +144,20 @@ if(isset($_POST['action'])&&$_POST['action']== 'user'){
 			else if(isset($_POST['action'])&&$_POST['action']== 'messaged'){
 				if ($_POST['act']=="delete") {
 					$query="update chat_message set st='off' where to_user_id='".$_POST['id']."' and from_user_id='".$_SESSION['user_id']."'";
+					if(mysqli_query($con,$query)){
+						echo "success";
+					} else {
+						echo mysqli_error($con);
+					}
 				} elseif ($_POST['act']=="restore") {
 					$query="update chat_message set st='on' where to_user_id='".$_POST['id']."' and from_user_id='".$_SESSION['user_id']."'";
+					if(mysqli_query($con,$query)){
+						echo "success1";
+					} else {
+						echo mysqli_error($con);
+					}
 				}
-				if(mysqli_query($con,$query)){
-					echo "success";
-				} else {
-					echo mysqli_error($con);
-				}
+
 			}
 
 
