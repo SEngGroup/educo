@@ -46,6 +46,11 @@
                     <div id="user_details" style="margin-bottom:10px"></div>
                     <p></p><p></p>
                 </div>
+                <style media="screen">
+                  .chat-view{
+                    height: 400px !important;
+                  }
+                </style>
                 <div class="chat-view" style="margin-left: 185px;">
                     <ul class="chat-links">
                         <li id="all" style="cursor:pointer">All messages</li>

@@ -21,8 +21,10 @@
     </head>
     <body>
 <?php if(isset($_GET['touserid'])){
-if(!isset($_SESSION)) {session_start();}?>
-                    <div class="text-box" style="padding: 10px; height: 465px;">
+if(!isset($_SESSION)) {session_start();}
+include('database_connection.php');?>
+<h5 style="margin-left:2%;font-weight:bold;font-size:18px;color:brown; border-bottom:1px dotted black"><?php echo get_user_name($_GET['touserid'],$connect); ?><h5/>
+                    <div class="text-box" style="padding: 10px; height: 380px;">
               				<div id="user_model_details"></div>
                     </div>
 
@@ -45,7 +47,7 @@ if(!isset($_SESSION)) {session_start();}?>
     	function make_chat_dialog_box(to_user_id, to_user_name)
     	{
     		var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="You have chat with '+to_user_name+'">';
-    		modal_content += '<div style="height:400px; border:0px solid #ccc; overflow-y: auto; margin-bottom:4px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
+    		modal_content += '<div style="height:350px; border:0px solid #ccc; overflow-y: auto; margin-bottom:4px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
     		modal_content += fetch_user_chat_history(to_user_id);
     		modal_content += '</div>';
     		modal_content += '<div class="form-group">';
