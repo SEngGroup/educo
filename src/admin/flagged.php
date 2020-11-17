@@ -7,25 +7,40 @@
     //     exit();
     // }
 
-    $query        = "SELECT * FROM topics WHERE topic_status == 'flagged'";
-    $stm          = $connect->prepare($query);
 
+
+    // Handle delete
+    if (isset($_GET['delete_id'])) {
+        $delete_id  = (int) $_GET['delete_id'];
+
+        // Delete topic with id
+        $sql        = "DELETE FROM topics WHERE topic_id='$delete_id'";
+        $stm        = $connect->prepare($sql);
+
+        // success
+        if($stm->execute()){
+            echo "Deleted Successfully";
+            echo "<br><br>";
+        } else {
+            echo "Error deleting this Topic!";
+            echo "<br><br>";
+        }
+    }
+
+    // handle flagged topics list view
+    $query        = "SELECT * FROM topics where";
+    $stm          = $connect->prepare($query);
 
     if($stm->execute()){
         $flagged = $stm->fetchAll();
 
         foreach($flagged as $flagged_topic){
-
-            echo '<p id='.$flagged_topic['topic_id'].'>';
-            echo html_entity_decode($flagged_topic["topic_subject"]).'</p>';
-                
-            echo "
-            <script>
-                document.getElementById('".$flagged_topic['topic_id']."').onclick = function() {
-                    var el = document.getElementById('ifplayer2');
-                    el.src = 'Post_Com/index.php?id=".$flagged_topic['topic_id']."';
-                }
-            </script>";
+            echo "<tr>";
+            echo "<td>".$flagged_topic["topic_id"]."</td>";
+            echo "<td>".$flagged_topic["topic_subject"]."</td>";
+            echo "<td>".$flagged_topic["topic_description"]."</td>";
+            echo "<td bgcolor=\"red\"><a href=\"?delete_id={$flagged_topic['topic_id']}\">Delete Topic</a></td>";
+            echo "</tr>";
         }
     }else {
         echo 'No Flagged Topics';
