@@ -13,21 +13,21 @@ $link = connect();
 		if($Pwd == $Cpwd && $Pwd != ""){
 			$Pwd1 = password_hash($Pwd, PASSWORD_DEFAULT);
 
-			$sql = "INSERT INTO users(first_name, last_name, user_email, user_password, date_created) VALUES ('$fname', '$lname', '$email', '$Pwd1', CURRENT_TIMESTAMP)";
+			$sql = "INSERT INTO users(first_name, last_name, user_email, user_password, date_created, status) VALUES ('$fname', '$lname', '$email', '$Pwd1', CURRENT_TIMESTAMP, 'Null')";
 			$query = "SELECT * FROM users WHERE user_email = '$email'";
 			$result = mysqli_query($link, $query);
 
-			if(mysqli_num_rows($result) <= 0){
+			if(mysqli_num_rows($result) == 0){
 				if(insert($sql)=="success"){
 					$_SESSION['msg'] = "Registration success";
 					header("Location: login.php");
 				} else{
-					$_SESSION['msg'] = "User already exists";
-					header("Location: signup.php");
+					$_SESSION['msg'] = "Registration Failed, Try again! - DB Issues";
+					header("Location: sign-up.php");
 				}
 		} else{
 			$_SESSION['msg'] = "User already exists";
-			header("Location: signup.php");
+			header("Location: sign-up.php");
 		}
 
 

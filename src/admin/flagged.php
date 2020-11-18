@@ -28,7 +28,7 @@
     }
 
     // handle flagged topics list view
-    $query        = "SELECT * FROM topics where";
+    $query        = "SELECT * FROM topics WHERE topic_status != 'ok'";
     $stm          = $connect->prepare($query);
 
     if($stm->execute()){
