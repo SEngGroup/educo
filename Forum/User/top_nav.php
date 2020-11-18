@@ -5,7 +5,7 @@
             <ul class="chat-top-nav">
                 <li class="top-links"><a href="">Home</a></li>
                 <li class="top-links"><a href="">Chats</a></li>
-                <li class="top-links"><a href="">About Us</a></li>
+                <li class="top-links"><a href="../../src/aboutus/aboutus.html">About Us</a></li>
 <li class="top-links"><a href=""><?php if (isset($_SESSION['username'])) {
 echo $_SESSION['username'];
 } else {
