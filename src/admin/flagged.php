@@ -34,14 +34,17 @@
     if($stm->execute()){
         $flagged = $stm->fetchAll();
 
+        echo "<table>";        
+        echo "<th>Flagged Topics</th>";
         foreach($flagged as $flagged_topic){
+        
             echo "<tr>";
             echo "<td>".$flagged_topic["topic_id"]."</td>";
             echo "<td>".$flagged_topic["topic_subject"]."</td>";
-            echo "<td>".$flagged_topic["topic_description"]."</td>";
             echo "<td bgcolor=\"red\"><a href=\"?delete_id={$flagged_topic['topic_id']}\">Delete Topic</a></td>";
             echo "</tr>";
         }
+        echo "</table>";
     }else {
         echo 'No Flagged Topics';
     }
