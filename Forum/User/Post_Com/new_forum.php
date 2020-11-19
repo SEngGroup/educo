@@ -58,7 +58,7 @@ if(isset($_SESSION['user_id'])) {} else{
     <input type="hidden" name="comment_by" id="comment_by" value="<?php echo $_SESSION['user_id'] ?>">
 <p></p>
 		Category:<p></p>
-    <select class="phone-select" name="category" id="category" size="10" style="width:300px">
+    <select class="phone-select" multiple="multiple" name="category" id="category" size="10" style="width:300px">
     <?php
     $sqlcat="select * from categories order by category_name";
     $statementcat = $connect->prepare($sqlcat);

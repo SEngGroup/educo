@@ -1,7 +1,6 @@
 <?php
 
 $connect = new PDO("mysql:host=localhost; dbname=educo", "root", "");
-
 /*function get_total_row($connect)
 {
   $query = "

@@ -1,5 +1,5 @@
 <?php
-$connect = new PDO("mysql:host=localhost;dbname=educo", "root", "");
+$connect = new PDO("mysql:host=localhost; dbname=educo", "root", "");
 $host = "localhost"; /* Host name */
 $user = "root"; /* User */
 $password = ""; /* Password */
