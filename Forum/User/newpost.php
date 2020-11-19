@@ -1,6 +1,6 @@
   <style>
   @import 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css';
-    label, input { display:block; }
+    label { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
     h1 { font-size: 1.2em; margin: .6em 0; }
@@ -70,7 +70,7 @@
 
 
     $( "#create-user" ).on( "click", function() {
-      dialog.dialog( "open" );
+      //dialog.dialog( "open" );
     });
   } );
   </script>
