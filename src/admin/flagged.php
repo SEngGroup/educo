@@ -1,24 +1,27 @@
+<html>
+    <link rel="stylesheet" href="style.css">
+</html>
+
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/Forum/User/Post_Com/config.php');
 
+
     // check db con
-    // if (mysqli_connect_errno()) {
-    //     printf("Connect failed: %s\n", mysqli_connect_error());
-    //     exit();
-    // }
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
 
-
-
-    // Handle delete
+    // actions [delete, ok]
     if (isset($_GET['delete_id'])) {
         $delete_id  = (int) $_GET['delete_id'];
 
-        // Delete topic with id
-        $sql        = "DELETE FROM topics WHERE topic_id='$delete_id'";
-        $stm        = $connect->prepare($sql);
+        // Soft Delete topic with id
+        $query_del  = "UPDATE flags SET status = 'deleted' WHERE topic_id = '$delete_id'";
+        $stm_del    = $connect->prepare($query_del);
 
         // success
-        if($stm->execute()){
+        if($stm_del->execute()){
             echo "Deleted Successfully";
             echo "<br><br>";
         } else {
@@ -26,27 +29,65 @@
             echo "<br><br>";
         }
     }
+    if (isset($_GET['ignore_id'])) {
+        $ignore_id  = (int) $_GET['ignore_id'];
 
-    // handle flagged topics list view
-    $query        = "SELECT * FROM topics WHERE topic_status != 'ok'";
-    $stm          = $connect->prepare($query);
+        // Remove Flag topic with id
+        $query_ignore  = "UPDATE flags SET status = 'ok' WHERE topic_id = '$ignore_id'";
+        $stm_ignore    = $connect->prepare($query_ignore);
 
-    if($stm->execute()){
-        $flagged = $stm->fetchAll();
-
-        echo "<table>";        
-        echo "<th>Flagged Topics</th>";
-        foreach($flagged as $flagged_topic){
-        
-            echo "<tr>";
-            echo "<td>".$flagged_topic["topic_id"]."</td>";
-            echo "<td>".$flagged_topic["topic_subject"]."</td>";
-            echo "<td bgcolor=\"red\"><a href=\"?delete_id={$flagged_topic['topic_id']}\">Delete Topic</a></td>";
-            echo "</tr>";
+        // success
+        if($stm_ignore->execute()){
+            echo "Flag Removed Successfully";
+            echo "<br><br>";
+        } else {
+            echo "Error Removing Flag!";
+            echo "<br><br>";
         }
-        echo "</table>";
-    }else {
-        echo 'No Flagged Topics';
     }
 
+
+    // print out topic, complaints and actions
+    echo "<table id='topic'>";
+        echo "<th>Flagged Topics</th>";
+        echo "<tr>";
+            echo "<td>Topic Title </td>";
+            echo "<td>Flag reason(s)</td>";
+            echo "<td>Actions</td>";
+        echo "</tr>";
+        
+        // get unique ids of flagged topics
+        $query_flagged  = "SELECT topic_id FROM flags WHERE status = 'flagged' GROUP BY topic_id";
+        $stm_flagged    = $connect->prepare($query_flagged);
+
+        if($stm_flagged->execute()){
+            $topic_ids  = $stm_flagged->fetchAll();
+            
+            // loop through flagged topics
+            foreach($topic_ids as $topic_id){
+                // get topic title
+                $query_topic        = "SELECT topic_subject FROM topics WHERE topic_id = '$topic_id'";
+                $stm_topic          = $connect->prepare($query_topic);
+                
+                // get complaints 
+                $query_complaints   = "SELECT description FROM flags WHERE topic_id = '$topic_id'";
+                $stm_complaints     = $connect->prepare($query_complaints);
+                
+                
+                
+                if($stm_topic->execute()){
+                    $topic_title    = $stm_topic->execute();
+                    echo "<tr>";
+                    echo "<td>".$topic_title."</td>";
+                    if($stm_complaints->execute()){
+                            $complaints = $stm_complaints->fetchAll();
+                            echo "<td>".$complaints."</td>";
+                        }
+                        echo "<td bgcolor=\"red\"><a href=\"?delete_id={$topic_id}\">Delete Topic</a> <a href=\"?ignore_id={$topic_id}\">Remove Flag</a> </td>";
+                    echo "</tr>";                
+                }
+                
+            }
+        }
+    echo "</table>"; 
 ?>
