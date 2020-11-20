@@ -467,7 +467,7 @@ code {
 
 .contact-faqs .faqs{
   padding: 0px 20px 20px;
-  
+
 }
 
 .contact-faqs h2{
@@ -491,7 +491,7 @@ code {
 
 .my_issues{
   margin-left: 55rem;
-  margin-top: -36.5rem;
+  margin-top: -33rem;
   overflow-x: auto;
   overflow-y: auto;
   border-radius: 7px;
@@ -559,7 +559,7 @@ code {
 
 .users table tbody td{
   padding: 10px;
-  
+
 }
 
 .users table td{
@@ -568,7 +568,7 @@ code {
 
 table tbody tr:nth-child(odd){
   background-color: #e0e5d5;
-} 
+}
 
 .users table tbody tr td a{
   text-decoration: none;

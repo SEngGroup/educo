@@ -4,8 +4,8 @@ require_once("db_connect.php");
 $link = connect();
 
 	if(isset($_POST["sub"])){
-		$fname = mysqli_real_escape_string($link, $_POST["fname"]);
-		$lname = mysqli_real_escape_string($link, $_POST["lname"]);
+		$fname = mysqli_real_escape_string($link, $_POST["fullname"]);
+		$lname = mysqli_real_escape_string($link, $_POST["username"]);
 		$email = mysqli_real_escape_string($link, $_POST["email"]);
 		$Pwd = mysqli_real_escape_string($link, $_POST["pwd"]);
 		$Cpwd = mysqli_real_escape_string($link, $_POST["cpwd"]);
@@ -13,13 +13,13 @@ $link = connect();
 		if($Pwd == $Cpwd && $Pwd != ""){
 			$Pwd1 = password_hash($Pwd, PASSWORD_DEFAULT);
 
-			$sql = "INSERT INTO users(first_name, last_name, user_email, user_password, date_created) VALUES ('$fname', '$lname', '$email', '$Pwd1', CURRENT_TIMESTAMP)";
+			$sql = "INSERT INTO users(full_name, user_name, user_email, user_password, date_created) VALUES ('$fname', '$lname', '$email', '$Pwd1', CURRENT_TIMESTAMP)";
 			$query = "SELECT * FROM users WHERE user_email = '$email'";
 			$result = mysqli_query($link, $query);
 
 			if(mysqli_num_rows($result) <= 0){
 				if(insert($sql)=="success"){
-					$_SESSION['msg'] = "Registration success";
+					$_SESSION['msg'] = "Registration successful";
 					header("Location: login.php");
 				} else{
 					$_SESSION['msg'] = "User already exists";
@@ -29,8 +29,6 @@ $link = connect();
 			$_SESSION['msg'] = "User already exists";
 			header("Location: signup.php");
 		}
-
-
 		}else{
 			$_SESSION['msg'] = "Passwords do not match";
 			header("Location: signup.php");
@@ -51,9 +49,12 @@ $link = connect();
 				while ($row = mysqli_fetch_array($result)) {
 					if(password_verify($Pwd, $row["user_password"])){
 						echo "Correct Login";
+						$_SESSION['full_name'] = $row['full_name'];
 						$_SESSION['email']=$row['user_email'];
 						$_SESSION['user_id']=$row['user_id'];
-						$_SESSION['username']=$row['first_name']." ".$row['last_name'];
+						$_SESSION['username']=$row['full_name'];
+						$_SESSION['userabout'] = $row['user_about'];
+						$_SESSION['userimage'] = $row['user_image'];
 						header("Location: ../../index.php");
 					}else{
 						$_SESSION['msg'] = "invalid credentials";
@@ -73,32 +74,40 @@ $link = connect();
 		$about = mysqli_real_escape_string($link, $_POST['about']);
 		$uid = $_SESSION['user_id'];
 
-		if(!isset($_FILES['img'])){
+		if(empty($_FILES['img'])){
 			$sql = "UPDATE users SET full_name = '$fname', user_name = '$uname', user_email = '$email', user_about = '$about' WHERE user_id = '$uid'";
-		}else{
+			if(insert($sql)=="success"){
+				echo "<script>alert('Success')</script>";
+				header("Location: ../../Forum/User/profile.php");
+			} else{
+				echo "<script>alert('Please try again')</script>";
+			}
+		}else if(!empty($_FILES['img'])) {
 			$image = $_FILES['img'];
 
 			$original_file_name = $_FILES['img']['name'];
 			$file_tmp_location = $_FILES['img']['tmp_name'];
 
 			$file_type = substr($original_file_name, strpos($original_file_name, '.'), strlen($original_file_name));
-			$file_path = "Images/";
+			$file_path = "../../assets/images/";
 
 			$new_file_name = time().$file_type;
 
 			if(move_uploaded_file($file_tmp_location, $file_path.$new_file_name)){
 				$sql = "UPDATE users SET full_name = '$fname', user_name = '$uname', user_email = '$email', user_about = '$about', user_image = '$new_file_name' WHERE user_id = '$uid'";
+				if(insert($sql)=="success"){
+					echo "<script>alert('Success')</script>";
+					header("Location: ../../Forum/User/profile.php");
+				} else{
+					echo "<script>alert('Please try again')</script>";
+				}
 			}else{
 				echo "There was an error uploading the image";
 			}
+
 		}
 
-		if(insert($sql)=="success"){
-			echo "<script>alert('Success')</script>";
-			header("Location: ../../Forum/User/profile.php");
-		} else{
-			echo "<script>alert('Please try again')</script>";
-		}
+
 	}
 
 	if(isset($_POST['save_pwd'])){

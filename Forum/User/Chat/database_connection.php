@@ -71,7 +71,7 @@ function get_user_name($user_id, $connect)
 	$result = $statement->fetchAll();
 	foreach($result as $row)
 	{
-		return $row['first_name']." ".$row['last_name'];
+		return $row['full_name'];
 	}
 }
 

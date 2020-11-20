@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-
+include 'time.php';
 // Insert record
 if(isset($_POST['action'])&&$_POST['action']!= ''){
 	 if ($_POST['action']=="comment") {
@@ -11,7 +11,7 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
      echo "<br>Topic: ".$comment_topic;
  		echo "By: ".$comment_by;
  		if($comment_message != ''){
- 			mysqli_query($con, "INSERT INTO comments(comment_message,comment_topic,comment_by) VALUES('".$comment_message."','".$comment_topic."','".$comment_by."') ");
+ 			mysqli_query($con, "INSERT INTO comments(comment_message,comment_topic,comment_by,comment_date) VALUES('".$comment_message."','".$comment_topic."','".$comment_by."','".getTime()."') ");
  			//header('location: index.php');
 		}
 		} else if ($_POST['action']=="reply") {
@@ -22,7 +22,7 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 		echo "<br>to: ".$reply_to;
 		echo "By: ".$reply_by;
 		if($reply_content != ''){
-			mysqli_query($con, "INSERT INTO replies(reply_content,reply_to,reply_by) VALUES('".$reply_content."','".$reply_to."','".$reply_by."') ");
+			mysqli_query($con, "INSERT INTO replies(reply_content,reply_to,reply_by,reply_date) VALUES('".$reply_content."','".$reply_to."','".$reply_by."','".getTime()."') ");
 			//header('location: index.php');
 	}
 
@@ -41,7 +41,7 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 			echo $long_desc."<p></p>";
 			echo $topic_by."<p></p>";*/
 			if($long_desc != ''){
-				mysqli_query($con, "INSERT INTO topics(topic_subject,topic_category,topic_by,topic_description) VALUES('".$short_desc."','".$topic_category."','".$topic_by."','".$long_desc."') ");
+				mysqli_query($con, "INSERT INTO topics(topic_subject,topic_date,topic_category,topic_by,topic_description) VALUES('".$short_desc."','".getTime()."','".$topic_category."','".$topic_by."','".$long_desc."') ");
 				//header('location: index.php');
 		 }
 		}

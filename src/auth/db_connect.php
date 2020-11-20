@@ -19,4 +19,19 @@ function insert($sql){
 		return "Could not update".mysqli_error($link);
 	}
 }
+function getData($result){
+	$rows = array();
+	if(!$result){
+		//echo "No record found";
+	} else{
+	if(mysqli_num_rows($result) > 0){
+		while($row = mysqli_fetch_assoc($result)){
+			$rows[] = $row;
+		}
+		return $rows;
+		}else{
+		//	echo "No record found";
+		}
+	}
+}
 ?>

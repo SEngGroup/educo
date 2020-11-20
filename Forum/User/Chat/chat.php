@@ -1,4 +1,5 @@
 <?php include '../header.php';include('database_connection.php');
+include '../Post_Com/time.php';
  ?>
 <?php if(!isset($_SESSION)) {session_start();}if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
@@ -16,7 +17,7 @@
                 <li class="side-links"><a href="../profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
                 <li class="side-links"><a href="../forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="" style="color: #00ffff;"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
-                <li class="side-links"><a href="../help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
+                <li class="side-links"><a href=""><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
                 <li class="side-links"><a href="../../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
             </ul>
