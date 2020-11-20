@@ -72,21 +72,37 @@
                 // get complaints 
                 $query_complaints   = "SELECT description FROM flags WHERE topic_id = '$topic_id'";
                 $stm_complaints     = $connect->prepare($query_complaints);
-                
-                
-                
+
+
+                // here we are printing the table rows                
                 if($stm_topic->execute()){
                     $topic_title    = $stm_topic->execute();
                     echo "<tr>";
+                    // topic title
                     echo "<td>".$topic_title."</td>";
-                    if($stm_complaints->execute()){
+
+                    // flag complain
+                    echo "<td>";
+                        if($stm_complaints->execute()){
                             $complaints = $stm_complaints->fetchAll();
-                            echo "<td>".$complaints."</td>";
+                            if($complaints){
+                                foreach($complaints as $complaint){
+                                    printf($complaint);
+                                }
+                            }else{
+                                printf("No Reasons!");
+                            }
                         }
-                        echo "<td bgcolor=\"red\"><a href=\"?delete_id={$topic_id}\">Delete Topic</a> <a href=\"?ignore_id={$topic_id}\">Remove Flag</a> </td>";
+                    echo "</td>";
+
+                    // actions
+                    echo "<td bgcolor=\"red\">";
+                        echo "<a href=\"?delete_id={$topic_id}\">Delete Topic</a>";
+                        echo "<br>";
+                        echo "<a href=\"?ignore_id={$topic_id}\">Remove Flag</a>";
+                    echo "</td>";
                     echo "</tr>";                
-                }
-                
+                }                
             }
         }
     echo "</table>"; 
