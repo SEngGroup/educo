@@ -1,4 +1,5 @@
 <?php include '../header.php';include('database_connection.php');
+include '../Post_Com/time.php';
  ?>
 <?php if(!isset($_SESSION)) {session_start();}if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";

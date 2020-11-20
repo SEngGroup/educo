@@ -1,25 +1,12 @@
-<?php
-    session_start();
-
-    if (!isset($_SESSION['email'])){
-        $_SESSION['msg'] = "You must log in first";
-        header('location: login.php');
-    }
-    if (isset($_GET['logout'])){
-        session_destroy();
-        unset($_SESSION['username']);
-        unset($_SESSION['email']);
-        session_start();
-        $_SESSION['msg'] = "You are now logged out";
-        header("Location: login.php");
-    }
-?>
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Test Auth</title>
         <link rel="stylesheet" href="static/css/style.css">
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="615106965069-55mjfn0j0eoqfli2nrbiipfp2l8a8eka.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
 
     <body>
@@ -54,5 +41,25 @@
                 </p>
             <?php endif ?>
         </div>
+        <?php
+            session_start();
+
+            if (!isset($_SESSION['email'])){
+                $_SESSION['msg'] = "You must log in first";
+                header('location: login.php');
+            }
+            if (isset($_GET['logout'])){
+              unset($_SESSION['username']);
+              unset($_SESSION['email']);
+              session_unset();
+              session_destroy();
+              session_start();
+              $_SESSION['msg'] = "You are now logged out";
+              header("Location: login.php");
+              ?>
+              <?php
+            }
+        ?>
+
     </body>
 </html>

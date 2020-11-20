@@ -12,13 +12,13 @@ include "Post_Com/config.php";?>
     <div class="container">
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
-              <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
+              <a href="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
                 <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="dasboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
                 <li class="side-links"><a href="profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
                 <li class="side-links"><a href="forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links"><a href="Chat/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
-                <li class="side-links"><a href=""><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
+                <li class="side-links"><a href="help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
                 <li class="side-links"><a href="../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
             </ul>
@@ -41,11 +41,12 @@ include "Post_Com/config.php";?>
 
                         $link = mysqli_connect("localhost", "root", "", "educo");
 
+
                         if(!$link){
                             die("Could not connect: ".mysqli_error());
                         }
 
-                        $sql = "SELECT * FROM topics WHERE topic_by = 1";
+                        $sql = "SELECT * FROM topics WHERE topic_by ='".$_SESSION['user_id']."'";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
 
@@ -65,7 +66,7 @@ include "Post_Com/config.php";?>
                             die("Could not connect: ".mysqli_error());
                         }
 
-                        $sql = "SELECT * FROM replies WHERE reply_by = 1";
+                        $sql = "SELECT * FROM replies WHERE reply_by ='".$_SESSION['user_id']."'";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
 
@@ -88,12 +89,22 @@ google.charts.setOnLoadCallback(drawBackgroundColor);
 
 function drawBackgroundColor() {
   var data = new google.visualization.DataTable();
-  data.addColumn('number', 'X');
-  data.addColumn('number', 'contributions');
-
+  data.addColumn('date', 'Date');
+  data.addColumn('number', 'Topics');
+  data.addColumn('number', 'Comments');
   data.addRows([
-    [1, 1],
-    [2, 20]
+      [new Date(2020, 0, 3), 0,0]
+    <?php
+       $sql2 = "SELECT  DATE(topics.topic_date) topic_dt, COUNT(topics.topic_by) totalCount,COUNT(comments.comment_by) totalCount2 FROM topics
+       INNER JOIN comments ON topics.topic_by=comments.comment_by
+       WHERE topics.topic_by='".$_SESSION['user_id']."' GROUP BY  DATE(topics.topic_date),Date(comments.comment_date)";
+       $result2 = mysqli_query($link, $sql2);
+       foreach($result2 as $row){
+           echo ",[new Date(".date("Y,m,d", strtotime('-1 month', strtotime($row['topic_dt'])))."), ".$row['totalCount'].",".$row['totalCount2']."]";
+       }
+    ?>
+    //[new Date(2020-11-09), 5],
+    //[new Date(2015, 0, 3), 6]
 
   ]);
 
@@ -120,15 +131,15 @@ function drawBackgroundColor() {
   }
 };
 
-  /*var options = {
+  var options = {
     hAxis: {
       title: 'Time'
     },
     vAxis: {
       title: 'Contributions'
     },
-    backgroundColor: '#f1f8e9'
-  };*/
+    legend: { position: 'bottom', alignment: 'start' }
+  };
 
   var chart = new google.visualization.LineChart(document.getElementById('graph-graph'));
   chart.draw(data, options);
@@ -146,7 +157,7 @@ function drawBackgroundColor() {
                             die("Could not connect: ".mysqli_error());
                         }
 
-                        $sql = "SELECT topic_subject FROM topics WHERE topic_by = 1";
+                        $sql = "SELECT topic_subject FROM topics WHERE topic_by ='".$_SESSION['user_id']."'";
                         $result = mysqli_query($link, $sql);
 
                         function getData($result){
@@ -163,7 +174,7 @@ function drawBackgroundColor() {
 
                         if($res > 0){
                             foreach ($res as $key => $value) {
-                                echo $vaue['topic_subject'];
+                                echo $value['topic_subject'];
                             }
                         }else{
                             echo "<div id='noPosts'>No recent posts</div>";

@@ -1,7 +1,8 @@
 <?php
 $connect = new PDO("mysql:host=localhost;dbname=educo;charset=utf8mb4", "root", "");
 date_default_timezone_set('Africa/Nairobi');
-$mysqli = new mysqli('localhost', 'root', '', 'educo');
+$mysqli = new mysqli("localhost", "root", "", "educo");
+$link = mysqli_connect("localhost", "root", "", "educo");
 
 function fetch_user_chat_history($from_user_id, $to_user_id, $connect)
 {
@@ -70,7 +71,7 @@ function get_user_name($user_id, $connect)
 	$result = $statement->fetchAll();
 	foreach($result as $row)
 	{
-		return $row['first_name']." ".$row['last_name'];
+		return $row['full_name'];
 	}
 }
 

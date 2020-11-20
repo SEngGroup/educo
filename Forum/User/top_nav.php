@@ -3,8 +3,8 @@
             <i class="fa fa-search" aria-hidden="true"></i>
             <input id="search" type="text" placeholder="Search" class="search-bar">
             <ul class="chat-top-nav">
-                <li class="top-links"><a href="">Home</a></li>
-                <li class="top-links"><a href="">Chats</a></li>
+                <li class="top-links"><a href="../../index.php">Home</a></li>
+                <li class="top-links"><a href="Chat/chat.php">Chats</a></li>
                 <li class="top-links"><a href="">About Us</a></li>
 <li class="top-links"><a href=""><?php if (isset($_SESSION['username'])) {
 echo $_SESSION['username'];
