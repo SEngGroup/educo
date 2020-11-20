@@ -39,6 +39,7 @@ $link = connect();
 		}
 	}
 
+//normal login
 	if(isset($_POST["login"])){
 		$Email = mysqli_real_escape_string($link, $_POST["email"]);
 		$Pwd = mysqli_real_escape_string($link, $_POST["pwd"]);
@@ -67,6 +68,30 @@ $link = connect();
 			echo '<script>alert("Incorrect Login details")</script>';
 		}
 	}
+	//google login
+	if(isset($_GET["g_l"])){
+		$Email = mysqli_real_escape_string($link, $_GET["g_l"]);
+		$query = "SELECT * FROM users WHERE user_email = '$Email'";
+		$result = mysqli_query($link, $query);
+
+		if(mysqli_num_rows($result) > 0){
+				while ($row = mysqli_fetch_array($result)) {
+						echo "Correct Login";
+						$_SESSION['full_name'] = $row['full_name'];
+						$_SESSION['email']=$row['user_email'];
+						$_SESSION['user_id']=$row['user_id'];
+						$_SESSION['username']=$row['full_name'];
+						$_SESSION['userabout'] = $row['user_about'];
+						$_SESSION['userimage'] = $_GET['g_img'];
+						header("Location: ../../index.php");
+				}
+		}else{
+			$_SESSION['msg'] = "User does not exist";
+			header("Location: login.php");
+			echo '<script>alert("Incorrect Login details")</script>';
+		}
+	}
+	//
 	if(isset($_POST["save"])){
 		$fname = mysqli_real_escape_string($link, $_POST["full_name"]);
 		$uname = mysqli_real_escape_string($link, $_POST["user_name"]);
