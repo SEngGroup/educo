@@ -19,7 +19,7 @@ include "config.php";?>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
     <script src="../../../ckeditor/ckeditor.js" ></script>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     <title>Chats</title>
@@ -176,7 +176,7 @@ include "config.php";?>
       $result1 = $statement1->fetchAll();
       foreach($result1 as $row1)
       {
-      $topic_by=$row1['first_name']." ".$row1['last_name'];
+      $topic_by=$row1['full_name'];
     }
     }else {
       $topic_by='Anonymous';
@@ -313,7 +313,7 @@ if(long_desc!=''&&problem_id!=''){
        echo "<p><b>By: <i>".$topic_by."</i></b></p>
        <p><b>Posted: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
        <p><b>Category: <i>".$topic_category."</i></b></p>
-       <p><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
+       <p style='cursor:pointer;'><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
        ";
     ?>
 
@@ -391,7 +391,7 @@ if(long_desc!=''&&problem_id!=''){
             $resultby1 = $statementby1->fetchAll();
             foreach($resultby1 as $rowby1)
             {
-            $comment_by=$rowby1['first_name']." ".$rowby1['last_name'];
+            $comment_by=$rowby1['full_name'];
           }
           }else {
             $comment_by='Anonymous';
@@ -440,7 +440,7 @@ if(long_desc!=''&&problem_id!=''){
           $resultby2 = $statementby2->fetchAll();
           foreach($resultby2 as $rowby2)
           {
-          $reply_by=$rowby2['first_name']." ".$rowby2['last_name'];
+          $reply_by=$rowby2['full_name'];
         }
         }else {
           $reply_by='Anonymous';
@@ -666,7 +666,7 @@ body,html {
     ';
   } ?>
 
-      
+
 
       <script>
 

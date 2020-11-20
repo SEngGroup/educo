@@ -1,8 +1,7 @@
 <?php if(!isset($_SESSION)) {session_start();}
 if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
-  echo '<a id="link" target="_parent" href="../auth/login.php"></a>
-
+  echo '<a id="link" target="_parent" href="../../src/auth/login.php"></a>
 <script type="text/javascript">
     document.getElementById("link").click();
 </script>';}
@@ -30,7 +29,7 @@ include "Post_Com/config.php";?>
                 <li class="side-links"><a href="Chat/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
                 <li class="side-links"><a href="help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
-                <li class="side-links"><a href="auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
+                <li class="side-links"><a href="../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
             </ul>
       </div>
 
@@ -60,7 +59,7 @@ include "Post_Com/config.php";?>
     </div>-->
 
     <?php
-            require_once("../../auth/db_connect.php");
+            require_once("../../src/auth/db_connect.php");
             $link = connect();
 
             $uid = $_SESSION['user_id'];
@@ -72,7 +71,7 @@ include "Post_Com/config.php";?>
 
     <div class="content">
         <div class="pic-section">
-            <img src="../../assets/img<?php echo $row['user_image'];?>">
+            <img src="../../assets/images/<?php echo $row['user_image'];?>">
             <!--<div id="icon">
                 <i class="fa fa-pencil"></i>
                 <i class="fa fa-trash"></i>
@@ -99,9 +98,7 @@ include "Post_Com/config.php";?>
             <a href="#">Save</a>
             <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 120px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px;">
                             <i class="fa fa-floppy-o" aria-hidden="true" style="color: white;"></i> <a href="edit-profile.php" style="text-decoration: none; margin-left: 10px; color: white;">Edit Profile</a>
-
             </div>
-
             <div style="border-radius: 50px; background-color: rgba(22, 180, 180); width: 200px; padding-top: 15px; padding-bottom: 15px; padding-left: 30px; padding-right: 10px; margin-top: -3rem; margin-left: 15rem;">
                             <i class="fa fa-key" aria-hidden="true" style="color: white;"></i> <a href="#" style="text-decoration: none; margin-left: 10px; color: white;">Change Password</a>
             </div> -->

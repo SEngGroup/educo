@@ -1,4 +1,5 @@
-<script>function time_ago(time) {
+<script>
+function time_ago(time) {
 
   switch (typeof time) {
     case 'number':
@@ -58,7 +59,7 @@
 //console.log(time_ago(new Date(Date.now() - aDay * 2)));
 </script>
 <?php
-
+date_default_timezone_set("Africa/Nairobi");
 function time_elapsed_string($time_ago)
 {
   $time_ago = strtotime($time_ago);

@@ -1,8 +1,7 @@
 <?php if(!isset($_SESSION)) {session_start();}
 if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
-  echo '<a id="link" target="_parent" href="../auth/login.php"></a>
-
+  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
 <script type="text/javascript">
     document.getElementById("link").click();
 </script>';}
@@ -25,10 +24,10 @@ if(isset($_SESSION['user_id'])) {} else{
             <ul class="chat-side-nav">
               <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
-                <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="dashboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
-                <li class="side-links"><a href="profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
-                <li class="side-links"><a href="forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
-                <li class="side-links"><a href="chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
+                <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="admin_dashboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
+                <li class="side-links"><a href="../User/profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
+                <li class="side-links"><a href="../User/forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
+                <li class="side-links"><a href="../User/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
                 <li class="side-links"><a href="help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
                 <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
                 <li class="side-links"><a href="auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
@@ -43,7 +42,7 @@ if(isset($_SESSION['user_id'])) {} else{
     <h3 style="margin-left: 16rem; margin-top: -39rem;"><a href="admin_dashboard.php">Back</a></h3>
 
     <?php
-    include_once '../../auth/db_connect.php';
+    include_once '../../src/auth/db_connect.php';
     $link = connect();
 
     $name = $_GET['name'];
@@ -79,7 +78,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['user_about']?></td>
                                 <td><div style="width: 10rem;"><?php echo $value['date_created']?></div></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
@@ -118,9 +117,9 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['issue_desc']?></td>
                                 <td><div style="width: 7rem;"><?php echo $value['issue_date']?></div></td>
                                 <td><?php echo $value['status']?></td>
-                                <td><a href="auth/server_auth.php?id=<?php echo $value['issue_id']?>">Update</a></td>
+                                <td><a href="../../src/auth/server_auth.php?id=<?php echo $value['issue_id']?>">Update</a></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
@@ -157,7 +156,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><div style="width: 10rem;"><?php echo $value['topic_date']?></div></td>
                                 <td><?php echo $value['topic_description']?></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
@@ -166,7 +165,7 @@ if(isset($_SESSION['user_id'])) {} else{
         </div>
         <?php
             break;
-        
+
         case 'reply':
             echo "Displaying replies";
 
@@ -194,7 +193,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['topic_date']?></td>
                                 <td><?php echo $value['topic_description']?></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
@@ -231,7 +230,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['comment_message']?></td>
                                 <td><?php echo $value['comment_date']?></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
@@ -266,7 +265,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['category_name']?></td>
                                 <td><?php echo $value['category_description']?></td>
                             </tr>
-                        <?php 
+                        <?php
                         }
 
                     ?>
