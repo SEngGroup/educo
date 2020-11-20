@@ -1,4 +1,8 @@
-<?php if(!isset($_SESSION)) {session_start();}?>
+<?php if(!isset($_SESSION)) {session_start();}
+if (isset($_SESSION['user_id'])) {
+  header("Location: ../../Forum/User/dashboard.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
