@@ -6,12 +6,21 @@
         header('location: login.php');
     }
     if (isset($_GET['logout'])){
-        session_destroy();
-        unset($_SESSION['username']);
-        unset($_SESSION['email']);
-        session_start();
-        $_SESSION['msg'] = "You are now logged out";
-        header("Location: login.php");
+      unset($_SESSION['username']);
+      unset($_SESSION['email']);
+      session_unset();
+      session_destroy();
+      session_start();
+      $_SESSION['msg'] = "You are now logged out";
+      header("Location: login.php");
+      ?>
+      <script>
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      </script>
+      <?php
     }
 ?>
 
