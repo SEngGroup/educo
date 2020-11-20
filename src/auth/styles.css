@@ -151,15 +151,29 @@ article {
     height: 35px;
     font-weight: bold;
     font-size: 12px;
-    border-radius: 100px;
-    background-image: linear-gradient(to left, #cc00cc, #0bb0b3, #00ffff);
-    color: white;
-}
-
-#button:hover {
+    border-radius: 80px;
     background-image: linear-gradient(to left, white, white);
     color: #0bb0b3;
-    border: 1px solid #cc00cc;
+    border: 1px solid #0bb0b3;
+}
+.boucy{
+  animation: bouncy 5s infinite linear;
+  position: relative;
+  color: black;
+}
+@keyframes bouncy {
+ 0%{top:0em}
+ 40%{top:0em}
+ 43%{top:-0.9em}
+ 46%{top:0em}
+ 48%{top:-0.4em}
+ 50%{top:0em}
+ 100%{top:0em;}
+}
+#button:hover {
+    background: rgb(0, 153, 153);;
+    color: white;
+    border: 1px solid #0bb0b3;
 }
 
 .camp-image {
