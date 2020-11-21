@@ -1,7 +1,7 @@
 <?php
 
 function connect(){
-	$link = mysqli_connect("localhost", "root", "Hello@world2020", "educo");
+	$link = mysqli_connect("localhost", "root", "", "educo");
 
 	if(!$link){
 		die("Could not connect to the database".mysqli_connect_error());

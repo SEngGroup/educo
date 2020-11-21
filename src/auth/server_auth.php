@@ -56,6 +56,7 @@ $link = connect();
 						$_SESSION['username']=$row['full_name'];
 						$_SESSION['userabout'] = $row['user_about'];
 						$_SESSION['userimage'] = $row['user_image'];
+						$_SESSION['usertype'] = $row['user_type'];
 						header("Location: ../../index.php");
 					}else{
 						$_SESSION['msg'] = "invalid credentials";
@@ -194,6 +195,48 @@ $link = connect();
 			header("Location: ../../Forum/User/help_center.php");
 		}
 	}
+
+	if(isset($_GET['id'])){
+        $id = $_GET['id'];
+
+        $query = "UPDATE issues SET status='Resolved' WHERE issue_id = '$id'";
+
+        if(insert($query) == "success"){
+            header("Location: ../../Forum/Admin/common.php?name=issues");
+        }else{
+            echo "<script>alert('Please try again')</script>";
+        }
+    }
+
+	if (isset($_GET['delete_id'])) {
+        $delete_id  = (int) $_GET['delete_id'];
+
+        // Delete topic with id
+        $sql = "UPDATE flags SET flags.status = 'Deleted'WHERE flags.topic_id = '$delete_id'";
+        //$stm        = $connect->prepare($sql);
+
+        if(insert($sql) == "success"){
+        	$query = "DELETE FROM topics WHERE topics.topic_id='$delete_id'";
+        	if(insert($query) == "success"){
+        		header("Location: ../../Forum/Admin/common.php?name=flagged");
+        	}else{
+        		echo "<script>alert(' try again');</script>";
+        	}
+        	//header("Location: ../../Forum/Admin/common.php?name=flagged");
+        }else{
+        	echo "<script>alert(' try again');</script>";
+        }
+
+        // success
+        // if($stm->execute()){
+        //     echo "Deleted Successfully";
+        //     echo "<br><br>";
+        //     //header("Location: ../../Forum/User/help_center.php");
+        // } else {
+        //     echo "Error deleting this Topic!";
+        //     echo "<br><br>";
+        // }
+    }
 ?>
 
 

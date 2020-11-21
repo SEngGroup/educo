@@ -180,4 +180,21 @@
             echo "<script>alert('Please try again')</script>";
         }
     }
+
+    if (isset($_GET['delete_id'])) {
+        $delete_id  = (int) $_GET['delete_id'];
+
+        // Delete topic with id
+        $sql        = "DELETE FROM topics WHERE topic_id='$delete_id'";
+        $stm        = $connect->prepare($sql);
+
+        // success
+        if($stm->execute()){
+            //echo "Deleted Successfully";
+            //echo "<br><br>";
+            header("Location: ../common.php");
+        } else {
+            echo "<script>alert('Please try again')</script>";
+        }
+    }
 ?>

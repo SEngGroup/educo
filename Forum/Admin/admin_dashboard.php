@@ -24,12 +24,14 @@ if(isset($_SESSION['user_id'])) {} else{
               <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
               <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="admin_dashboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
+
+
               <li class="side-links"><a href="../User/profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
               <li class="side-links"><a href="../User/forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
-              <li class="side-links"><a href="../User/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
-              <li class="side-links"><a href="help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
+              <li class="side-links"><a href="../User/Chat/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
+              <li class="side-links"><a href="../User/help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
               <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
-              <li class="side-links"><a href="auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
+              <li class="side-links"><a href="../../src/auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
         </ul>
         </div>
 
@@ -119,7 +121,7 @@ if(isset($_SESSION['user_id'])) {} else{
                             die("Could not connect: ".mysqli_error());
                         }
 
-                        $sql = "SELECT * FROM issues WHERE issue_date = CURRENT_DATE()";
+                        $sql = "SELECT * FROM issues WHERE issue_date = CURRENT_DATE() && status = 'Active'";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
 
@@ -166,6 +168,29 @@ if(isset($_SESSION['user_id'])) {} else{
                         }
 
                         $sql = "SELECT * FROM categories";
+                        $result = mysqli_query($link, $sql);
+                        $row_Count = mysqli_num_rows($result);
+
+                        if($row_Count > 0){
+                            echo $row_Count;
+                        }else{
+                            //echo 0;
+                            echo "<div id='postsCount'>0</div>";
+                        }
+                    ?>
+            </div>
+
+            <div class="flagged">
+                <h3><a href="common.php?name=flagged" style="color: #fff">Flagged posts</a></h3>
+                <?php
+
+                        $link = mysqli_connect("localhost", "root", "", "educo");
+
+                        if(!$link){
+                            die("Could not connect: ".mysqli_error());
+                        }
+
+                        $sql = "SELECT * FROM flags WHERE flag_date = CURRENT_DATE() && status = 'Flagged'";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
 
@@ -378,8 +403,20 @@ margin-bottom: 11rem;
 
 .total-categories{
 border: 2px solid rgba(22, 180, 180);
-margin-left: 57rem;
+margin-left: 48rem;
 margin-top: -16.5rem;
+width: 13rem;
+height: 5.5rem;
+text-align: center;
+border-radius: 5px;
+background-color: rgba(22, 180, 180);
+color: white;
+}
+
+.flagged{
+border: 2px solid rgba(22, 180, 180);
+margin-left: 65rem;
+margin-top: -5.5rem;
 width: 13rem;
 height: 5.5rem;
 text-align: center;

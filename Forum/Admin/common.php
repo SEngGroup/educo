@@ -178,20 +178,20 @@ if(isset($_SESSION['user_id'])) {} else{
             <table>
                 <thead>
                     <tr>
-                        <th>Topic ID</th>
-                        <th>Topic Subject</th>
-                        <th>Topic Date</th>
-                        <th>Topic Description</th>
+                        <th>Reply ID</th>
+                        <th>Reply Content</th>
+                        <th>Reply Date</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         foreach ($res as $key => $value) {?>
                             <tr>
-                                <td><?php echo $value['topic_id']?></td>
-                                <td><?php echo $value['topic_subject']?></td>
-                                <td><?php echo $value['topic_date']?></td>
-                                <td><?php echo $value['topic_description']?></td>
+                                <td><?php echo $value['reply_id']?></td>
+                                <td><?php echo $value['reply_content']?></td>
+                                <td><?php echo $value['reply_date']?></td>
+                                
                             </tr>
                         <?php
                         }
@@ -264,6 +264,45 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['category_id']?></td>
                                 <td><?php echo $value['category_name']?></td>
                                 <td><?php echo $value['category_description']?></td>
+                            </tr>
+                        <?php
+                        }
+
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <?php
+            break;
+
+        case 'flagged':
+            echo "Displaying flaged";
+
+            $query = "SELECT topics.topic_subject, flags.topic_id, flags.description, flags.flag_date, flags.status FROM topics INNER JOIN flags ON topics.topic_id = flags.topic_id ORDER BY flags.flag_date DESC";
+            $result = mysqli_query($link, $query);
+            $res = getData($result);
+
+            ?>
+            <div class="users">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Topic subject</th>
+                        <th>Flag Description</th>
+                        <th>Status</th>
+                        <th>Flag Date</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach ($res as $key => $value) {?>
+                            <tr>
+                                <td><?php echo $value['topic_subject']?></td>
+                                <td><?php echo $value['description']?></td>
+                                <td><?php echo $value['status']?></td>
+                                <td><?php echo $value['flag_date']?></td>
+                                <td><a href="../../src/auth/server_auth.php?delete_id=<?php echo $value['topic_id']?>">Delete</a></td>
                             </tr>
                         <?php
                         }

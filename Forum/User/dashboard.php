@@ -14,7 +14,7 @@ include "Post_Com/config.php";?>
             <ul class="chat-side-nav">
               <a href="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
 
-                <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="dasboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
+                <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><?php $usertype = $_SESSION['usertype']; if($usertype == 'Admin'){echo "<a href='../Admin/admin_dashboard.php' style='color: #00ffff;'><i class='fa fa-signal side-nav' aria-hidden='true'></i>Dashboard</a>";}else{echo "<a href='dashboard.php' style='color: #00ffff;'><i class='fa fa-signal side-nav' aria-hidden='true'></i>Dashboard</a>";}?></li>
                 <li class="side-links"><a href="profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
                 <li class="side-links"><a href="forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
                 <li class="side-links"><a href="Chat/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
@@ -174,7 +174,9 @@ function drawBackgroundColor() {
 
                         if($res > 0){
                             foreach ($res as $key => $value) {
-                                echo $value['topic_subject'];
+                                //echo $value['topic_subject'];?>
+                                <p class="my_posts"><?php echo $value['topic_subject'];?></p>
+                                <?php echo "<br>";
                             }
                         }else{
                             echo "<div id='noPosts'>No recent posts</div>";
@@ -269,12 +271,27 @@ height: 30rem;
 }
 
 .posts .posts-recent{
-border: 2px solid black;
+/*border: 2px solid black;
+width: 50%;
+height: 10rem;
+margin-left: 6rem;
+text-align: center;
+margin-top: 1rem;*/
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.526);
+border-radius: 5px;
 width: 50%;
 height: 10rem;
 margin-left: 6rem;
 text-align: center;
 margin-top: 1rem;
+overflow-x: auto;
+overflow-y: auto;
+}
+.posts .posts-recent .my_posts{
+   padding: 5px;
+    color: white;
+    background: rgba(22, 170, 180);
+    margin-top: -6px;
 }
 
 .posts .posts-calendar{
