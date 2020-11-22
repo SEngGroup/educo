@@ -90,17 +90,15 @@ google.charts.setOnLoadCallback(drawBackgroundColor);
 function drawBackgroundColor() {
   var data = new google.visualization.DataTable();
   data.addColumn('date', 'Date');
-  data.addColumn('number', 'Topics');
-  data.addColumn('number', 'Comments');
+  data.addColumn('number', 'Contributions');
   data.addRows([
-      [new Date(2020, 0, 3), 0,0]
+      [new Date(2020, 0, 3), 0]
     <?php
-       $sql2 = "SELECT  DATE(topics.topic_date) topic_dt, COUNT(topics.topic_by) totalCount,COUNT(comments.comment_by) totalCount2 FROM topics
-       INNER JOIN comments ON topics.topic_by=comments.comment_by
-       WHERE topics.topic_by='".$_SESSION['user_id']."' GROUP BY  DATE(topics.topic_date),Date(comments.comment_date)";
+       $sql2 = "SELECT  DATE(comment_date) topic_dt, COUNT(comment_by) totalCount FROM comments
+       WHERE comment_by='".$_SESSION['user_id']."' GROUP BY  DATE(comment_date)";
        $result2 = mysqli_query($link, $sql2);
        foreach($result2 as $row){
-           echo ",[new Date(".date("Y,m,d", strtotime('-1 month', strtotime($row['topic_dt'])))."), ".$row['totalCount'].",".$row['totalCount2']."]";
+           echo ",[new Date(".date("Y,m,d", strtotime('-1 month', strtotime($row['topic_dt'])))."), ".$row['totalCount']."]";
        }
     ?>
     //[new Date(2020-11-09), 5],

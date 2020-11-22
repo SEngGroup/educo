@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) {session_start();}
 if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
-  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
+  echo '<a id="link" target="_parent" href="../../src/auth/login.php"></a>
 
 <script type="text/javascript">
     document.getElementById("link").click();
@@ -15,7 +15,7 @@ include 'header.php';
         <div class="side-nav-bar">
             <ul class="chat-side-nav">
                 <a href="new_topic.php" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
-                
+
 
                 <li class="side-links"><?php $usertype = $_SESSION['usertype']; if($usertype == 'Admin'){echo "<a href='../Admin/admin_dashboard.php'><i class='fa fa-signal side-nav' aria-hidden='true'></i>Dashboard</a>";}else{echo "<a href='dashboard.php'><i class='fa fa-signal side-nav' aria-hidden='true'></i>Dashboard</a>";}?></li>
 
