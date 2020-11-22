@@ -71,13 +71,6 @@ if(isset($_SESSION['user_id'])) {} else{
                     //session_start();
                     //$id = $_SESSION['userid'];
                     $uid = $_SESSION['user_id'];
-
-                        $link = mysqli_connect("localhost", "root", "", "educo");
-
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT * FROM topics";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
@@ -94,10 +87,6 @@ if(isset($_SESSION['user_id'])) {} else{
             <div class="graph-reply">
                 <h3 style="margin-top: 15px;"><a href="common_view.php?name=reply" style="color: #fff">Total replies</a></h3>
                     <?php
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT * FROM replies";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
@@ -115,12 +104,6 @@ if(isset($_SESSION['user_id'])) {} else{
                 <h3><a href="common_view.php?name=issues" style="color: #fff">New issues</a></h3>
                 <?php
 
-                        $link = mysqli_connect("localhost", "root", "", "educo");
-
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT * FROM issues WHERE issue_date = CURRENT_DATE() && status = 'Active'";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
@@ -137,13 +120,6 @@ if(isset($_SESSION['user_id'])) {} else{
             <div class="total-comments">
                 <h3><a href="common_view.php?name=comments" style="color: #fff">Total Comments</a></h3>
                 <?php
-
-                        $link = mysqli_connect("localhost", "root", "", "educo");
-
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT * FROM comments";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
@@ -160,13 +136,6 @@ if(isset($_SESSION['user_id'])) {} else{
             <div class="total-categories">
                 <h3><a href="common_view.php?name=categories" style="color: #fff">Total Categories</a></h3>
                 <?php
-
-                        $link = mysqli_connect("localhost", "root", "", "educo");
-
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT * FROM categories";
                         $result = mysqli_query($link, $sql);
                         $row_Count = mysqli_num_rows($result);
@@ -184,11 +153,7 @@ if(isset($_SESSION['user_id'])) {} else{
                 <h3><a href="common_view.php?name=flagged" style="color: #fff">Flagged posts</a></h3>
                 <?php
 
-                        $link = mysqli_connect("localhost", "root", "", "educo");
 
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
 
                         $sql = "SELECT * FROM flags WHERE flag_date = CURRENT_DATE() && status = 'Flagged'";
                         $result = mysqli_query($link, $sql);
@@ -270,10 +235,6 @@ function drawBackgroundColor() {
             <div class="posts-recent">
                 <h3>Recent Posts</h3>
                 <?php
-                        if(!$link){
-                            die("Could not connect: ".mysqli_error());
-                        }
-
                         $sql = "SELECT topic_subject FROM topics";
                         $result = mysqli_query($link, $sql);
 
