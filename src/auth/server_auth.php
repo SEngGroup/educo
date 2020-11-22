@@ -57,11 +57,11 @@ $link = connect();
 						$_SESSION['userabout'] = $row['user_about'];
 						$_SESSION['userimage'] = $row['user_image'];
 						$_SESSION['usertype'] = $row['user_type'];
-						header("Location: ../../index.php");
-					}else{
-						$_SESSION['msg'] = "invalid credentials";
-						header("Location: login.php");
-					}
+						if($row['user_type']=='Admin'){
+								header("Location: ../../Forum/Admin/admin_dashboard.php");
+						} else {
+								header("Location: ../../Forum/User/dashboard.php");
+						}
 				}
 		}else{
 			$_SESSION['msg'] = "User does not exist";
