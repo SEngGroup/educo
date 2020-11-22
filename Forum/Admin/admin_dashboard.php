@@ -1,7 +1,7 @@
 <?php if(!isset($_SESSION)) {session_start();}
 if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
-  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
+  echo '<a id="link" target="_parent" href="../../src/auth/login.php"></a>
 <script type="text/javascript">
     document.getElementById("link").click();
 </script>';}
@@ -44,7 +44,7 @@ if(isset($_SESSION['user_id'])) {} else{
     </div>
 
             <div class="graph-users">
-                <h3><a href="common.php?name=users" style="color: #fff">Total users</a></h3>
+                <h3><a href="common_view.php?name=users" style="color: #fff">Total users</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");
@@ -66,7 +66,7 @@ if(isset($_SESSION['user_id'])) {} else{
                     ?>
             </div>
             <div class="graph-posts">
-                <h3 style="margin-top: 15px;"><a href="common.php?name=posts" style="color: #fff">Total posts</a></h3>
+                <h3 style="margin-top: 15px;"><a href="common_view.php?name=posts" style="color: #fff">Total posts</a></h3>
                     <?php
                     //session_start();
                     //$id = $_SESSION['userid'];
@@ -92,7 +92,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             </div>
             <div class="graph-reply">
-                <h3 style="margin-top: 15px;"><a href="common.php?name=reply" style="color: #fff">Total replies</a></h3>
+                <h3 style="margin-top: 15px;"><a href="common_view.php?name=reply" style="color: #fff">Total replies</a></h3>
                     <?php
                         if(!$link){
                             die("Could not connect: ".mysqli_error());
@@ -112,7 +112,7 @@ if(isset($_SESSION['user_id'])) {} else{
             </div>
 
             <div class="graph-new-issues">
-                <h3><a href="common.php?name=issues" style="color: #fff">New issues</a></h3>
+                <h3><a href="common_view.php?name=issues" style="color: #fff">New issues</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");
@@ -135,7 +135,7 @@ if(isset($_SESSION['user_id'])) {} else{
             </div>
 
             <div class="total-comments">
-                <h3><a href="common.php?name=comments" style="color: #fff">Total Comments</a></h3>
+                <h3><a href="common_view.php?name=comments" style="color: #fff">Total Comments</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");
@@ -158,7 +158,7 @@ if(isset($_SESSION['user_id'])) {} else{
             </div>
 
             <div class="total-categories">
-                <h3><a href="common.php?name=categories" style="color: #fff">Total Categories</a></h3>
+                <h3><a href="common_view.php?name=categories" style="color: #fff">Total Categories</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");
@@ -181,7 +181,7 @@ if(isset($_SESSION['user_id'])) {} else{
             </div>
 
             <div class="flagged">
-                <h3><a href="common.php?name=flagged" style="color: #fff">Flagged posts</a></h3>
+                <h3><a href="common_view.php?name=flagged" style="color: #fff">Flagged posts</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");

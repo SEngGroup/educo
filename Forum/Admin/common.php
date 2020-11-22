@@ -1,49 +1,28 @@
-<?php if(!isset($_SESSION)) {session_start();}
-if(isset($_SESSION['user_id'])) {} else{
-  $_SESSION['msg']="Session Expired! Please login";
-  echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
-<script type="text/javascript">
-    document.getElementById("link").click();
-</script>';}
+<?php if(!isset($_SESSION)) {session_start();}  include_once '../../src/auth/db_connect.php';
+  $link = connect();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script language="JavaScript" src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
+
     <title>Dashboard</title>
 </head>
-<body>
-<
-    <div class="container">
-        <div class="side-nav-bar">
-            <ul class="chat-side-nav">
-              <a href="#exampleModal-4" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@fat" id="create-user"><li id="create-chat"><i class="fa fa-pencil side-nav" aria-hidden="true" ></i>Create New</li></a>
-
-                <li class="side-links" style="background-color: rgba(0, 255, 255, 0.2);"><a href="admin_dashboard.php" style="color: #00ffff;"><i class="fa fa-signal side-nav" aria-hidden="true"></i>Dashboard</a></li>
-                <li class="side-links"><a href="../User/profile.php"><i class="fa fa-user side-nav" aria-hidden="true"></i>Your Profile</a></li>
-                <li class="side-links"><a href="../User/forum.php"><i class="fa fa-users side-nav" aria-hidden="true"></i>Forum</a></li>
-                <li class="side-links"><a href="../User/chat.php"><i class="fa fa-comments side-nav" aria-hidden="true"></i>Chat</a></li>
-                <li class="side-links"><a href="help_center.php"><i class="fa fa-globe side-nav" aria-hidden="true"></i>Help Center</a></li>
-                <li class="side-links cog"><a href=""><i class="fa fa-cog side-nav" aria-hidden="true"></i>Settings</a></li>
-                <li class="side-links"><a href="auth/test_auth.php?logout='1"><i class="fa fa-sign-out side-nav" aria-hidden="true"></i>Logout</a></li>
-            </ul>
-        </div>
-
-        <div class="main" style="width: 83%;">
-          <?php include '../User/top_nav.php'; ?>
-        </div>
-    </div>
-
-    <h3 style="margin-left: 16rem; margin-top: -39rem;"><a href="admin_dashboard.php">Back</a></h3>
+<body style="padding:8px">
+    <h3><a target="_parent" href="admin_dashboard.php">Back</a></h3>
 
     <?php
-    include_once '../../src/auth/db_connect.php';
-    $link = connect();
 
     $name = $_GET['name'];
     switch ($name) {
@@ -56,7 +35,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>User ID</th>
@@ -97,7 +76,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Issue ID</th>
@@ -138,7 +117,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Topic ID</th>
@@ -175,13 +154,13 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Reply ID</th>
                         <th>Reply Content</th>
                         <th>Reply Date</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -191,7 +170,7 @@ if(isset($_SESSION['user_id'])) {} else{
                                 <td><?php echo $value['reply_id']?></td>
                                 <td><?php echo $value['reply_content']?></td>
                                 <td><?php echo $value['reply_date']?></td>
-                                
+
                             </tr>
                         <?php
                         }
@@ -212,7 +191,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Comment ID</th>
@@ -249,7 +228,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Category ID</th>
@@ -284,7 +263,7 @@ if(isset($_SESSION['user_id'])) {} else{
 
             ?>
             <div class="users">
-            <table>
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Topic subject</th>
@@ -321,5 +300,16 @@ if(isset($_SESSION['user_id'])) {} else{
 
 
     ?>
+    <script type="text/javascript">
+$(document).ready(function () {
+      $('#example').DataTable({
+          "processing": true,
+          "info": true,
+          "stateSave": true,
+
+      });
+  });
+
+</script>
 </body>
 </html>
