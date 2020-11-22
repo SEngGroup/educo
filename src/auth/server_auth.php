@@ -62,6 +62,7 @@ $link = connect();
 						} else {
 								header("Location: ../../Forum/User/dashboard.php");
 						}
+					}
 				}
 		}else{
 			$_SESSION['msg'] = "User does not exist";
