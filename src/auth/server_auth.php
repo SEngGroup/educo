@@ -83,8 +83,15 @@ $link = connect();
 						$_SESSION['user_id']=$row['user_id'];
 						$_SESSION['username']=$row['full_name'];
 						$_SESSION['userabout'] = $row['user_about'];
+
 						$_SESSION['userimage'] = $_GET['g_img'];
-						header("Location: ../../index.php");
+						$_SESSION['usertype'] = $row['user_type'];
+						if($row['user_type']=='Admin'){
+								header("Location: ../../Forum/Admin/admin_dashboard.php");
+						} else {
+								header("Location: ../../Forum/User/dashboard.php");
+						}
+
 				}
 		}else{
 			$_SESSION['msg'] = "User does not exist";
