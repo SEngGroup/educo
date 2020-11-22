@@ -1,0 +1,188 @@
+body {
+    margin: auto;
+}
+
+h3 {
+    font-size: 1.5em;
+  }
+  h2{
+      text-align: center;
+  }
+  h4{
+      font-size: 1.5em;
+  }
+
+
+footer {
+    display: flex;
+    background-color: black;
+    margin-top: 30px;
+    padding: 50px;
+    text-align: center;
+}
+
+footer ul {
+  position: relative;
+  top: 30px;
+}
+
+
+
+
+
+.img_div {
+    /* border: 1px solid black; */
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 10px 2px grey;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.img_div p, .img_div h3, .img_div input{
+    padding: 0px 10px;
+}
+
+.posted-images {
+    /* box-shadow: 10px 10px 8px rgb(192, 192, 192); */
+    width: 324px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.footer-headings {
+    color: #add8e6;
+    font-family: 'Suez One', serif;
+    margin-bottom: 0px;
+}
+
+.footer-logo {
+    position: relative;
+    top: 30px;
+    margin-right: 35px;
+    color:#add8e6;
+    font-size: 35px;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.footer-subbox {
+    margin-left: 100px;
+}
+
+footer p {
+    margin-bottom: 0px;
+    font-weight: bolder;
+    color:#add8e6;
+}
+
+footer a{
+    text-decoration: none;
+    font-family: 'Raleway';
+    color:#add8e6;
+    margin-top: 40px;
+}
+
+.signup-header {
+    background-image: url(img/maggie-yang-6c-5iqcZyTE-unsplash.jpg);
+    background-size: cover;
+    height: 760px;
+}
+
+main h2 {
+    font-family: 'Suez One', serif;
+    font-size: 30px;
+}
+
+main h3 {
+    font-family: 'Suez One', serif;
+}
+
+#services {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(0, 0, 0, 0.5);
+    display: flex;
+    height: 70px;
+    margin-bottom: auto;
+}
+  
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 23px 16px;
+    text-decoration: none;
+    font-family: 'Raleway';
+}
+
+.navbar h3 {
+    position: relative;
+    bottom: 10px;
+    height: 40px;
+    margin-right: 26%;
+    margin-left: 35px;
+    font-family: 'Kaushan Script', cursive;
+    color: #add8e6;
+}
+  
+
+.paragraphs {
+    display: flex;
+    width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.paragraph {
+    font-size: 26px;
+    width: 350px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: justify;
+    border: 1px dotted #add8e6;
+    padding: 10px;
+}
+
+.paragraph h2{
+    text-align: center;
+}
+
+.comm-img {
+    height: 100%;
+    width: 100%;
+    background: url("book.jpg")no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.comm-container {
+    background-color: rgb(0, 0, 0, 0.5);
+    height: 250px;
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+.avatar {
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+ .reece{
+     float: left;
+     width: auto;
+     padding:5px;
+ }
+ .avatar::after{
+     content: "";
+     clear:both;
+     display: table;
+
+ }
