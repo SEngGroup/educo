@@ -85,7 +85,7 @@ $link = connect();
 						$_SESSION['username']=$row['full_name'];
 						$_SESSION['userabout'] = $row['user_about'];
 
-						$_SESSION['userimage'] = $_GET['g_img'];
+						$_SESSION['userimageg'] = $_GET['g_img'];
 						$_SESSION['usertype'] = $row['user_type'];
 						if($row['user_type']=='Admin'){
 								header("Location: ../../Forum/Admin/admin_dashboard.php");

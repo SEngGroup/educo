@@ -26,6 +26,7 @@ body {
 .session-profile {
     border-radius: 50%;
     margin-left: 35px;
+    margin-top: 15px;
 }
 li.box_result {
     list-style-type: none;
