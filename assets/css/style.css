@@ -9,6 +9,25 @@ body {
 .w3-badge {
     border-radius: 50%;
 }
+.avatar_comment img{
+    width: 70px  !important;
+    height: 70px !important;
+    border-radius: 50px;
+
+}
+.card1{
+  box-shadow: 2px 2px 2px 2px grey;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.card2{
+  box-shadow: 1px 1px 0px 0px grey;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 2px;
+}
 .w3-badge, .w3-tag {
     background-color: #000;
     color: #fff;
@@ -247,7 +266,6 @@ a {
     position: relative;
     line-height: 1.358;
     word-break: break-word;
-    border: 1px solid #d3d6db;
     word-wrap: break-word;
     background: #fff;
     box-sizing: border-box;
@@ -282,8 +300,8 @@ a {
 }
 .box_comment button{
   margin-left:8px;
-  background-color: #4267b2;
-  border: 1px solid #4267b2;
+  background-color: #3CA8FF;
+  border: 1px solid #3CA8FF;
   color: #fff;
   text-decoration: none;
   line-height: 22px;
@@ -324,7 +342,7 @@ a {
 .box_result .result_comment h4{
   font-weight: 600;
   white-space: nowrap;
-  color: #365899;
+  color: #3CA8FF;
   cursor: pointer;
   text-decoration: none;
   font-size: 14px;
@@ -355,7 +373,7 @@ a {
   line-height: 1.358;
 }
 .box_result .result_comment .tools_comment a{
-  color: #4267b2;
+  color: #3CA8FF;
   cursor: pointer;
   text-decoration: none;
 }
@@ -379,10 +397,10 @@ a {
   border-radius: 2px;
 }
 code {
-  background-color: #eee;
-  border: 1px solid #999;
+  color: crimson;
+  background-color: #f1f1f1;
   display: block;
-  padding: 20px;
+  padding: 2px;
 }
 .ui-draggable, .ui-droppable {
 	background-position: top;

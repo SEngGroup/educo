@@ -26,7 +26,20 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 			//header('location: index.php');
 	}
 
-		} else {
+		} else if ($_POST['action']=="ereply") {
+		$reply_content=$_POST['texta'];
+		$reply_to=$_POST['reply_to'];
+		$reply_by=$_POST['reply_by'];
+		if($reply_content != ''){
+			if($_POST['df']=="com"){
+				mysqli_query($con, "update comments set comment_message= '".$reply_content."' where comment_id='".$reply_to."'");
+			} else if($_POST['df']=="rep") {
+				mysqli_query($con, "update replies set reply_content= '".$reply_content."' where reply_id='".$reply_to."'");
+			}
+			//mysqli_query($con, "INSERT INTO replies(reply_content,reply_to,reply_by,reply_date) VALUES('".$reply_content."','".$reply_to."','".$reply_by."','".getTime()."') ");
+			//header('location: index.php');
+			echo $reply_content;
+		}} else {
 			echo "Message Blank";
 		}
 
@@ -60,7 +73,7 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 			}
 
 	 else {
-		echo "Not Set";
+		//echo "Not Set";
 	}
 echo mysqli_error($con);
 ?>

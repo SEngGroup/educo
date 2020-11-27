@@ -305,18 +305,89 @@ if(long_desc!=''&&problem_id!=''){
 } );
 
 </script>
-    <?php
-       echo "<h1>".$topic_subject."</h1>";
-       echo "<article>
-        ".$topic_description."
-         </article>";
-       echo "<p><b>By: <i>".$topic_by."</i></b></p>
-       <p><b>Posted: <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></b></p>
-       <p><b>Category: <i>".$topic_category."</i></b></p>
-       <p style='cursor:pointer;'><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
-       ";
-    ?>
+<script>
+/* vote.js */
+function addVote(id,vote_rank) {
+	$.ajax({
+	url: "add_vote.php",
+	data:'id='+id+'&vote_rank='+vote_rank,
+	type: "POST",
+	beforeSend: function(){
+		$('#links-'+id+' .btn-votes').html("<img src='LoaderIcon.gif' />");
+	},
+	success: function(vote_rank_status){
+	var votes = parseInt($('#votes-'+id).val());
+	var vote_rank_status;// = parseInt($('#vote_rank_status-'+id).val());
+	switch(vote_rank) {
+		case "1":
+		votes = votes+1;
+		//vote_rank_status = vote_rank_status+1;
+		break;
+		case "-1":
+		votes = votes-1;
+		//vote_rank_status = vote_rank_status-1;
+		break;
+	}
+	$('#votes-'+id).val(votes);
+	$('#vote_rank_status-'+id).val(vote_rank_status);
 
+	var up,down;
+
+	if(vote_rank_status == 1) {
+		up="disabled";
+		down="enabled";
+	}
+	if(vote_rank_status == -1) {
+		up="enabled";
+		down="disabled";
+	}
+	var vote_button_html = '<input type="button" title="Up" class="up" onClick="addVote('+id+',\'1\')" '+up+' /><div class="label-votes">'+votes+'</div><input type="button" title="Down" class="down"  onClick="addVote('+id+',\'-1\')" '+down+' />';
+	$('#links-'+id+' .btn-votes').html(vote_button_html);
+	}
+	});
+}
+</script>
+
+
+<div class="card1">
+  <?php
+     echo "<h1>".$topic_subject."</h1>";
+     echo "<article>
+      ".$topic_description."
+       </article>";
+     echo "<p><b>By: </b><i>".$topic_by."</i></p>
+     <p><b>Posted:</b> <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></p>
+     <p><b>Category: </b><i>".$topic_category."</i></p>
+     <p style='cursor:pointer;'><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
+     ";
+  ?>
+
+
+
+
+<style media="screen">
+.demo-table {width: 100%;border-spacing: initial;margin: 20px 0px;word-break: break-word;table-layout: auto;line-height:1.8em;color:#333;}
+.demo-table th {background: #81CBFD;padding: 5px;text-align: left;color:#FFF;}
+.demo-table td {border-bottom: #f0f0f0 1px solid;background-color: #ffffff;padding: 5px;}
+.demo-table td div.feed_title{text-decoration: none;color:#333;font-weight:bold;}
+.demo-table .highlight, .demo-table .selected {color:#F4B30A;text-shadow: 0 0 1px #F48F0A;}
+.btn-votes {float:left; padding: 0px 5px;cursor:pointer;}
+.btn-votes input[type="button"]{width:32px;height:32px;border:0;cursor:pointer;}
+.up {background:url('up.png')}
+.up:disabled {background:url('up_off.png')}
+.down {background:url('down.png')}
+.down:disabled {background:url('down_off.png')}
+.label-votes {font-size:1.0em;color:#40CD22;width:32px;height:32px;text-align:center;font-weight:bold;}
+.desc {color:#999;width:90%;}
+ul{padding-inline-start: 10px;}
+
+code{
+  display: inline-grid;
+}
+a{
+  cursor: pointer;
+}
+</style>
 
       <div id="com" class="box_comment col-md-11">
         <h2>Type Your answer</h2>
@@ -334,7 +405,7 @@ if(long_desc!=''&&problem_id!=''){
           <div class="box_post">
           <div class="pull-left">
             <span>
-           <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar" />
+           <img src="../../../assets/images/<?php echo $_SESSION['userimage'];?>" alt="avatar" />
            <i style="font-size:12px">Posting as <b><?php if(isset($_SESSION['username'])) {echo $_SESSION['username'];} else{echo "Guest";} ?><b></i>
            </span>
           </div>
@@ -347,6 +418,7 @@ if(long_desc!=''&&problem_id!=''){
       <div id="result">
 
       </div>
+
       <script>
 
         $(function () {
@@ -377,10 +449,14 @@ if(long_desc!=''&&problem_id!=''){
         <ul id="list_comment" class="col-md-12">
         <?php
 
-          $sqlcom="select * from comments where comment_topic='".$row['topic_id']."' order by comment_date desc";
+          $sqlcom="select * from comments where comment_topic='".$row['topic_id']."' order by comment_id desc";
           $statementcom = $connect->prepare($sqlcom);
           if($statementcom->execute()){
             $resultcom = $statementcom->fetchAll();
+            if(!$resultcom){
+              echo "<p style='font-weight:lighter'>No Answers Posted</p>";
+            } else {
+
             foreach($resultcom as $rowcom)
             {
 
@@ -392,96 +468,167 @@ if(long_desc!=''&&problem_id!=''){
             foreach($resultby1 as $rowby1)
             {
             $comment_by=$rowby1['full_name'];
+            $image=$rowby1['user_image'];
           }
           }else {
             $comment_by='Anonymous';
+            $image='';
           }
-
+          $vote=$rowcom['vote'];
           $comment_id=$rowcom['comment_id'];
           $comment_message=$rowcom['comment_message'];
           //$comment_topic=$rowcom['comment_topic'];
 
           $comment_date=$rowcom['comment_date'];
         ?>
+        <table class="demo-table">
+        <tbody>
+        <?php
+        $query ="SELECT * FROM comments";
+        $result = runQuery($query,$con);
+        ?>
+        <tr>
+        <td valign="top">
 
-    <?php
-    echo '
-    <li class="box_result row">
-    <div class="avatar_comment col-md-1">
-    <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
-    </div>
-    <div class="result_comment col-md-11">
-    <h4>'.$comment_by.'</h4>
-    <p>'.$comment_message.'</p>
-    <div class="tools_comment">
-    <a class="like" >Like</a>
-    <span aria-hidden="true"> · </span>
-    <a id="'.$comment_id.'" class="replay" >Reply</a>
-    <span aria-hidden="true"> · </span>
-    <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-    <span aria-hidden="true"> · </span>
-    <span><script>document.write(time_ago(new Date("'.($comment_date).'")));</script></span>
-    </div>
-    <ul class="child_replay">
-    ';
-    $sqlrp="select * from replies where reply_to='".$rowcom['comment_id']."' order by reply_date desc";
-    $statementrp = $connect->prepare($sqlrp);
-    if($statementrp->execute()){
-      $resultrp = $statementrp->fetchAll();
-      foreach($resultrp as $rowrp)
-      {
-        $reply_id=$rowrp['reply_id'];
-        $reply_content=$rowrp['reply_content'];
-        $reply_to=$rowrp['reply_to'];
+          <?php echo '
+          <li class="box_result row">
 
-        $sqlby2="select * from users where user_id='".$rowrp['reply_by']."'";
-        $statementby2 = $connect->prepare($sqlby2);
-        if($statementby2->execute()){
-          $resultby2 = $statementby2->fetchAll();
-          foreach($resultby2 as $rowby2)
-          {
-          $reply_by=$rowby2['full_name'];
+          <div class="result_comment col-md-11">
+          <div class="feed_title">
+          <div class="avatar_comment col-md-1">
+          <img src="../../../assets/images/'.$image.'" alt="avatar"/>
+          </div>
+          <h4>'.$comment_by.'</h4>
+
+          '; ?>
+
+          </div>
+        <div id="links-<?php echo $comment_id; ?>">
+        <input type="hidden" id="votes-<?php echo $comment_id; ?>" value="<?php echo $vote; ?>">
+        <?php
+        $vote_rank = 0;
+        $query ="SELECT SUM(vote) as vote_rank,comment_by FROM comments WHERE comment_id = '" . $comment_id . "'";
+        $row = runQuery($query,$con);
+        $up = "";
+        $down = "";
+
+        if(!empty($row[0]["vote_rank"])) {
+        	$vote_rank = $row[0]["vote_rank"];
+        	if($vote_rank == -1) {
+        	$up = "enabled";
+        	$down = "disabled";
+        	}
+        	if($vote_rank >= 1000 ) {
+        	$up = "disabled";
+        	$down = "enabled";
+        	}
         }
-        }else {
-          $reply_by='Anonymous';
-        }
-        $reply_date=$rowrp['reply_date'];
-        echo'
-        <li class="box_reply row">
-        <div class="avatar_comment col-md-1">
-        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg" alt="avatar"/>
+        ?>
+        <input type="hidden" id="vote_rank_status-<?php echo $comment_id; ?>" value="<?php echo $vote_rank; ?>">
+        <div class="btn-votes">
+        <input type="button" title="Up" class="up" onClick="addVote(<?php echo $comment_id; ?>,'1')" <?php echo $up; ?> />
+        <div class="label-votes"><?php echo $vote; ?></div>
+        <input type="button" title="Down" class="down" onClick="addVote(<?php echo $comment_id; ?>,'-1')" <?php echo $down; ?> />
         </div>
-        <div class="result_comment col-md-11">
-        <h4>'.$reply_by.'</h4>
-        <p>'.$reply_content.'</p>
-        <div class="tools_comment">
-        <a class="like" >Like</a>
-        <span aria-hidden="true"> · </span>
-        <a class="replay" >Reply</a>
-        <span aria-hidden="true"> · </span>
-        <i class="fa fa-thumbs-o-up"></i> <span class="count">1</span>
-        <span aria-hidden="true"> · </span>
-        <span><script>document.write(time_ago(new Date("'.($reply_date).'")));</script></span>
-        </div>
-        <ul class="child_replay"></ul>
-        </div>
-        </li>';
-    }
 
+        </div>
+        <div style="margin-left:1px;display:inline-grid" class="desc">
+          <?php
+
+          echo '
+
+
+          <div id="disp'.$comment_id.'">'.$comment_message.'</div>
+          <div class="tools_comment">';
+          if ($rowcom['comment_by']==$_SESSION['user_id']){
+            echo '<input id="iptxt_'.$comment_id.'" value="'.$comment_id.'" hidden></input><textarea id="ptxt_'.$comment_id.'" hidden>'.$comment_message.'</textarea><a id="txt_'.$comment_id.'" class="edit" >Edit</a>';
+          }else {
+            echo '<a class="flag" >Flag</a>';
+          }
+          echo '
+
+          <span aria-hidden="true"> · </span>
+          <a id="'.$comment_id.'" class="replay" >Reply</a>
+
+          <span><script>document.write(time_ago(new Date("'.($comment_date).'")));</script></span>
+          </div>
+          <ul class="child_replay">
+          ';
+          $sqlrp="select * from replies where reply_to='".$rowcom['comment_id']."' order by reply_date desc";
+          $statementrp = $connect->prepare($sqlrp);
+          if($statementrp->execute()){
+            $resultrp = $statementrp->fetchAll();
+            foreach($resultrp as $rowrp)
+            {
+              $reply_id=$rowrp['reply_id'];
+              $reply_content=$rowrp['reply_content'];
+              $reply_to=$rowrp['reply_to'];
+
+              $sqlby2="select * from users where user_id='".$rowrp['reply_by']."'";
+              $statementby2 = $connect->prepare($sqlby2);
+              if($statementby2->execute()){
+                $resultby2 = $statementby2->fetchAll();
+                foreach($resultby2 as $rowby2)
+                {
+                $reply_by=$rowby2['full_name'];
+                $image2=$rowby2['user_image'];
+              }
+              }else {
+                $reply_by='Anonymous';
+                $image2='';
+              }
+              $reply_date=$rowrp['reply_date'];
+              echo'
+              <li class="box_reply row">
+              <div class="avatar_comment col-md-1">
+              <img src="../../../assets/images/'.$image2.'" alt="avatar"/>
+              </div>
+              <div class="result_comment col-md-11">
+              <h4>'.$reply_by.'</h4>
+              <div id="disp1'.$reply_id.'">'.$reply_content.'</div>
+              <div class="tools_comment">';
+              if ($rowcom['comment_by']==$_SESSION['user_id']){
+                echo '<input id="iptxt1_'.$reply_id.'" value="'.$reply_id.'" hidden></input> <textarea id="ptxt1_'.$reply_id.'" hidden>'.$reply_content.'</textarea><a id="txt1_'.$reply_id.'" class="edit" >Edit</a>';
+              }else {
+                echo '<a class="flag" >Flag</a>';
+              }
+              echo '
+              <span aria-hidden="true"> · </span>
+              <a class="replay" >Reply</a>
+              <span><script>document.write(time_ago(new Date("'.($reply_date).'")));</script></span>
+              </div>
+              <ul class="child_replay"></ul>
+              </div>
+              </li>';
+          }
+?>
+        </div>
+        </td>
+        </tr>
+        <?php
+        }
+
+        ?>
+        </tbody>
+        </table>
+  <?php }
     echo'
 
-    </ul>
-    </div>
-    </li>
     ';
-  }
-}
+
     ?>
 
 
-        </ul>
+  </ul>
+  </div>
+  </li>
+  </ul>
+
+
+
       </div>
-      <?php }
+    <?php }
+    }
     }
   } } else {
     echo '
@@ -695,15 +842,12 @@ body,html {
         el.className = "box_result row";
         el.innerHTML =
          '<div class=\"avatar_comment col-md-1\">'+
-           '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+           '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\"/>'+
          '</div>'+
          '<div class=\"result_comment col-md-11\">'+
          '<h4><?php if(isset($_SESSION['username'])) {echo $_SESSION['username'];} else{echo "Guest";}?></h4>'+
          '<p>'+ comment +'</p>'+
          '<div class=\"tools_comment\">'+
-         '<a class=\"like\" >Like</a><span aria-hidden=\"true\"> · </span>'+
-         '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
-         '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
            '<span>Just Now</span>'+
          '</div>'+
@@ -717,28 +861,16 @@ body,html {
 
 
       $(document).ready(function() {
-       $('#list_comment').on('click', '.like', function (e) {
+       $('#list_comment').on('click', '.edit', function (e) {
          $current = $(this);
-         var x = $current.closest('div').find('.like').text().trim();
-         var y = parseInt($current.closest('div').find('.count').text().trim());
-
-         if (x === "Like") {
-           $current.closest('div').find('.like').text('Unlike');
-           $current.closest('div').find('.count').text(y + 1);
-         } else if (x === "Unlike"){
-           $current.closest('div').find('.like').text('Like');
-           $current.closest('div').find('.count').text(y - 1);
-         } else {
-           var replay = $current.closest('div').find('.like').text('Like');
-           $current.closest('div').find('.count').text(y - 1);
-         }
+         var x = $current.closest('div').find('.edit').text();
        });
 
           var counter = 0;
           window.uniqueId = function(){
             return 'myid-' + counter++
           }
-
+          //reply
        $('#list_comment').on('click', '.replay', function (e) {
          cancel_reply();
          $current = $(this);
@@ -752,7 +884,7 @@ body,html {
            '<div class=\"col-md-12 reply_comment\">'+
              '<form id="form3" action="post.php" method="post"><div class=\"row\">'+
                '<div class=\"avatar_comment col-md-1\">'+
-                 '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+                 '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\"/>'+
                '</div>'+
                '<div class=\"box_comment col-md-10\">'+
                  '<textarea id="texta" name="texta" class=\"comment_replay\" placeholder=\"Add a comment...\"></textarea>'+
@@ -761,7 +893,7 @@ body,html {
                  '<div class=\"box_post\">'+
                  '<div class=\"pull-right\">'+
                    '<span>'+
-                   '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\" />'+
+                   '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\" />'+
                    '<i class=\"fa fa-caret-down\"></i>'+
                    '</span>'+
                    '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
@@ -795,8 +927,64 @@ body,html {
            height: "200px"
 } );*/
        });
+       //edit
+       $('#list_comment').on('click', '.edit', function (e) {
+         cancel_reply();
+         $current = $(this);
+         var elmId = $($current).attr("id");
+         //alert(elmId);
+         var txt=document.getElementById('p'+elmId).value;
+         var eid=document.getElementById('ip'+elmId).value;
+         el = document.createElement('li');
+         el.className = "box_reply row";
+         var id= uniqueId();
+         //el.id=id;
+         el.innerHTML =
+           '<div class=\"col-md-12 reply_comment\">'+
+             '<form id="form3" action="post.php" method="post"><div class=\"row\">'+
+               '<div class=\"avatar_comment col-md-1\">'+
+                 '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\"/>'+
+               '</div>'+
+               '<div class=\"box_comment col-md-10\">'+
+                '<input name="eid" id="eid" value="ip'+elmId+'" hidden></input>'+
+                 '<textarea id="texta" name="texta" class=\"comment_replay\" placeholder=\"Add a comment...\">'+txt+'</textarea>'+
+                 '<input id="reply_to" name="reply_to" value="'+eid+'" hidden/>'+
+                 '<input id="reply_by" name="reply_by" value="<?php if(isset($_SESSION['user_id'])) {echo $_SESSION['user_id'];} else{echo "Guest";} ?>" hidden/>'+
+                 '<div class=\"box_post\">'+
+                 '<div class=\"pull-right\">'+
+                   '<span>'+
+                   '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\" />'+
+                   '<i class=\"fa fa-caret-down\"></i>'+
+                   '</span>'+
+                   '<button class=\"cancel\" onclick=\"cancel_reply()\" type=\"button\">Cancel</button>'+
+                   '<button id="reply1" type=\"submit\" value=\"1\">Save</button>'+
+                 '</div>'+
+                 '</div>'+
+               '</div>'+
+             '</div></form>'+
+           '</div>';
+         $current.closest('li').find('.child_replay').prepend(el);
+         //CKEDITOR.inline( 'texta');
+         CKEDITOR.replace('texta',{
+           extraPlugins: 'uploadimage',
+           uploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+
+          // Configure your file manager integration. This example uses CKFinder 3 for PHP.
+          filebrowserBrowseUrl: '../../../apps/ckfinder/ckfinder.html',
+          filebrowserImageBrowseUrl: '../../../apps/ckfinder/ckfinder.html?type=Images',
+          filebrowserUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+          filebrowserImageUploadUrl: '../../../apps/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+          // Configure the Enhanced Image plugin to use classes instead of styles and to disable the
+          // resizer (because image size is controlled by widget styles or the image takes maximum
+          // 100% of the editor width).
+           width: "100%",
+               height: "200px"
+
+         });
+       });
       });
 
+//submit reply
       $(document).on('click', '#reply', function (event) {
         //$('#reply').bind('click', function (event) {
           var texta  = CKEDITOR.instances['texta'].getData();
@@ -818,7 +1006,44 @@ body,html {
           });
         });
 
+        //edit reply
+        $(document).on('click', '#reply1', function (event) {
+          //$('#reply').bind('click', function (event) {
+            var texta  = CKEDITOR.instances['texta'].getData();
+            var reply_to = document.getElementById('reply_to').value;
+            var reply_by =  document.getElementById('reply_by').value;
+            var eid = document.getElementById('eid').value;
+            var action = "ereply";
+            event.preventDefault();
+            if(eid=='iptxt_'+reply_to){
+              var df="com";
+              $.ajax({
+                type: 'POST',
+                url: 'post.php',
+                data:{texta:texta,df:df,reply_to:reply_to,reply_by:reply_by,action:action},
+                success:function(data)
+                {
+                  $("#disp"+reply_to).html(data);
+                }
+              });
+            } else if(eid=='iptxt1_'+reply_to){
+              var df="rep";
+              $.ajax({
+                type: 'POST',
+                url: 'post.php',
+                data:{texta:texta,df:df,reply_to:reply_to,reply_by:reply_by,action:action},
+                success:function(data)
+                {
+                  //load_cart_data();
+                  $("#disp1"+reply_to).html(data);
 
+                }
+              });
+            }
+            $('.reply_comment').remove();
+
+
+          });
       function submit_reply(){
 
 
@@ -828,15 +1053,12 @@ body,html {
         el.className = "box_reply row";
         el.innerHTML =
          '<div class=\"avatar_comment col-md-1\">'+
-           '<img src=\"https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg\" alt=\"avatar\"/>'+
+           '<img src=\"../../../assets/images/<?php echo $_SESSION['userimage'];?>\" alt=\"avatar\"/>'+
          '</div>'+
          '<div class=\"result_comment col-md-11\">'+
          '<h4><?php if(isset($_SESSION['username'])) {echo $_SESSION['username'];} else{echo "Guest";}?></h4>'+
          '<p>'+ comment_replay +'</p>'+
          '<div class=\"tools_comment\">'+
-         '<a class=\"like\" >Like</a><span aria-hidden=\"true\"> · </span>'+
-         '<i class=\"fa fa-thumbs-o-up\"></i> <span class=\"count\">0</span>'+
-         '<span aria-hidden=\"true\"> · </span>'+
          '<a class=\"replay\" >Reply</a><span aria-hidden=\"true\"> · </span>'+
            '<span>Just Now</span>'+
          '</div>'+

@@ -13,6 +13,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	</head>
 	<body>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Scroll To Top</button>
+
 		<header class="signup-header">
 			<div id="opac-color">
 				<div class="navbar">
@@ -54,6 +57,9 @@
 		    header('location:Forum/search/index.php?string='.$_POST['query']);
 		}
 		?>
+		</div>
+		<div id="ft">
+
 		</div>
 			<div id="welcome">
 				<h2 style="color: rgba(22, 180, 180)">Welcome</h2>
@@ -260,6 +266,25 @@
             </div>
 		</footer>
 		<style media="screen">
+		#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #13263a;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color:rgba(22, 180, 180);
+}
 		/* The overlay effect with black background */
 .overlay {
 height: 100%;
@@ -1071,6 +1096,27 @@ tr:hover {
 }
 
 		</style>
+		<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		mybutton.style.display = "block";
+	} else {
+		mybutton.style.display = "none";
+	}
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
+}
+</script>
 		<script>
 		// Open the full screen search box
 function openSearch() {
