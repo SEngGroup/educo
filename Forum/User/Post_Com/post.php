@@ -67,7 +67,7 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 				echo $long_desc."<p></p>";
 				echo $topic_by."<p></p>";*/
 				if($long_desc != ''){
-					mysqli_query($con, "INSERT INTO flags(topic_id,description) VALUES('".$short_desc."','".$long_desc."') ");
+					mysqli_query($con, "INSERT INTO flags(topic_id,description,flag_date) VALUES('".$short_desc."','".$long_desc."','".getTime()."') ");
 					//header('location: index.php');
 			 }
 			}
