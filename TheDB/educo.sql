@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 21, 2020 at 02:37 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Host: sql305.epizy.com
+-- Generation Time: Nov 29, 2020 at 04:39 PM
+-- Server version: 5.6.48-88.0
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `educo`
+-- Database: `epiz_27212497_educo`
 --
 
 -- --------------------------------------------------------
@@ -838,8 +838,8 @@ CREATE TABLE `chat_message` (
   `to_user_id` int(11) NOT NULL,
   `from_user_id` int(11) NOT NULL,
   `chat_message` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` int(1) NOT NULL DEFAULT 1,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(1) NOT NULL DEFAULT '1',
   `is_type` text NOT NULL,
   `st` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -849,8 +849,14 @@ CREATE TABLE `chat_message` (
 --
 
 INSERT INTO `chat_message` (`chat_message_id`, `to_user_id`, `from_user_id`, `chat_message`, `timestamp`, `status`, `is_type`, `st`) VALUES
-(1, 2, 1, 'Hello', '2020-11-21 13:15:39', 0, '', ''),
-(2, 1, 2, 'Hello\n', '2020-11-21 13:29:07', 0, '', '');
+(1, 1, 2, 'Hello', '2020-11-21 21:42:36', 0, '', 'off'),
+(2, 1, 2, 'Hello', '2020-11-21 22:12:30', 0, '', 'off'),
+(3, 2, 1, 'Hello', '2020-11-22 22:42:30', 0, '', ''),
+(4, 1, 3, 'Hello,\nUpdate user status in tbl admin to sqg', '2020-11-22 22:57:25', 0, '', 'off'),
+(5, 4, 3, 'Hello', '2020-11-23 01:21:47', 1, '', ''),
+(8, 3, 1, 'ok\n', '2020-11-26 21:27:33', 1, '', ''),
+(6, 2, 5, 'Hello', '2020-11-23 17:53:54', 0, '', ''),
+(7, 6, 2, 'Hello', '2020-11-23 19:36:02', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -863,15 +869,18 @@ CREATE TABLE `comments` (
   `comment_message` text NOT NULL,
   `comment_topic` int(11) NOT NULL,
   `comment_by` int(11) NOT NULL,
-  `comment_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `vote` int(11) NOT NULL,
+  `ip` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`comment_id`, `comment_message`, `comment_topic`, `comment_by`, `comment_date`) VALUES
-(1, '<p>We need to complete this before today</p>\n', 2, 10, '2020-11-21 08:48:16');
+INSERT INTO `comments` (`comment_id`, `comment_message`, `comment_topic`, `comment_by`, `comment_date`, `vote`, `ip`) VALUES
+(1, '<ol>\n	<li>Intro&nbsp;- Cyprian</li>\n	<li>About Us + Landing Page + Login/Register(2 types) - Adrian&nbsp;</li>\n	<li>User Dashboard + Profile - Frank</li>\n	<li>Forum + Create New + Search - Rees</li>\n	<li>Chat + Help Center - Ziroh&nbsp;</li>\n	<li>Admin/Outro -Cyprian</li>\n</ol>\n\n<p>&nbsp;</p>\n', 2, 3, '2020-11-28 16:33:43', 0, ''),
+(2, '<p>Finec</p>\n', 2, 1, '2020-11-27 23:08:28', 0, '');
 
 -- --------------------------------------------------------
 
@@ -883,8 +892,8 @@ CREATE TABLE `flags` (
   `complain_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `description` text NOT NULL,
-  `flag_date` date NOT NULL DEFAULT current_timestamp(),
-  `status` text NOT NULL DEFAULT 'Flagged'
+  `flag_date` date NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'Flagged'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -892,10 +901,10 @@ CREATE TABLE `flags` (
 --
 
 INSERT INTO `flags` (`complain_id`, `topic_id`, `description`, `flag_date`, `status`) VALUES
-(1, 0, 'It has an issue', '2020-11-21', 'Deleted'),
-(2, 2, 'It is inappropriate', '2020-11-21', 'Flagged'),
-(5, 5, 'It has an issue', '2020-11-21', 'Deleted'),
-(4, 4, 'It has an issue', '2020-11-21', 'Deleted');
+(1, 1, 'It is inappropriate', '0000-00-00', ''),
+(2, 3, 'Outdated content', '0000-00-00', 'Deleted'),
+(3, 3, 'It has a big issue', '0000-00-00', 'Deleted'),
+(4, 1, 'It has an issue', '0000-00-00', 'Flagged');
 
 -- --------------------------------------------------------
 
@@ -909,7 +918,7 @@ CREATE TABLE `issues` (
   `issue_name` text NOT NULL,
   `issue_desc` text NOT NULL,
   `issue_date` date NOT NULL,
-  `status` text NOT NULL DEFAULT 'Active'
+  `status` varchar(255) NOT NULL DEFAULT 'Active'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -917,9 +926,8 @@ CREATE TABLE `issues` (
 --
 
 INSERT INTO `issues` (`issue_id`, `issue_by`, `issue_name`, `issue_desc`, `issue_date`, `status`) VALUES
-(1, 2, 'Issue', 'I have an issue', '2020-11-21', 'Resolved'),
-(2, 2, 'Issue two', 'I have another issue', '2020-11-21', 'Resolved'),
-(3, 1, 'Issue Five', 'I have an issue', '2020-11-21', 'Resolved');
+(0, 1, 'fgd', 'b', '2020-11-22', 'Resolved'),
+(0, 6, 'How do I ask a question on Educo?', 'Is there any formality to be followed?', '2020-11-23', 'Resolved');
 
 -- --------------------------------------------------------
 
@@ -932,7 +940,7 @@ CREATE TABLE `replies` (
   `reply_content` text NOT NULL,
   `reply_to` int(11) NOT NULL,
   `reply_by` int(11) NOT NULL,
-  `reply_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `reply_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -940,7 +948,8 @@ CREATE TABLE `replies` (
 --
 
 INSERT INTO `replies` (`reply_id`, `reply_content`, `reply_to`, `reply_by`, `reply_date`) VALUES
-(1, '<p>Yes we really need to</p>\n', 0, 10, '2020-11-21 08:48:40');
+(1, '<p>ok</p>\n', 1, 1, '2020-11-28 03:19:26'),
+(2, '<p><img alt=\"frac{partial }{partial x}\" src=\"http://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Cpartial%20%7D%7B%5Cpartial%20x%7D\" /></p>\n\n<p><img alt=\"\" src=\"/ckfinder/userfiles/images/image-20201109125438-1.jpeg\" style=\"height:183px; width:275px\" /></p>\n', 2, 1, '2020-11-27 22:53:34');
 
 -- --------------------------------------------------------
 
@@ -951,7 +960,7 @@ INSERT INTO `replies` (`reply_id`, `reply_content`, `reply_to`, `reply_by`, `rep
 CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_subject` text NOT NULL,
-  `topic_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `topic_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `topic_category` text NOT NULL,
   `topic_by` int(11) NOT NULL,
   `topic_description` text NOT NULL,
@@ -963,6 +972,7 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`topic_id`, `topic_subject`, `topic_date`, `topic_category`, `topic_by`, `topic_description`, `topic_status`) VALUES
+(1, 'tst', '2020-11-21 05:56:55', '9', 1, '<p>jko</p>\n', ''),
 (2, 'Pending Tasks', '2020-11-21 06:07:26', '3', 1, '<ol>\n	<li>Activate Side Nav Links&nbsp;<input type=\"checkbox\" /></li>\n	<li>Style Top Nav + Fixed Search bar, Navigation no - wrap&nbsp;<input type=\"checkbox\" /></li>\n	<li>Echo image session either from google login or db&nbsp;<input type=\"checkbox\" /></li>\n	<li>Send multiple select array to db&nbsp;<input type=\"checkbox\" /></li>\n	<li>Admin pgination&nbsp;<input type=\"checkbox\" /></li>\n	<li>Unify topics/comments in dashboard.php&nbsp;<input type=\"checkbox\" /></li>\n	<li>Encrypt user info as is passed to Oauth&nbsp;<input type=\"checkbox\" /></li>\n	<li>About Us&nbsp;<input type=\"checkbox\" /></li>\n	<li>Settings&nbsp;<input type=\"checkbox\" /></li>\n	<li>Google Oauth disconnect on logout&nbsp;<input name=\"Complete\" required=\"required\" type=\"checkbox\" value=\"1\" /></li>\n	<li><textarea>Add more</textarea></li>\n</ol>\n', '');
 
 -- --------------------------------------------------------
@@ -974,22 +984,28 @@ INSERT INTO `topics` (`topic_id`, `topic_subject`, `topic_date`, `topic_category
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `full_name` text NOT NULL,
-  `user_name` text NOT NULL,
-  `user_email` text NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `user_password` text NOT NULL,
   `user_about` text NOT NULL,
   `user_image` text NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `user_type` text NOT NULL DEFAULT 'User'
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_type` varchar(255) NOT NULL DEFAULT 'User',
+  `user_status` varchar(255) NOT NULL DEFAULT 'active'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `full_name`, `user_name`, `user_email`, `user_password`, `user_about`, `user_image`, `date_created`, `user_type`) VALUES
-(1, 'Rees Alumasa', '@rees_alumasa', 'reesalumasa@gmail.com', '$2y$10$gO/LODCrSAB9hEfz1L.oeuIyxY6FfPD2CQ8DxVfwGnhHKsPvm87Rm', 'Student', '1605889783.jpg', '2020-11-21 09:04:41', 'User'),
-(2, 'Cyprian Kyalo', '@Cyprian', 'cypkyalo17@gmail.com', '$2y$10$BAUKodu18QO9RrQ8GNu4Xu0djbhPsf3F.FH9/pcLI2trkQlmeedu.', 'I am a student', '1605963507.PNG', '2020-11-21 12:58:59', 'Admin');
+INSERT INTO `users` (`user_id`, `full_name`, `user_name`, `user_email`, `user_password`, `user_about`, `user_image`, `date_created`, `user_type`, `user_status`) VALUES
+(1, 'Rees Alumasa', '@rees_alumasa', 'reesalumasa@gmail.com', '$2y$10$gO/LODCrSAB9hEfz1L.oeuIyxY6FfPD2CQ8DxVfwGnhHKsPvm87Rm', 'Student', '1605889783.jpg', '2020-11-22 14:55:11', 'User', ''),
+(2, 'Cyprian Kyalo', '@Cyprian', 'cypkyalo17@gmail.com', '$2y$10$M8TEN6SVzxbtMeiAevklbOD2ATGvlZ1Ly1HfjFKLS1u4qJixj7cKO', 'I am a student', '1605966177.PNG', '2020-11-22 14:55:17', 'User', ''),
+(3, 'Admin', 'admin', 'admin@educo.com', '$2y$10$.RroQl0zMZqguvT5TYuuz.bPVyA1Wuumywe2S02FLdJUxepvU2afC', '', '1606056977.png', '2020-11-22 14:56:33', 'Admin', ''),
+(4, 'Adrian Harman', 'adrian', 'adrianmangare@gmail.com', '$2y$10$yNg8cmeZhmtsjOc1YKytRO.VwykDzgV5DKb0sgrt.3OFRZhOCwWOu', '', '', '2020-11-22 16:53:24', 'User', ''),
+(5, 'John Doe', '@JDoe', 'jdoe@gmail.com', '$2y$10$hjDnx4W01DSxKVO.g.zRieRyCmDetIUrlg7rcnlJL5D9ChDvItPTC', '', '', '2020-11-23 09:53:10', 'User', ''),
+(6, 'Kelvin Ziro', 'Kziro', 'kelvin@example.com', '$2y$10$sjcciucBhpDKomxbedZtT.baCN6WtD5UU0l2RXUxIxJvqLj0e7EQ2', '', '', '2020-11-23 11:30:58', 'User', ''),
+(7, 'kim', 'kim', 'kim@gmail.com', '$2y$10$kOgEYVqoe4f3NFFDFGMm7en1MFvgdZC4tn6NYEuiKVH.OTTDBX4jK', '', '', '2020-11-29 20:12:47', 'User', '');
 
 --
 -- Indexes for dumped tables
@@ -1022,12 +1038,6 @@ ALTER TABLE `flags`
   ADD PRIMARY KEY (`complain_id`);
 
 --
--- Indexes for table `issues`
---
-ALTER TABLE `issues`
-  ADD PRIMARY KEY (`issue_id`);
-
---
 -- Indexes for table `replies`
 --
 ALTER TABLE `replies`
@@ -1046,7 +1056,9 @@ ALTER TABLE `topics`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_email` (`user_email`),
+  ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1062,43 +1074,37 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `chat_message`
 --
 ALTER TABLE `chat_message`
-  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `flags`
 --
 ALTER TABLE `flags`
-  MODIFY `complain_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `issues`
---
-ALTER TABLE `issues`
-  MODIFY `issue_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `complain_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `replies`
 --
 ALTER TABLE `replies`
-  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
