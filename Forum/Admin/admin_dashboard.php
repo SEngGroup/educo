@@ -44,7 +44,7 @@ if(isset($_SESSION['user_id'])) {} else{
     </div>
 
             <div class="graph-users">
-                <h3><a href="common_view.php?name=users" style="color: #fff">Total users</a></h3>
+                <h3><a href="user_view.php" style="color: #fff">Total users</a></h3>
                 <?php
 
                         $link = mysqli_connect("localhost", "root", "", "educo");

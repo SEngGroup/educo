@@ -48,21 +48,31 @@ $link = connect();
 
 		if(mysqli_num_rows($result) > 0){
 				while ($row = mysqli_fetch_array($result)) {
-					if(password_verify($Pwd, $row["user_password"])){
-						echo "Correct Login";
-						$_SESSION['full_name'] = $row['full_name'];
-						$_SESSION['email']=$row['user_email'];
-						$_SESSION['user_id']=$row['user_id'];
-						$_SESSION['username']=$row['full_name'];
-						$_SESSION['userabout'] = $row['user_about'];
-						$_SESSION['userimage'] = $row['user_image'];
-						$_SESSION['usertype'] = $row['user_type'];
-						if($row['user_type']=='Admin'){
-								header("Location: ../../Forum/Admin/admin_dashboard.php");
-						} else {
-								header("Location: ../../Forum/User/dashboard.php");
+					if($row['user_status']=="active"){
+						if(password_verify($Pwd, $row["user_password"])){
+							echo "Correct Login";
+							$_SESSION['full_name'] = $row['full_name'];
+							$_SESSION['email']=$row['user_email'];
+							$_SESSION['user_id']=$row['user_id'];
+							$_SESSION['username']=$row['full_name'];
+							$_SESSION['userabout'] = $row['user_about'];
+							$_SESSION['userimage'] = $row['user_image'];
+							$_SESSION['usertype'] = $row['user_type'];
+							if($row['user_type']=='Admin'){
+									header("Location: ../../Forum/Admin/admin_dashboard.php");
+							} else {
+									header("Location: ../../Forum/User/dashboard.php");
+							}
+						}else{
+							$_SESSION['msg'] = "Invalid Credentials";
+							header("Location: login.php");
+							echo '<script>alert("Incorrect Login details")</script>';
 						}
+					} else{
+						$_SESSION['msg'] = "Account disabled! Contact support";
+						header("Location: login.php");
 					}
+
 				}
 		}else{
 			$_SESSION['msg'] = "User does not exist";
@@ -245,7 +255,4 @@ $link = connect();
         //     echo "<br><br>";
         // }
     }
-?>
-
-
 ?>
