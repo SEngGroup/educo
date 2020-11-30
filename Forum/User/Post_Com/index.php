@@ -158,16 +158,19 @@ include "config.php";?>
     $topic_id= $row['topic_id'];
     $topic_subject=$row['topic_subject'];
     //category name
-    $sqlcat="select * from categories where category_id='".$row['topic_category']."'";
-    $statementcat = $connect->prepare($sqlcat);
-    if($statementcat->execute()){
-      $resultcat = $statementcat->fetchAll();
-      foreach($resultcat as $rowcat)
-      {
-      $topic_category=$rowcat['category_name'];
-    }
-    }else {
-      $topic_category='Undefined';
+    $topic_category=array();
+    $tp=unserialize($row['topic_category']);
+    foreach($tp as $tpr)
+    {
+      $sqlcat="select * from categories where category_id='".$tpr."'";
+      $statementcat = $connect->prepare($sqlcat);
+      if($statementcat->execute()){
+        $resultcat = $statementcat->fetchAll();
+        foreach($resultcat as $rowcat)
+        {
+          array_push($topic_category,$rowcat['category_name']);
+      }
+      }
     }
     //user name
     $sqlby="select * from users where user_id='".$row['topic_by']."'";
@@ -350,14 +353,27 @@ function addVote(id,vote_rank) {
 
 
 <div class="card1">
+  <div class="tags">
   <?php
+
      echo "<h1>".$topic_subject."</h1>";
      echo "<article>
       ".$topic_description."
        </article>";
      echo "<p><b>By: </b><i>".$topic_by."</i></p>
-     <p><b>Posted:</b> <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></p>
-     <p><b>Category: </b><i>".$topic_category."</i></p>
+     <p><b>Posted:</b> <i><script>document.write(time_ago(new Date('".$topic_date."')));</script>: (".$topic_date.")</i></p>";
+     echo '
+
+  <h4>Tags</h4>';
+   foreach ($topic_category as $tag) {
+     echo '
+     <a href="#"><span class="tag">'.$tag.'</span></a>
+        ';
+   }
+
+
+
+     echo "</div>
      <p style='cursor:pointer;'><a id='flagit'>Flag this post <i class='fa fa-flag'></i></a></p>
      ";
   ?>
@@ -366,6 +382,45 @@ function addVote(id,vote_rank) {
 
 
 <style media="screen">
+.tags {
+  margin-left:2px;
+  margin-top:5px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  width: auto;
+  border-radius: 5px;
+}
+
+.tags h4 {
+  color:#3CA8FF;
+  font-size:15px;
+}
+.tags h1,.p {
+  color:#3CA8FF;
+}
+.tags a {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.tags span{
+  display: inline-block;
+}
+
+
+.tags .tag {
+  border: 1px solid #dee2e5;
+  background-color: #dee2e5;
+  border-radius: 5px;
+  padding: 6px 15px;
+  color: #8199A3;
+  transition: all 300ms ease-in-out;
+}
+
+.tags .tag:hover{
+  color: #fff;
+  background-color: #3CA8FF;
+}
 .demo-table {width: 100%;border-spacing: initial;margin: 20px 0px;word-break: break-word;table-layout: auto;line-height:1.8em;color:#333;}
 .demo-table th {background: #81CBFD;padding: 5px;text-align: left;color:#FFF;}
 .demo-table td {border-bottom: #f0f0f0 1px solid;background-color: #ffffff;padding: 5px;}
@@ -383,6 +438,11 @@ ul{padding-inline-start: 10px;}
 
 code{
   display: inline-grid;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: pre-line;
+  padding: 10px;
+  margin-top: 5px;
 }
 a{
   cursor: pointer;

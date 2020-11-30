@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 if(!isset($_SESSION)) {session_start();}
-include "config.php";
+//include "config.php";
 if(isset($_SESSION['user_id'])) {} else{
   $_SESSION['msg']="Session Expired! Please login";
   echo '<a id="link" target="_parent" href="../../../src/auth/login.php"></a>
@@ -108,7 +108,12 @@ if(isset($_SESSION['user_id'])) {} else{
 			$('#post_topic').bind('click', function (event) {
         var long_desc  = CKEDITOR.instances['long_desc'].getData();
         var short_desc  =  document.getElementById('short_desc').value;
-        var topic_category = document.getElementById('category').value;
+        var topic_category = new Array();//storing the selected values inside an array
+     $('#category :selected').each(function(i, selected) {
+         topic_category[i] = $(selected).val();
+     });
+
+      //  var topic_category = document.getElementById('category').value;
         var topic_by =  document.getElementById('comment_by').value;
         var action2 = "post";
 			event.preventDefault();

@@ -1,5 +1,6 @@
 .DS_Store
 C:\xampp\htdocs\seproject\lab-exercise-1\apps\ckfinder\core\connector\php\vendor\cksource\ckfinder\dev\doc\builddoc.sh
 ft.php
+phpmailer.php
 onlinedb.php
 builddoc.sh

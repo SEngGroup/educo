@@ -46,8 +46,9 @@ if(isset($_POST['action'])&&$_POST['action']!= ''){
 	} if(isset($_POST['action2'])&&$_POST['action2']!= ''){
 		  $long_desc=$_POST['long_desc'];
 			$short_desc=$_POST['short_desc'];
-			$topic_category=$_POST['topic_category'];
+			$topic_category=serialize($_POST['topic_category']);
 			$topic_by=$_POST['topic_by'];
+			//print_r($topic_category);
 
 			/*echo $short_desc."<p></p>";
 			echo $topic_category."<p></p>";
