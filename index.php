@@ -11,6 +11,18 @@
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Hotjar Tracking Code for http://educo.epizy.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:2115747,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/47f75fe772a4def200a03c3ce/94154dad66c184ee4f01e64ac.js");</script>
 	</head>
 	<body>
 
@@ -26,14 +38,18 @@
 										<?php if (isset($_SESSION['username'])) {
 												echo '<a href="Forum/User/forum.php">View Forums</a>';
 										} else {
-												echo '<a href="src/auth/login.php" title="Register / Log In">Register/Log In</a>';
+												echo '<a href="educo/src/auth/login.php" title="Register / Log In">Register/Log In</a>';
 										}
 								?>
 
 					<a class="logind" onclick="openSearch()">Search...</a>
+                    <div class="dropdown">
           <?php if (isset($_SESSION['username'])) {
-              echo "<a>".$_SESSION['username']."</a>";
+              echo "<a class='dropbtn'>".$_SESSION['username']."</a>";
           }?>
+            <div class="dropdown-content">
+                <a href="educo/src/auth/test_auth.php?logout=1">Logout</a>
+            </div></div>
 				</div>
 				<div id="intro">
 					<div id="intro-text">
@@ -54,7 +70,7 @@
   	</div>
 		<?php
 		if(isset($_POST['submit'])){
-		    header('location:Forum/search/index.php?string='.$_POST['query']);
+		    header('location:educo/Forum/search/index.php?string='.$_POST['query']);
 		}
 		?>
 		</div>
@@ -259,8 +275,8 @@
 			<div class="footer-subbox">
 				<h3 class="footer-headings">Quick Links</h3>
 				<p>
-					<a href="src/auth/signup.php">Sign Up</a><br>
-					<a href="src/auth/login.php">Log In</a><br>
+					<a href="educo/src/auth/signup.php">Sign Up</a><br>
+					<a href="educo/src/auth/login.php">Log In</a><br>
 					<a href="aboutus.php">About Us</a>
 				</p>
             </div>
@@ -838,53 +854,32 @@ main h3 {
     font-family: 'Permanent Marker', cursive;
     color: white;
 }
-
 .dropdown {
-    float: left;
-    overflow: hidden;
+  position: relative;
+  display: inline-block;
 }
-
-.dropdown .dropbtn {
-    font-size: 19px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 20px 16px 24px 16px;
-    background-color: inherit;
-    font-family: 'Raleway';
-    /* margin-bottom: 4px ; */
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-    border: 2px solid white;
-}
-
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: gray;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  float:left;
+ background-color:black;
+  color:white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-top:20px;
 }
 
 .dropdown-content a {
-    float: none;
-    color: white;
-    padding: 15px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  background-color:black;
 }
 
-.dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-}
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+.dropdown:hover .dropdown-content {display: block;}
 
 .cards_container {
     display: flex;
